@@ -206,6 +206,7 @@
   .toolbar-actions { display: flex; gap: 5px; }
   .tool-btn { border: 0; background: transparent; color: var(--muted); padding: 7px 8px; border-radius: 7px; font-size: 11px; }
   .tool-btn:hover { color: var(--jade); background: var(--jade-soft); }
+  .tool-btn:disabled { opacity: .38; cursor: not-allowed; background: transparent; color: var(--muted); }
   .study-body { padding: clamp(21px,3.2vw,40px); }
   .question-box { position: relative; padding: 17px 19px 17px 21px; margin-bottom: 27px; background: linear-gradient(90deg,rgba(243,226,220,.63),rgba(243,226,220,.16)); border-left: 3px solid var(--red); border-radius: 3px 11px 11px 3px; }
   .question-box.sishu { background: linear-gradient(90deg,rgba(223,236,230,.7),rgba(223,236,230,.12)); border-color: var(--jade); }
@@ -250,6 +251,35 @@
   .clause-blank small { margin-left: 5px; color: #a18762; font-size: .8em; }
   .clause-blank.revealed { margin: 0; padding: 0; border: 0; background: transparent; color: inherit; font-family: var(--serif); font-size: inherit; }
   .clause-blank.revealed:hover { background: transparent; }
+  .dictation-panel { padding: 18px; border: 1px solid #e6ddd0; border-radius: 14px; background: #fcfaf5; }
+  .dictation-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .dictation-head strong { font-family: var(--serif); font-size: 17px; }
+  .dictation-head span { color: var(--muted); font-size: 10px; }
+  .dictation-input { width: 100%; min-height: 255px; margin-top: 12px; padding: 15px; resize: vertical; border: 1px solid #d8cdbd; border-radius: 11px; background: #fffdf8; color: var(--ink); font-family: var(--serif); font-size: 16px; line-height: 1.95; letter-spacing: .035em; }
+  .dictation-input::placeholder { color: #aaa398; }
+  .dictation-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .dictation-note { margin-top: 10px; color: var(--muted); font-size: 10px; line-height: 1.75; }
+  .dictation-result { margin-top: 23px; padding-top: 21px; border-top: 1px dashed var(--line); }
+  .dictation-result-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 15px; margin-bottom: 13px; }
+  .dictation-result-head h3 { margin: 0; font-family: var(--serif); font-size: 20px; }
+  .dictation-result-head span { color: var(--red); font-size: 11px; font-weight: 700; }
+  .dictation-score-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+  .score-card { padding: 13px 14px; border: 1px solid #e8dfd2; border-radius: 10px; background: #fffdf8; }
+  .score-card span { color: var(--muted); font-size: 10px; }
+  .score-card strong { display: block; margin-top: 5px; font-family: Georgia,serif; font-size: 25px; font-weight: 400; }
+  .score-card.mastered strong { color: var(--jade); }
+  .score-card.fuzzy strong { color: var(--amber); }
+  .score-track { height: 5px; margin-top: 9px; overflow: hidden; border-radius: 999px; background: var(--paper-2); }
+  .score-fill { height: 100%; border-radius: inherit; background: var(--red); transition: width .45s ease; }
+  .dictation-feedback { margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; background: var(--amber-soft); color: #755d3a; font-size: 11px; line-height: 1.7; }
+  .dictation-missing { margin-top: 14px; }
+  .dictation-missing-title { margin-bottom: 7px; color: #7f8079; font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+  .missing-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+  .missing-chip { padding: 4px 7px; border-radius: 5px; background: var(--red-soft); color: var(--red-deep); font-size: 9px; }
+  .missing-ok { color: var(--jade); font-size: 11px; }
+  .dictation-answer { margin-top: 18px; padding-top: 17px; border-top: 1px solid #ece4d8; }
+  .dictation-answer-title { margin-bottom: 13px; color: #81786d; font-size: 10px; font-weight: 700; letter-spacing: .11em; }
+  .dictation-answer .paragraph { margin-bottom: 19px; }
   .mask-stage { min-height: 295px; display: grid; place-items: center; padding: 25px; border: 1px dashed var(--line-strong); border-radius: 13px; background: linear-gradient(rgba(255,253,248,.88),rgba(255,253,248,.88)), repeating-linear-gradient(0deg,transparent,transparent 29px,#ddd5c8 30px); text-align: center; }
   .mask-inner { max-width: 430px; }
   .mask-seal { width: 54px; height: 54px; margin: 0 auto 16px; border-radius: 50%; display: grid; place-items: center; background: var(--red-soft); color: var(--red); font-family: var(--serif); font-size: 22px; }
@@ -316,6 +346,8 @@
     .level-btn { min-width: 0; padding: 8px 7px; }
     .level-hint { max-width: none; }
     .sentence-flow { font-size: 16px; line-height: 2; }
+    .dictation-input { min-height: 190px; }
+    .dictation-score-grid { grid-template-columns: 1fr; }
     .study-side { grid-template-columns: 1fr; } .status-btn { min-height: 58px; }
     .study-bottom { align-items: flex-start; flex-direction: column; }
   }
@@ -361,7 +393,7 @@
       </div>
     </div>
     <button class="reset-link" id="resetBtn">清空全部背诵进度</button>
-    <div class="keyboard-tip">背诵页快捷键<br><kbd>Space</kbd> 揭晓 &nbsp; <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> 自评<br><kbd>←</kbd><kbd>→</kbd> 切换模板</div>
+    <div class="keyboard-tip">背诵页快捷键<br><kbd>Space</kbd> 揭晓 &nbsp; <kbd>R</kbd> 重遮<br><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> 自评 &nbsp; <kbd>←</kbd><kbd>→</kbd> 切换</div>
   </aside>
 
   <section class="workspace">
@@ -425,11 +457,13 @@
               <div class="mode-switch" id="modeSwitch" aria-label="背诵模式">
                 <button class="mode-btn active" data-mode="full">全文</button>
                 <button class="mode-btn" data-mode="cloze">挖空</button>
+                <button class="mode-btn" data-mode="dictation">默写</button>
                 <button class="mode-btn" data-mode="mask">掩卷</button>
                 <button class="mode-btn" data-mode="outline">提纲</button>
               </div>
               <div class="toolbar-actions">
                 <button class="tool-btn" id="revealAllBtn">全部揭晓</button>
+                <button class="tool-btn hidden" id="recoverBtn">重新遮盖</button>
                 <button class="tool-btn" id="speakBtn">朗读</button>
                 <button class="tool-btn" id="copyBtn">复制</button>
                 <button class="tool-btn" id="printBtn">打印</button>
@@ -478,7 +512,7 @@
             <div class="timer-line"><strong id="timerDisplay">00:00</strong><button class="btn" id="timerToggle">暂停</button></div>
             <div class="timer-label" id="timerTotal">今日累计 0 分钟</div>
           </section>
-          <div class="study-side-foot"><kbd>Space</kbd> 揭晓答案 · <kbd>1</kbd> 需巩固 · <kbd>2</kbd> 已掌握 · <kbd>3</kbd> 未开始</div>
+          <div class="study-side-foot"><kbd>Space</kbd> 揭晓 · <kbd>R</kbd> 重新遮盖 · <kbd>1</kbd> 需巩固 · <kbd>2</kbd> 已掌握 · <kbd>3</kbd> 未开始</div>
         </aside>
       </div>
     </div>
@@ -1024,17 +1058,17 @@ const RING_CIRCUMFERENCE = 2 * Math.PI * 70;
 let state = loadState();
 let view = {
   deckFilter: "all", statusFilter: "all", search: "", currentCardId: null, mode: "full", clozeLevel: "standard",
-  maskRevealed: false, revealedBlanks: new Set(), timerRunning: true, timerStartedAt: null,
+  maskRevealed: false, revealedBlanks: new Set(), dictationResult: null, timerRunning: true, timerStartedAt: null,
   timerBaseSeconds: 0, timerInterval: null
 };
 function todayKey() { const d = new Date(); const p = n => String(n).padStart(2,"0"); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
-function defaultState() { return { status: {}, favorites: {}, daily: {}, lastCard: null }; }
+function defaultState() { return { status: {}, favorites: {}, daily: {}, drafts: {}, lastCard: null }; }
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultState();
     const parsed = JSON.parse(raw);
-    return { ...defaultState(), ...parsed, status: parsed.status || {}, favorites: parsed.favorites || {}, daily: parsed.daily || {} };
+    return { ...defaultState(), ...parsed, status: parsed.status || {}, favorites: parsed.favorites || {}, daily: parsed.daily || {}, drafts: parsed.drafts || {} };
   } catch (error) { return defaultState(); }
 }
 function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (error) {} }
@@ -1068,13 +1102,22 @@ function splitByKeywords(text, keywords) {
 function highlightKeywords(text, keywords) {
   return splitByKeywords(text, keywords).map(({ part, isKeyword }) => isKeyword ? `<mark>${escapeHtml(part)}</mark>` : escapeHtml(part)).join("");
 }
-function clozeText(text, keywords, revealed) {
+function clozeText(text, keywords, revealed, paragraphIndex) {
+  let occurrenceIndex = 0;
   return splitByKeywords(text, keywords).map(({ part, isKeyword }) => {
     if (!isKeyword) return escapeHtml(part);
+    const key = `p${paragraphIndex}-k${occurrenceIndex++}`;
     const escaped = escapeHtml(part);
-    const isVisible = revealed.has(part);
-    return `<button class="blank${isVisible ? " revealed" : ""}" data-answer="${escaped}" data-blank="${escaped}" aria-label="${isVisible ? "隐藏" : "揭晓"}${escaped}">${isVisible ? escaped : ""}</button>`;
+    const isVisible = revealed.has(key);
+    return `<button class="blank${isVisible ? " revealed" : ""}" data-answer="${escaped}" data-blank-key="${key}" aria-label="${isVisible ? "隐藏" : "揭晓"}${escaped}">${isVisible ? escaped : ""}</button>`;
   }).join("");
+}
+function getKeywordClozeKeys(card) {
+  return card.paragraphs.flatMap((paragraph, paragraphIndex) =>
+    splitByKeywords(paragraph[1], card.keywords)
+      .filter(item => item.isKeyword)
+      .map((item, occurrenceIndex) => `p${paragraphIndex}-k${occurrenceIndex}`)
+  );
 }
 function getClozeKeywords(card) {
   return card.keywords;
@@ -1146,6 +1189,87 @@ function renderChallengeCloze(card) {
     return `<div class="paragraph"><div class="paragraph-label">${escapeHtml(paragraph[0])}</div><div class="sentence-flow">${body}</div></div>`;
   }).join("");
 }
+function normalizeForCompare(text) {
+  return String(text).replace(/[\s，。！？；：、“”‘’（）()《》〈〉【】\[\]{}.,!?;:'"…—\-]/g, "").toLowerCase();
+}
+function getLcsLength(a, b) {
+  let previous = new Uint16Array(b.length + 1);
+  let current = new Uint16Array(b.length + 1);
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      current[j] = a[i - 1] === b[j - 1] ? previous[j - 1] + 1 : Math.max(previous[j], current[j - 1]);
+    }
+    [previous, current] = [current, previous];
+    current.fill(0);
+  }
+  return previous[b.length];
+}
+function evaluateDictation(card, typed) {
+  const answer = normalizeForCompare(card.paragraphs.map(paragraph => paragraph[1]).join(""));
+  const input = normalizeForCompare(typed);
+  const lcs = getLcsLength(answer, input);
+  const similarity = answer.length && input.length ? Math.round((2 * lcs / (answer.length + input.length)) * 100) : 0;
+  const missingKeywords = card.keywords.filter(keyword => !input.includes(normalizeForCompare(keyword)));
+  const coverage = card.keywords.length ? Math.round(((card.keywords.length - missingKeywords.length) / card.keywords.length) * 100) : 100;
+  const score = Math.round(similarity * .7 + coverage * .3);
+  return { cardId: card.id, score, similarity, coverage, missingKeywords, typedLength: input.length, answerLength: answer.length };
+}
+function dictationFeedback(score) {
+  if (score >= 85) return "非常稳：结构和关键词都基本到位，可以进入下一篇。";
+  if (score >= 65) return "基本掌握：主要意思已经写出，重点补齐遗漏关键词并回看原文表述。";
+  if (score >= 40) return "还需巩固：建议先看提纲回忆骨架，再进行第二次默写。";
+  return "先别急：回看一遍原文和关键词，再清空重写，效果会更好。";
+}
+function renderDictationResult(card, result) {
+  const scoreClass = result.score >= 65 ? "mastered" : "fuzzy";
+  const missing = result.missingKeywords.length
+    ? `<div class="missing-chips">${result.missingKeywords.map(word => `<span class="missing-chip">${escapeHtml(word)}</span>`).join("")}</div>`
+    : `<div class="missing-ok">关键词均已覆盖。</div>`;
+  return `
+    <section class="dictation-result" id="dictationResult">
+      <div class="dictation-result-head"><h3>默写对照</h3><span>${escapeHtml(dictationFeedback(result.score))}</span></div>
+      <div class="dictation-score-grid">
+        <div class="score-card"><span>文字相似度</span><strong>${result.similarity}%</strong><div class="score-track"><div class="score-fill" style="width:${result.similarity}%"></div></div></div>
+        <div class="score-card ${scoreClass}"><span>关键词覆盖</span><strong>${result.coverage}%</strong><div class="score-track"><div class="score-fill" style="width:${result.coverage}%"></div></div></div>
+      </div>
+      <div class="dictation-feedback">综合得分 <strong>${result.score} 分</strong> · 你写了 ${result.typedLength} 字，标准答案 ${result.answerLength} 字（均不计标点）</div>
+      <div class="dictation-missing"><div class="dictation-missing-title">遗漏关键词</div>${missing}</div>
+      <div class="dictation-answer"><div class="dictation-answer-title">原文对照</div>${card.paragraphs.map(paragraph => `<div class="paragraph"><div class="paragraph-label">${escapeHtml(paragraph[0])}</div><p>${highlightKeywords(paragraph[1], card.keywords)}</p></div>`).join("")}</div>
+    </section>`;
+}
+function renderDictation(card) {
+  const draft = (state.drafts && state.drafts[card.id]) || "";
+  const count = normalizeForCompare(draft).length;
+  const result = view.dictationResult && view.dictationResult.cardId === card.id ? renderDictationResult(card, view.dictationResult) : "";
+  return `
+    <div class="dictation-panel">
+      <div class="dictation-head"><strong>默写区</strong><span id="dictationCount">${count} 字</span></div>
+      <textarea class="dictation-input" id="dictationInput" spellcheck="false" placeholder="在这里默写完整答案，标点可以省略……">${escapeHtml(draft)}</textarea>
+      <div class="dictation-actions"><button class="btn btn-primary" id="dictationCheck">提交对照</button><button class="btn" id="dictationClear">清空重写</button></div>
+      <div class="dictation-note">文字相似度与关键词覆盖共同计分，标点、空格不计分。草稿会自动保存在本机；电脑端可按 Ctrl + Enter 提交。</div>
+      ${result}
+    </div>`;
+}
+function submitDictation() {
+  const card = CARD_MAP.get(view.currentCardId);
+  const input = document.getElementById("dictationInput");
+  if (!card || !input) return;
+  if (normalizeForCompare(input.value).length < 5) { toast("先写下几句再提交对照"); return; }
+  state.drafts[card.id] = input.value;
+  view.dictationResult = evaluateDictation(card, input.value);
+  saveState();
+  renderStudyContent(card);
+  requestAnimationFrame(() => { const node = document.getElementById("dictationResult"); if (node) node.scrollIntoView({ behavior: "smooth", block: "nearest" }); });
+}
+function clearDictation() {
+  const card = CARD_MAP.get(view.currentCardId);
+  if (!card) return;
+  delete state.drafts[card.id];
+  view.dictationResult = null;
+  saveState();
+  renderStudyContent(card);
+  requestAnimationFrame(() => { const input = document.getElementById("dictationInput"); if (input) input.focus(); });
+}
 function renderDashboard() {
   const today = ensureToday();
   const counts = { new: 0, fuzzy: 0, mastered: 0 };
@@ -1184,7 +1308,7 @@ function openStudy(id) {
   if (!card) return;
   stopSpeech();
   if (view.currentCardId && view.currentCardId !== id) flushTimer(false);
-  view.currentCardId = id; view.mode = "full"; view.maskRevealed = false; view.revealedBlanks = new Set();
+  view.currentCardId = id; view.mode = "full"; view.maskRevealed = false; view.revealedBlanks = new Set(); view.dictationResult = null;
   view.timerRunning = true; state.lastCard = id;
   ensureToday().reviewed = [...new Set([...ensureToday().reviewed,id])];
   saveState();
@@ -1227,13 +1351,25 @@ function renderStudy() {
   };
   document.getElementById("clozeLevelHint").textContent = levelHints[view.clozeLevel];
   document.getElementById("revealAllBtn").classList.toggle("hidden", !["cloze","mask"].includes(view.mode));
+  syncClozeControls();
   document.getElementById("speakBtn").textContent = ("speechSynthesis" in window) && speechSynthesis.speaking ? "停止朗读" : "朗读";
   document.getElementById("cueList").innerHTML = card.cues.map(cue => `<button class="cue-chip" data-cue="${escapeHtml(cue)}">${escapeHtml(cue)}</button>`).join("");
   document.getElementById("cueNote").textContent = card.note;
   renderStudyContent(card); updateTimerDisplay();
 }
+function syncClozeControls() {
+  const recoverBtn = document.getElementById("recoverBtn");
+  if (!recoverBtn) return;
+  recoverBtn.classList.toggle("hidden", view.mode !== "cloze");
+  recoverBtn.disabled = view.revealedBlanks.size === 0;
+}
 function renderStudyContent(card) {
   const content = document.getElementById("studyContent");
+  syncClozeControls();
+  if (view.mode === "dictation") {
+    content.innerHTML = renderDictation(card);
+    return;
+  }
   if (view.mode === "outline") {
     content.innerHTML = `<div class="outline-list">${card.outline.map((item,index) => `<div class="outline-item"><div class="outline-num">${String(index+1).padStart(2,"0")}</div><div><h4>${escapeHtml(item[0])}</h4><p>${escapeHtml(item[1])}</p></div></div>`).join("")}</div><div class="outline-tip"><strong>背诵提示：</strong>${escapeHtml(card.note)}</div>`;
     return;
@@ -1250,15 +1386,15 @@ function renderStudyContent(card) {
     content.innerHTML = renderAdvancedCloze(card);
     return;
   }
-  content.innerHTML = card.paragraphs.map(paragraph => {
-    const body = view.mode === "cloze" ? clozeText(paragraph[1],getClozeKeywords(card),view.revealedBlanks) : highlightKeywords(paragraph[1],card.keywords);
+  content.innerHTML = card.paragraphs.map((paragraph, paragraphIndex) => {
+    const body = view.mode === "cloze" ? clozeText(paragraph[1],getClozeKeywords(card),view.revealedBlanks,paragraphIndex) : highlightKeywords(paragraph[1],card.keywords);
     return `<div class="paragraph"><div class="paragraph-label">${escapeHtml(paragraph[0])}</div><p>${body}</p></div>`;
   }).join("");
 }
 function getCurrentClozeKeys(card) {
   if (view.clozeLevel === "challenge") return getSentenceClozeKeys(card);
   if (view.clozeLevel === "advanced") return getAdvancedClozeKeys(card);
-  return getClozeKeywords(card);
+  return getKeywordClozeKeys(card);
 }
 function revealAll() {
   const card = CARD_MAP.get(view.currentCardId);
@@ -1269,6 +1405,12 @@ function revealAll() {
     toast(view.clozeLevel === "challenge" ? "已揭晓全部句子" : view.clozeLevel === "advanced" ? "已揭晓全部长分句" : "已揭晓全部关键词");
   }
 }
+function recoverAll() {
+  if (view.mode !== "cloze") return;
+  view.revealedBlanks = new Set();
+  renderStudyContent(CARD_MAP.get(view.currentCardId));
+  toast("已重新遮盖全部挖空");
+}
 function revealNextCloze() {
   if (view.mode !== "cloze") return;
   const card = CARD_MAP.get(view.currentCardId);
@@ -1278,7 +1420,7 @@ function revealNextCloze() {
   renderStudyContent(card);
 }
 function changeMode(mode) {
-  if (!["full","cloze","mask","outline"].includes(mode)) return;
+  if (!["full","cloze","dictation","mask","outline"].includes(mode)) return;
   view.mode = mode; view.maskRevealed = false;
   if (mode !== "cloze") view.revealedBlanks = new Set();
   renderStudy();
@@ -1412,13 +1554,30 @@ document.addEventListener("click", event => {
   if (deckBtn) { view.deckFilter = deckBtn.dataset.deckFilter; document.querySelectorAll("[data-deck-filter]").forEach(btn => btn.classList.toggle("active",btn === deckBtn)); renderDashboard(); return; }
   const statusFilterBtn = event.target.closest("[data-status-filter]");
   if (statusFilterBtn) { view.statusFilter = statusFilterBtn.dataset.statusFilter; document.querySelectorAll("[data-status-filter]").forEach(btn => btn.classList.toggle("active",btn === statusFilterBtn)); renderDashboard(); return; }
-  const blank = event.target.closest("[data-blank]");
-  if (blank) { const word = blank.dataset.blank; if (view.revealedBlanks.has(word)) view.revealedBlanks.delete(word); else view.revealedBlanks.add(word); renderStudyContent(CARD_MAP.get(view.currentCardId)); return; }
+  const blank = event.target.closest("[data-blank-key]");
+  if (blank) {
+    const key = blank.dataset.blankKey;
+    if (view.revealedBlanks.has(key)) view.revealedBlanks.delete(key); else view.revealedBlanks.add(key);
+    renderStudyContent(CARD_MAP.get(view.currentCardId));
+    return;
+  }
   if (event.target.closest("#maskRevealBtn")) { revealAll(); return; }
+  if (event.target.closest("#dictationCheck")) { submitDictation(); return; }
+  if (event.target.closest("#dictationClear")) { clearDictation(); return; }
   const cue = event.target.closest("[data-cue]");
   if (cue) { if (view.mode !== "outline") changeMode("outline"); toast("提纲模式：" + cue.dataset.cue); }
 });
 document.getElementById("searchInput").addEventListener("input", event => { view.search = event.target.value; renderDashboard(); });
+document.addEventListener("input", event => {
+  if (event.target && event.target.id === "dictationInput") {
+    const card = CARD_MAP.get(view.currentCardId);
+    if (!card) return;
+    state.drafts[card.id] = event.target.value;
+    saveState();
+    const count = document.getElementById("dictationCount");
+    if (count) count.textContent = normalizeForCompare(event.target.value).length + " 字";
+  }
+});
 document.getElementById("backBtn").addEventListener("click", showDashboard);
 document.getElementById("prevCard").addEventListener("click", () => moveCard(-1));
 document.getElementById("nextCard").addEventListener("click", () => moveCard(1));
@@ -1432,13 +1591,18 @@ document.getElementById("startTodaySide").addEventListener("click", startToday);
 document.getElementById("weakSide").addEventListener("click", startWeak);
 document.getElementById("resetBtn").addEventListener("click", resetProgress);
 document.getElementById("revealAllBtn").addEventListener("click", revealAll);
+document.getElementById("recoverBtn").addEventListener("click", recoverAll);
 document.getElementById("speakBtn").addEventListener("click", speakCard);
 document.getElementById("copyBtn").addEventListener("click", copyCard);
 document.getElementById("printBtn").addEventListener("click", () => window.print());
 document.getElementById("timerToggle").addEventListener("click", toggleTimer);
 document.addEventListener("keydown", event => {
   const tag = document.activeElement && document.activeElement.tagName;
-  if (tag === "INPUT" || tag === "TEXTAREA" || !view.currentCardId) return;
+  if (!view.currentCardId) return;
+  if (tag === "TEXTAREA" && event.target.id === "dictationInput" && event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+    event.preventDefault(); submitDictation(); return;
+  }
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
   if (event.key === "Escape") { showDashboard(); return; }
   if (event.key === "ArrowLeft") { event.preventDefault(); moveCard(-1); return; }
   if (event.key === "ArrowRight") { event.preventDefault(); moveCard(1); return; }
@@ -1448,6 +1612,7 @@ document.addEventListener("keydown", event => {
     else if (view.mode === "cloze") revealNextCloze();
     return;
   }
+  if (event.key.toLowerCase() === "r" && view.mode === "cloze") { recoverAll(); return; }
   if (event.key === "1") setStatus("fuzzy");
   if (event.key === "2") setStatus("mastered");
   if (event.key === "3") setStatus("new");
