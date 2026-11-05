@@ -17,7 +17,7 @@
     --paper: #f2ede3; --paper-2: #e9e1d3; --card: #fffdf8;
     --ink: #202721; --muted: #747a73; --line: #d9d0c0; --line-strong: #c7bba8;
     --red: #a63f33; --red-deep: #7e2e26; --red-soft: #f3e2dc;
-    --jade: #2f6b5b; --jade-soft: #dfece6; --blue: #355f88; --blue-soft: #e4edf5;
+    --jade: #2f6b5b; --jade-soft: #dfece6; --blue: #355f88; --blue-soft: #e4edf5; --violet: #675688; --violet-soft: #ece7f4;
     --amber: #b07d3b; --amber-soft: #f4ead8;
     --shadow: 0 20px 56px rgba(51, 43, 31, .09);
     --serif: "STZhongsong", "Songti SC", "SimSun", "Noto Serif CJK SC", serif;
@@ -83,6 +83,10 @@
   .nav-item.active .nav-count { background: var(--red-soft); color: var(--red-deep); }
   .nav-item.active[data-deck-filter="ux"] { color: var(--blue); }
   .nav-item.active[data-deck-filter="ux"] .nav-count { background: var(--blue-soft); color: var(--blue); }
+  .nav-item.active[data-deck-filter="mzsg"] { color: var(--amber); }
+  .nav-item.active[data-deck-filter="mzsg"] .nav-count { background: var(--amber-soft); color: var(--amber); }
+  .nav-item.active[data-deck-filter="english"] { color: var(--violet); }
+  .nav-item.active[data-deck-filter="english"] .nav-count { background: var(--violet-soft); color: var(--violet); }
   .side-rule { height: 1px; margin: 18px 2px; background: var(--line); }
   .side-plan { margin: 0 2px 12px; padding: 13px; border-radius: 12px; background: #202721; color: #f9f5eb; }
   .side-plan-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; color: #bfc6bd; }
@@ -160,6 +164,8 @@
   .topic-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--red); opacity: .88; }
   .topic-card.sishu::before { background: var(--jade); }
   .topic-card.ux::before { background: var(--blue); }
+  .topic-card.mzsg::before { background: var(--amber); }
+  .topic-card.english::before { background: var(--violet); }
   .topic-card:hover { transform: translateY(-3px); border-color: var(--line-strong); box-shadow: 0 15px 35px rgba(51,43,31,.08); }
   .card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
   .card-num { color: #8b8d86; font-family: Georgia,serif; font-size: 12px; letter-spacing: .08em; }
@@ -176,6 +182,8 @@
   .card-open { border: 0; padding: 0; background: none; color: var(--red-deep); font-size: 11px; font-weight: 700; }
   .sishu .card-open { color: var(--jade); }
   .ux .card-open { color: var(--blue); }
+  .mzsg .card-open { color: var(--amber); }
+  .english .card-open { color: var(--violet); }
   .card-open:hover { text-decoration: underline; text-underline-offset: 4px; }
   .empty-state { padding: 50px 20px; text-align: center; border: 1px dashed var(--line-strong); border-radius: 16px; color: var(--muted); background: rgba(255,255,255,.25); }
   .empty-state strong { display: block; margin-bottom: 7px; color: var(--ink); font-family: var(--serif); font-size: 19px; }
@@ -188,6 +196,8 @@
   .study-eyebrow { color: var(--red); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
   .study-eyebrow.sishu { color: var(--jade); }
   .study-eyebrow.ux { color: var(--blue); }
+  .study-eyebrow.mzsg { color: var(--amber); }
+  .study-eyebrow.english { color: var(--violet); }
   .study-top h2 { margin: 3px 0 0; font-family: var(--serif); font-size: 25px; letter-spacing: .03em; }
   .study-nav { display: flex; align-items: center; gap: 7px; }
   .study-nav .btn { min-width: 70px; }
@@ -214,6 +224,10 @@
   .question-box.sishu .question-label { color: var(--jade); }
   .question-box.ux { background: linear-gradient(90deg,rgba(228,237,245,.75),rgba(228,237,245,.13)); border-color: var(--blue); }
   .question-box.ux .question-label { color: var(--blue); }
+  .question-box.mzsg { background: linear-gradient(90deg,rgba(244,234,216,.78),rgba(244,234,216,.14)); border-color: var(--amber); }
+  .question-box.mzsg .question-label { color: var(--amber); }
+  .question-box.english { background: linear-gradient(90deg,rgba(236,231,244,.8),rgba(236,231,244,.14)); border-color: var(--violet); }
+  .question-box.english .question-label { color: var(--violet); }
   .question-box p { margin: 0; font-size: 13px; line-height: 1.8; }
   .trigger-line { margin-top: 8px; color: var(--muted); font-size: 10px; }
   .paragraph { margin: 0 0 25px; } .paragraph:last-child { margin-bottom: 0; }
@@ -236,6 +250,10 @@
   .cloze-levelbar.sishu .level-btn.active { background: var(--jade-soft); }
   .cloze-levelbar.ux .level-btn:hover, .cloze-levelbar.ux .level-btn.active { border-color: var(--blue); color: var(--blue); }
   .cloze-levelbar.ux .level-btn.active { background: var(--blue-soft); }
+  .cloze-levelbar.mzsg .level-btn:hover, .cloze-levelbar.mzsg .level-btn.active { border-color: var(--amber); color: var(--amber); }
+  .cloze-levelbar.mzsg .level-btn.active { background: var(--amber-soft); }
+  .cloze-levelbar.english .level-btn:hover, .cloze-levelbar.english .level-btn.active { border-color: var(--violet); color: var(--violet); }
+  .cloze-levelbar.english .level-btn.active { background: var(--violet-soft); }
   .level-hint { flex: 0 0 auto; max-width: 205px; color: #908980; font-size: 9px; line-height: 1.55; }
   .sentence-flow { font-family: var(--serif); font-size: clamp(16px,1.55vw,18px); line-height: 2.08; letter-spacing: .045em; text-align: justify; }
   .sentence-blank { display: inline; margin: 0 2px; padding: 2px 8px; border: 1px dashed #cbb7a7; border-radius: 6px; background: #fbf0ea; color: var(--red-deep); font-family: var(--sans); font-size: .82em; line-height: 1.65; vertical-align: baseline; }
@@ -253,6 +271,12 @@
   .clause-blank.revealed:hover { background: transparent; }
   .dictation-panel { padding: 18px; border: 1px solid #e6ddd0; border-radius: 14px; background: #fcfaf5; }
   .dictation-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .dictation-head-meta { display: flex; align-items: center; gap: 12px; }
+  .dictation-clock { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 9px; font-weight: 400; }
+  .dictation-clock strong { color: var(--ink); font-family: Georgia,serif; font-size: 18px; font-weight: 400; letter-spacing: .04em; }
+  .dictation-clock button { padding: 3px 7px; border: 1px solid var(--line); border-radius: 5px; background: #fffdf8; color: var(--muted); font-size: 9px; }
+  .dictation-clock button:hover { color: var(--jade); border-color: var(--jade); }
+  .dictation-clock button:disabled { opacity: .45; cursor: default; }
   .dictation-head strong { font-family: var(--serif); font-size: 17px; }
   .dictation-head span { color: var(--muted); font-size: 10px; }
   .dictation-input { width: 100%; min-height: 255px; margin-top: 12px; padding: 15px; resize: vertical; border: 1px solid #d8cdbd; border-radius: 11px; background: #fffdf8; color: var(--ink); font-family: var(--serif); font-size: 16px; line-height: 1.95; letter-spacing: .035em; }
@@ -280,6 +304,14 @@
   .dictation-answer { margin-top: 18px; padding-top: 17px; border-top: 1px solid #ece4d8; }
   .dictation-answer-title { margin-bottom: 13px; color: #81786d; font-size: 10px; font-weight: 700; letter-spacing: .11em; }
   .dictation-answer .paragraph { margin-bottom: 19px; }
+  .dictation-diff { margin-top: 18px; }
+  .diff-legend { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; color: var(--muted); font-size: 10px; }
+  .diff-dot { width: 9px; height: 9px; border-radius: 3px; background: #e9b9b3; border-bottom: 2px solid #a63f33; }
+  .diff-columns { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .diff-panel { min-width: 0; padding: 13px; border: 1px solid #e8dfd2; border-radius: 10px; background: #fffdf8; }
+  .diff-panel-title { margin-bottom: 9px; color: #81786d; font-size: 10px; font-weight: 700; letter-spacing: .09em; }
+  .diff-text { min-height: 90px; color: var(--ink); font-family: var(--serif); font-size: 14px; line-height: 1.95; letter-spacing: .025em; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .diff-mark { padding: 0 1px; border-radius: 2px; background: #f3d1cc; color: #8d2f26; text-decoration: underline; text-decoration-style: wavy; text-decoration-color: #b24b40; text-underline-offset: 2px; }
   .mask-stage { min-height: 295px; display: grid; place-items: center; padding: 25px; border: 1px dashed var(--line-strong); border-radius: 13px; background: linear-gradient(rgba(255,253,248,.88),rgba(255,253,248,.88)), repeating-linear-gradient(0deg,transparent,transparent 29px,#ddd5c8 30px); text-align: center; }
   .mask-inner { max-width: 430px; }
   .mask-seal { width: 54px; height: 54px; margin: 0 auto 16px; border-radius: 50%; display: grid; place-items: center; background: var(--red-soft); color: var(--red); font-family: var(--serif); font-size: 22px; }
@@ -347,6 +379,9 @@
     .level-hint { max-width: none; }
     .sentence-flow { font-size: 16px; line-height: 2; }
     .dictation-input { min-height: 190px; }
+    .dictation-head { align-items: flex-start; flex-direction: column; gap: 7px; }
+    .dictation-head-meta { width: 100%; justify-content: space-between; }
+    .diff-columns { grid-template-columns: 1fr; }
     .dictation-score-grid { grid-template-columns: 1fr; }
     .study-side { grid-template-columns: 1fr; } .status-btn { min-height: 58px; }
     .study-bottom { align-items: flex-start; flex-direction: column; }
@@ -376,12 +411,14 @@
 
 <main class="layout">
   <aside class="sidebar" aria-label="题库导航">
-    <div class="side-label"><span>题库</span><span id="sideTotal">36 篇</span></div>
+    <div class="side-label"><span>题库</span><span id="sideTotal">63 篇</span></div>
     <nav class="deck-nav" id="deckNav">
-      <button class="nav-item active" data-deck-filter="all">全部模板 <span class="nav-count">36</span></button>
+      <button class="nav-item active" data-deck-filter="all">全部模板 <span class="nav-count">63</span></button>
       <button class="nav-item" data-deck-filter="mayuan">马原 34题 <span class="nav-count">6</span></button>
       <button class="nav-item" data-deck-filter="sishu">思修 37题 <span class="nav-count">5</span></button>
+      <button class="nav-item" data-deck-filter="mzsg">毛中特史纲 <span class="nav-count">7</span></button>
       <button class="nav-item" data-deck-filter="ux">用户研究 <span class="nav-count">25</span></button>
+      <button class="nav-item" data-deck-filter="english">英语作文 <span class="nav-count">20</span></button>
     </nav>
     <div class="side-rule"></div>
     <div class="side-plan">
@@ -398,7 +435,7 @@
 
   <section class="workspace">
     <div id="dashboardView">
-      <section class="hero" aria-labelledby="heroTitle" data-count="36">
+      <section class="hero" aria-labelledby="heroTitle" data-count="63">
         <div class="hero-copy">
           <span class="kicker">冲刺背诵 · 先骨架，后血肉</span>
           <h1 id="heroTitle">背考点，先背骨架，<br><em>再补血肉。</em></h1>
@@ -420,7 +457,7 @@
       <section class="stats-row" aria-label="学习统计">
         <div class="stat-card mastered"><span>已掌握</span><strong id="statMastered">0<small>篇</small></strong></div>
         <div class="stat-card fuzzy"><span>需要巩固</span><strong id="statFuzzy">0<small>篇</small></strong></div>
-        <div class="stat-card"><span>尚未开始</span><strong id="statNew">36<small>篇</small></strong></div>
+        <div class="stat-card"><span>尚未开始</span><strong id="statNew">63<small>篇</small></strong></div>
         <div class="stat-card"><span>今日专注</span><strong id="statMinutes">0<small>分钟</small></strong></div>
       </section>
 
@@ -1043,6 +1080,428 @@ const UX_CARDS = [
 
 DATA.push({ id: "ux", short: "用户研究", title: "用户研究与体验设计 · 必背高频", accent: "blue", cards: UX_CARDS });
 
+const MZ_CARDS = [
+  {
+    id: "mz-party", num: "01", title: "建党 105 周年专题模板",
+    trigger: "建党周年、歌颂党、初心使命、伟大建党精神",
+    tags: ["必背模板","歌颂党"],
+    prompt: "题目涉及建党周年、党的领导或伟大建党精神时，怎样展开？",
+    keywords: ["初心使命","依靠人民","为了人民","站起来","富起来","强起来","最本质特征","最大制度优势","领航掌舵","伟大建党精神","自我革命","中国式现代化"],
+    cues: ["105 载","初心使命","依靠人民 / 为了人民","三次伟大飞跃","最本质特征 / 最大制度优势","伟大建党精神 + 自我革命"],
+    outline: [["历史定位","党坚守为中国人民谋幸福、为中华民族谋复兴的初心使命。"],["伟大飞跃","带领中华民族实现站起来、富起来到强起来的伟大飞跃。"],["根本结论","党的领导是中国特色社会主义最本质特征和最大制度优势。"],["新征程","传承伟大建党精神，坚持党的全面领导，推进自我革命。"]],
+    note: "先写百年奋斗，再写党的领导结论，最后落到新征程行动。",
+    paragraphs: [
+      ["历史奋斗与伟大飞跃","一百零五载栉风沐雨，砥砺前行。中国共产党坚守为中国人民谋幸福、为中华民族谋复兴的初心使命，在革命、建设、改革各时期勇担重任。党始终坚持依靠人民、为了人民，带领中华民族迎来从站起来、富起来到强起来的伟大飞跃，创造了彪炳史册的人间奇迹。"],
+      ["历史昭示与新征程","历史和实践昭示，党是引领中国进步的核心力量，党的领导是中国特色社会主义最本质特征与最大制度优势。新时代历史性成就，根本在于习近平总书记领航掌舵。新征程上，我们要传承伟大建党精神，坚持党的全面领导，推进自我革命，奋力谱写中国式现代化新篇章，向着民族复兴奋勇前进。"]
+    ]
+  },
+  {
+    id: "mz-long-march", num: "02", title: "长征胜利 90 周年专题模板",
+    trigger: "长征胜利、长征精神、理想信念、新时代长征路",
+    tags: ["必背模板","长征精神"],
+    prompt: "题目涉及长征精神、理想信念或新时代奋斗时，怎样组织答案？",
+    keywords: ["长征精神","转危为安","冲破重重封锁","坚定理想信念","不怕牺牲","红色血脉","新时代长征路","强国建设","民族复兴"],
+    cues: ["90 载","转危为安","冲破封锁 / 跨越万水千山","理想信念 / 不怕牺牲","赓续红色血脉","新时代长征路"],
+    outline: [["历史意义","长征伟大胜利使中国革命转危为安。"],["精神形成","党领导红军冲破封锁、战胜艰险，铸就伟大长征精神。"],["精神内核","坚定理想信念与不怕牺牲的革命品格。"],["新时代行动","传承长征精神，直面风险挑战，走好新时代长征路。"]],
+    note: "结构是“历史胜利—精神形成—精神内核—新时代行动”。",
+    paragraphs: [
+      ["长征胜利与精神形成","九十载岁月流转，长征精神历久弥新。长征的伟大胜利，是中国革命转危为安的关键。在艰苦卓绝的斗争中，我们党领导红军冲破重重封锁，跨越万水千山，以钢铁意志战胜无数艰难险阻，铸就了伟大长征精神，充分彰显了共产党人坚定理想信念与不怕牺牲的革命品格。"],
+      ["新时代长征路","一代人有一代人的长征。在习近平总书记坚强领导下，我们赓续红色血脉，传承长征精神，直面风险挑战，勇担时代重任，走好新时代的长征路，奋力推进强国建设、民族复兴，奋力书写属于我们这一代人的历史篇章。"]
+    ]
+  },
+  {
+    id: "mz-system", num: "03", title: "社会主义制度确立 70 周年",
+    trigger: "1956 年、社会主义制度、制度自信、两个确立、制度优势",
+    tags: ["必背模板","制度优势"],
+    prompt: "题目涉及社会主义制度确立、制度自信或制度优势时，怎样作答？",
+    keywords: ["1956 年","社会变革","根本政治前提","制度基础","制度体系","生命力","显著优越性","两个确立","制度自信","中国式现代化"],
+    cues: ["70 载","1956 年确立","最深刻最伟大的社会变革","根本政治前提 + 制度基础","制度生命力 / 优越性","两个确立 + 制度自信"],
+    outline: [["历史节点","1956 年社会主义制度确立。"],["历史意义","实现中国历史上最深刻最伟大的社会变革。"],["制度价值","奠定根本政治前提和制度基础，彰显制度生命力与优越性。"],["新征程","领悟“两个确立”，坚定制度自信，推进制度完善与创新。"]],
+    note: "“1956 年—社会变革—制度基础—制度自信”是这道题的骨架。",
+    paragraphs: [
+      ["制度确立与历史意义","七十载沧桑巨变，社会主义制度彰显磅礴伟力。1956 年社会主义制度确立，实现了中国历史上最深刻最伟大的社会变革，为当代中国一切发展进步奠定根本政治前提和制度基础。"],
+      ["制度优势与新征程","七十年来，我国立足本国国情，不断完善中国特色社会主义制度体系，战胜各类风险挑战，取得举世瞩目发展成就，充分印证社会主义制度的强大生命力和显著优越性。新征程上，我们要深刻领悟“两个确立”的决定性意义，坚定制度自信，坚持党的全面领导，持续推进制度完善与创新，充分发挥制度优势，奋力推进中国式现代化，为实现中华民族伟大复兴不懈奋斗。"]
+    ]
+  },
+  {
+    id: "mz-theory", num: "04", title: "理论模板",
+    trigger: "马克思主义、两个结合、习近平新时代中国特色社会主义思想",
+    tags: ["必背模板","理论创新"],
+    prompt: "题目涉及马克思主义中国化时代化、理论创新或“两个结合”时，怎样作答？",
+    keywords: ["根本指导思想","两个结合","理论成果","习近平新时代中国特色社会主义思想","新的飞跃","守正创新","中国式现代化","民族复兴"],
+    cues: ["立党立国 / 兴党兴国","马克思主义基本原理 + 中国具体实际 + 中华优秀传统文化","一系列理论成果","习近平新时代中国特色社会主义思想","新的飞跃","守正创新"],
+    outline: [["根本定位","马克思主义是立党立国、兴党兴国的根本指导思想。"],["理论路径","坚持“两个结合”，持续推进理论探索。"],["新时代成果","创立习近平新时代中国特色社会主义思想，实现新的飞跃。"],["新征程","把握“两个结合”，坚持守正创新，凝聚思想合力。"]],
+    note: "答题主线是“根本指导思想—两个结合—新时代成果—新征程”。",
+    paragraphs: [
+      ["根本指导与理论探索","马克思主义是我们立党立国、兴党兴国的根本指导思想。百余年以来，中国共产党坚持把马克思主义基本原理同中国具体实际相结合、同中华优秀传统文化相结合，持续推进理论探索，形成一系列重大理论成果，指引革命、建设、改革事业不断向前。"],
+      ["新时代理论成果","进入新时代，以习近平同志为核心的党中央立足时代变局，创立习近平新时代中国特色社会主义思想，实现马克思主义中国化时代化新的飞跃。新征程上，我们要牢牢把握“两个结合”根本路径，坚持守正创新，凝聚起推进中国式现代化的强大思想合力，奋力奔赴民族复兴宏伟目标。"]
+    ]
+  },
+  {
+    id: "mz-sun", num: "05", title: "孙中山诞辰 160 周年专题",
+    trigger: "孙中山、辛亥革命、近代救亡、民族独立、人民解放",
+    tags: ["必背模板","近代史"],
+    prompt: "题目涉及孙中山、辛亥革命或近代救亡图存时，怎样展开？",
+    keywords: ["半殖民地半封建社会","辛亥革命","君主专制","民族独立","人民解放","振兴中华","中国式现代化","中国梦"],
+    cues: ["近代中国社会性质","辛亥革命推翻君主专制","未能彻底改变旧中国","中国共产党完成未竟事业","振兴中华","共圆中国梦"],
+    outline: [["时代背景","近代中国沦为半殖民地半封建社会。"],["历史贡献","孙中山领导辛亥革命，推翻君主专制制度。"],["历史局限","未能彻底改变旧中国社会性质。"],["接续奋斗","中国共产党完成民族独立与人民解放事业，推进中国式现代化。"]],
+    note: "先肯定历史贡献，再写历史局限，最后落到中国共产党接续完成未竟事业。",
+    paragraphs: [
+      ["近代背景与历史贡献","近代中国沦为半殖民地半封建社会，山河破碎、民生凋敝，无数仁人志士前赴后继、探求救国救民道路。孙中山先生领导辛亥革命，推翻君主专制制度，打开中国进步的闸门，但未能彻底改变旧中国半殖民地半封建社会的性质。中国共产党应运而生，继承革命先驱的遗志，完成其未竟的民族独立与人民解放事业。"],
+      ["新时代纪念与行动","站在新的历史方位，在习近平总书记坚强领导下，我们缅怀孙中山先生振兴中华的宏伟夙愿，汲取近代求索的历史启示，凝聚海内外中华儿女力量，勇毅前行，奋力推进中国式现代化，共圆中华民族伟大复兴的中国梦。"]
+    ]
+  },
+  {
+    id: "mz-mao", num: "06", title: "毛泽东逝世五十周年专题",
+    trigger: "毛泽东、新民主主义革命、三座大山、社会主义改造",
+    tags: ["必背模板","革命建设"],
+    prompt: "题目涉及毛泽东的历史贡献、新民主主义革命或社会主义建设时，怎样作答？",
+    keywords: ["第一代中央领导集体","新民主主义革命","三座大山","中华人民共和国","社会主义改造","社会主义基本制度","实事求是","群众路线","独立自主"],
+    cues: ["第一代中央领导集体核心","新民主主义革命","推翻三座大山","缔造新中国","社会主义改造 / 基本制度","实事求是 / 群众路线 / 独立自主"],
+    outline: [["领导地位","毛泽东是党的第一代中央领导集体核心。"],["革命贡献","领导新民主主义革命，推翻三座大山，缔造中华人民共和国。"],["建设贡献","完成社会主义改造，确立社会主义基本制度。"],["继续奋斗","传承毛泽东思想立场观点方法，坚持实事求是、群众路线、独立自主。"]],
+    note: "按“革命—建国—改造—思想方法”四个层次背诵。",
+    paragraphs: [
+      ["革命与建设贡献","毛泽东同志是党的第一代中央领导集体核心。他带领人民历经艰苦卓绝的新民主主义革命，推翻压在中国人民头上的三座大山，缔造中华人民共和国；领导完成社会主义改造，确立社会主义基本制度，为当代中国发展进步筑牢根本前提，留下宝贵思想财富与历史经验。"],
+      ["传承与继续奋斗","回望伟人奋斗征程，在习近平总书记坚强领导下，我们传承毛泽东思想立场观点方法，坚守实事求是、群众路线、独立自主，接续推进强国建设、民族复兴，在新时代实践中续写先辈孜孜以求的宏伟事业。"]
+    ]
+  },
+  {
+    id: "mz-xi", num: "07", title: "歌颂习近平总书记 2026 专题",
+    trigger: "2026、建党 105 周年、十五五、五位一体、四个全面、新质生产力",
+    tags: ["必背模板","2026 万能"],
+    prompt: "题目涉及新时代伟大成就、中国式现代化或 2026 年时政时，怎样展开？",
+    keywords: ["2026 年","建党 105 周年","十五五","五位一体","四个全面","伟大斗争","高质量发展","新质生产力","统筹发展和安全","中国式现代化"],
+    cues: ["2026 / 建党 105 周年 / 十五五开局","五位一体 + 四个全面","四个伟大","高质量发展","新质生产力","统筹发展和安全","中国式现代化"],
+    outline: [["时代坐标","2026 年是建党 105 周年和“十五五”规划开局之年。"],["伟大成就","统筹推进“五位一体”“四个全面”和“四个伟大”，取得崭新实践成果。"],["根本原因","新时代伟大成就是党和人民一道拼出来、干出来、奋斗出来的。"],["新征程","坚持党的集中统一领导，推动高质量发展，发展新质生产力，统筹发展和安全。"]],
+    note: "先写 2026 年坐标和成就，再写根本原因，最后落到高质量发展与新质生产力。",
+    paragraphs: [
+      ["2026 年坐标与伟大成就","2026 年是建党 105 周年，也是“十五五”规划开局之年。在以习近平同志为核心的党中央坚强领导下，我们迎难而上、砥砺奋进，在统筹推进“五位一体”总体布局、协调推进“四个全面”战略布局，统筹推进伟大斗争、伟大工程、伟大事业、伟大梦想等方面取得一系列崭新实践成果。事实充分昭示，新时代伟大成就是党和人民一道拼出来、干出来、奋斗出来的，彰显中国式现代化蕴含的蓬勃生机与显著制度优势。"],
+      ["高质量发展与新征程","新征程上，我们要紧紧依靠党中央的集中统一领导，牢牢把握高质量发展这一首要任务，着力发展新质生产力，统筹发展和安全，坚定不移深化改革扩大开放，凝心聚力攻坚克难，持续巩固拓展良好发展态势，统筹各项事业协同推进，砥砺担当使命、凝聚复兴磅礴伟力，奋力谱写以中国式现代化全面推进强国建设、民族复兴伟业的崭新篇章。"]
+    ]
+  }
+];
+
+
+DATA.splice(2, 0, {
+  id: "mzsg",
+  short: "毛中特史纲",
+  title: "毛泽东思想和中国特色社会主义理论体系 · 中国近现代史纲要",
+  accent: "amber",
+  cards: MZ_CARDS
+});
+
+
+const ENGLISH_CARDS = [
+  {
+    id: "en-01-recommendation", num: "01", title: "介绍信：推荐城市",
+    trigger: "推荐城市、介绍景点、给外国朋友建议",
+    tags: ["英语一","应用文·介绍信"],
+    prompt: "朋友计划来中国，请你推荐一座城市并给出实用建议，写约 100 词回信。",
+    keywords: ["I am writing to","highly recommended","First of all","Secondly","famous historical sites","it is advisable for you to","do not hesitate","looking forward to"],
+    cues: ["写信目的","推荐北京","政治文化中心","历史景点","天气和规则","期待见面"],
+    outline: [["开头","欢迎并说明写信目的。"],["主体","推荐北京，给出两个理由和旅行建议。"],["结尾","欢迎提问并期待见面。"]],
+    note: "推荐信用 First of all / Secondly / Plus 组织三个理由，最后回到联系与期待。",
+    paragraphs: [
+      ["开头","Dear Paul, Welcome to China! More than delighted to know that you are going to visit China next month, I am writing to offer my recommendation and a couple of useful tips for your stay."],
+      ["主体","The city of Beijing is highly recommended to you for the following reasons. First of all, Beijing is the capital of China and serves as a center of politics, culture, international exchanges and technological innovation. Secondly, Beijing, with a long history, is characterized by some famous historical sites, including the Great Wall, the Summer Palace and the Forbidden City. Plus, it is advisable for you to pay attention to changing weather and observe relevant rules and regulations during your stay."],
+      ["结尾","Please do not hesitate to contact me if you have any questions. I am looking forward to meeting you in China. Yours sincerely, Li Ming"]
+    ]
+  },
+  {
+    id: "en-02-inquiry", num: "02", title: "询问信：欧洲旅行",
+    trigger: "询问信息、旅行社、费用、行程安排",
+    tags: ["英语一","应用文·询问信"],
+    prompt: "你计划随旅行社去欧洲旅行，请写信询问费用、货币和行程安排。",
+    keywords: ["I am writing to make some inquiries","inclusive fee","two-week trip","visiting schedule","beforehand","looking forward to your reply"],
+    cues: ["说明旅行背景","询问总费用","询问欧元或人民币","询问行程安排","期待回复"],
+    outline: [["开头","说明旅行计划与写信目的。"],["主体","询问费用、货币和日程安排。"],["结尾","提前感谢并期待回复。"]],
+    note: "询问信的核心是问题清楚、语气礼貌，常用 Firstly / Secondly 分层提问。",
+    paragraphs: [
+      ["开头","Dear Sir or Madam, Planning to take an overseas leisure trip to Europe with your travel agency this summer before my postgraduate study in early September, I am writing to make some inquiries regarding what preparations I shall make for the journey."],
+      ["主体","Firstly, I would like to know the inclusive fee for a two-week trip. Shall I bring euros or RMB with me? Secondly, I do hope to have some ideas about the general visiting schedule for such a trip, so that I can inform my friends there beforehand and fix a date for gathering with them."],
+      ["结尾","Thanks in advance. I am looking forward to your reply. Sincerely yours, Li Ming"]
+    ]
+  },
+  {
+    id: "en-03-lost-items", num: "03", title: "寻物信：酒店遗失物品",
+    trigger: "寻找失物、酒店、手机电脑遗失、请求协助",
+    tags: ["英语一","应用文·寻物信"],
+    prompt: "你把手机和电脑落在酒店，写信请酒店帮助寻找并说明物品的重要性。",
+    keywords: ["regular guest","left my","lost items","very precious to me","a term paper","deadline","pick them up","kind assistance"],
+    cues: ["说明入住与遗失地点","描述照片珍贵","说明论文与资料重要","留下联系方式","请朋友代取"],
+    outline: [["开头","说明身份与遗失物品。"],["主体","解释照片、论文和数据的重要性。"],["结尾","提供联系方式并请求协助。"]],
+    note: "寻物信要写清物品、地点、特征和重要性，方便对方确认并寻找。",
+    paragraphs: [
+      ["开头","Dear Sir or Madam, I am a regular guest of your hotel. Yesterday I hurried to the airport and left my iPhone 17 and MacBook Air in Room 111. Could you please contact the department responsible for collecting guests' lost items and check if they have been found?"],
+      ["主体","In my iPhone 17, there are hundreds of photos taken with my parents and classmates. These pictures are very precious to me. Moreover, my MacBook Air contains a term paper and a wealth of data, as well as materials related to my research. The deadline of this paper is looming. I could not sleep because of it last night."],
+      ["结尾","If you have found the lost items, please kindly reply to me via email or contact me at 010-66xxxx66. I will ask my friend to pick them up. Thanks for your kind assistance. Yours truly, Li Ming"]
+    ]
+  },
+  {
+    id: "en-04-consolation", num: "04", title: "安慰信：竞选失败",
+    trigger: "失败安慰、同学受挫、鼓励重振信心",
+    tags: ["英语一","应用文·安慰信"],
+    prompt: "同学竞选学生会主席失败，请写信表达理解、肯定他的能力并给予鼓励。",
+    keywords: ["terribly sorry","failed in the election","fully understand","outstanding ability","precious experience","spot your weaknesses","Do not lose heart","sooner or later"],
+    cues: ["表达遗憾与理解","肯定付出和能力","失败也是经验","鼓励继续努力","愿意陪伴聊天"],
+    outline: [["开头","表达遗憾与共情。"],["主体","肯定能力，重塑失败的意义。"],["结尾","鼓励并主动陪伴。"]],
+    note: "安慰信要避免空洞说教，采用“共情—肯定—重构—陪伴”的顺序。",
+    paragraphs: [
+      ["开头","Dear Tom, I am terribly sorry to know that you failed in the election for chairman of the Students' Union. I fully understand how disappointed and upset you feel right now."],
+      ["主体","You spent plenty of time preparing for speeches and organizing activities. Undoubtedly, your outstanding ability and warm personality have always impressed all classmates. Defeat is never a total failure but precious experience. It helps you spot your weaknesses and make progress later."],
+      ["结尾","Do not lose heart. There will be more chances ahead. I firmly believe you can achieve your goal sooner or later. If you feel down, we can hang out and chat together. Yours sincerely, Li Ming"]
+    ]
+  },
+  {
+    id: "en-05-gratitude", num: "05", title: "感谢信：寄宿家庭",
+    trigger: "感谢信、交换生、寄宿家庭、热情招待",
+    tags: ["英语一","应用文·感谢信"],
+    prompt: "你结束美国交换项目，写信感谢纽约寄宿家庭的照顾并邀请他们来中国。",
+    keywords: ["heartfelt thanks","kindness and hospitality","generous help","beautiful memory","repay your kindness","pay a visit to China","send my regards"],
+    cues: ["报平安并致谢","回忆照顾与美好记忆","邀请来中国","希望回报善意","再次感谢"],
+    outline: [["开头","报平安并表达感谢。"],["主体","回顾帮助，表达愿望。"],["结尾","再次感谢并问候家人。"]],
+    note: "感谢信要写得具体：感谢什么、带来什么结果、如何回报。",
+    paragraphs: [
+      ["开头","Dear Mr. and Mrs. Smith, I have been back to China safe and sound. Here I would like to convey my heartfelt thanks to your entire family for the kindness and hospitality you extended to me during my stay in New York."],
+      ["主体","Your generous help and tender care made me feel warmly welcome and transformed my first American trip into a beautiful memory. I sincerely hope that you and your family will pay a visit to China in the future so that I could have the opportunity to repay your kindness. I assure you that you will enjoy the visit in China as much as I enjoyed my stay with you."],
+      ["结尾","Please allow me to extend my gratitude once again. Please send my regards to your family. Sincerely yours, Li Ming"]
+    ]
+  },
+  {
+    id: "en-06-apology", num: "06", title: "道歉信：不能赴宴",
+    trigger: "道歉信、拒绝邀请、解释原因、另约时间",
+    tags: ["英语一","应用文·道歉信"],
+    prompt: "朋友邀请你赴宴，但你因重要考试无法参加。写信道歉、解释原因并提出另约。",
+    keywords: ["kind invitation","much to my regret","fully occupied","important exam","terribly sorry","private meeting","preferred date","apologies once again"],
+    cues: ["感谢邀请","表达不能出席的遗憾","解释考试原因","希望聚会愉快","另约见面","再次道歉"],
+    outline: [["开头","感谢邀请并表达歉意。"],["主体","解释考试原因，表达遗憾。"],["结尾","提出另约并再次道歉。"]],
+    note: "道歉信三要素：明确致歉、真实原因、补救或另约。",
+    paragraphs: [
+      ["开头","Dear Jack, Thanks for your kind invitation to dinner at your home. Unfortunately, it is much to my regret that I cannot attend."],
+      ["主体","I am fully occupied with preparations for an important exam scheduled for the day after tomorrow. You know, it is of great importance to me because it directly affects my graduation. I feel terribly sorry for missing the chance of such a happy gathering, and I hope that all of you have a good time. Would it be possible for you and me to have a private meeting afterwards? If so, please don't hesitate to drop me a line about your preferred date. I do long for a pleasant chat with you."],
+      ["结尾","Please allow me to express my apologies once again. Sincerely yours, Li Ming"]
+    ]
+  },
+  {
+    id: "en-07-job", num: "07", title: "求职信：商务经理",
+    trigger: "求职信、招聘广告、商务经理、自我介绍、面试",
+    tags: ["英语一","应用文·求职信"],
+    prompt: "看到商务经理招聘广告，写邮件申请职位并说明专业、经历和优势。",
+    keywords: ["I am writing to apply for","business administration","academic performance","rich experience","renowned international companies","interpersonal skills","teamwork spirit","arrange an interview"],
+    cues: ["说明申请职位","介绍专业和毕业时间","强调成绩与实习","强调沟通与团队","请求面试机会"],
+    outline: [["开头","说明申请职位。"],["主体","介绍专业、成绩、经历和软技能。"],["结尾","礼貌请求面试机会。"]],
+    note: "求职信要把自身条件逐项对应岗位要求，最后用 I would be grateful if... 收尾。",
+    paragraphs: [
+      ["开头","Dear Sir or Madam, Being a senior from a prestigious university, I am glad to know from the advertisement that you are looking for a business manager, so I am writing to apply for the position."],
+      ["主体","To briefly introduce myself, I am majoring in business administration, and expect graduation next June. Not only do I have excellent academic performance in all courses, but also I possess rich experience of working in several renowned international companies, such as KPMG and Microsoft. Plus, my interpersonal skills and teamwork spirit are also appropriate for this post."],
+      ["结尾","I would be grateful if you could arrange an interview at your earliest convenience. Yours sincerely, Li Ming"]
+    ]
+  },
+  {
+    id: "en-08-major", num: "08", title: "建议信：推荐专业",
+    trigger: "推荐专业、应用心理学、学习建议、回复咨询",
+    tags: ["英语一","应用文·建议信"],
+    prompt: "朋友询问如何选择大学专业，请推荐应用心理学、说明理由并给出学习建议。",
+    keywords: ["In response to your inquiry","recommend Applied Psychology","prioritize","mental health","psychological guidance","lower the incidence","combine theory with case studies","read journals"],
+    cues: ["回应咨询并推荐专业","社会重视心理健康","可帮助他人","建议理论与实践结合","建议广泛阅读"],
+    outline: [["开头","回应咨询并给出推荐。"],["主体","说明两点专业价值。"],["结尾","给出学习建议并欢迎联系。"]],
+    note: "建议信用 First of all / What's more 说明理由，用 First / Second 给出建议。",
+    paragraphs: [
+      ["开头","Dear Jim, How have you been recently? In response to your inquiry about how to choose a suitable major for your university studies, I am writing to recommend Applied Psychology to you with the reasons as follows."],
+      ["主体","First of all, in contemporary society, an increasing number of people tend to prioritize personal achievement in study and work over mental health. By offering psychological guidance, you can help them lead a positive and optimistic life. What's more, due to the lack of a right state of mind, some people do harm to themselves and others. Through the application of psychological knowledge, we can effectively lower the incidence of such conflicts."],
+      ["结尾","To help you succeed in this major, here are two suggestions for you. First, combine theory with case studies to improve your analysis. Second, read journals and core textbooks widely. I hope that my recommendation and suggestions are of help to you. Please feel free to contact me if you have any questions. Yours sincerely, Li Ming"]
+    ]
+  },
+  {
+    id: "en-09-notice", num: "09", title: "通知：跨文化研究讲座",
+    trigger: "通知、讲座、跨文化研究、时间地点、主讲人",
+    tags: ["英语一","应用文·通知"],
+    prompt: "以中文系秘书身份写通知，告知师生跨文化研究讲座的时间、地点和主讲人。",
+    keywords: ["Notice","In order to enrich","lecture entitled","is to be held","meeting room","Professor Robert Johnson","renowned for","cordially welcome"],
+    cues: ["通知标题","讲座目的与名称","时间地点","主讲人身份与研究","欢迎参加","落款"],
+    outline: [["活动信息","说明目的、名称、时间和地点。"],["主讲人","介绍身份、研究方向和讲座内容。"],["参与邀请","欢迎师生参加并落款。"]],
+    note: "通知必须把活动、时间、地点、人物四要素写全，语言简洁正式。",
+    paragraphs: [
+      ["通知标题与活动信息","Notice. In order to enrich our extracurricular life and deepen the understanding of culture and technology, a lecture entitled 'Across Cultures: Digital Media and Literate Activity' is to be held in the meeting room of the Department of Chinese from 9:00 a.m. to 11:00 a.m. on Monday, December 11th."],
+      ["主讲人与内容","The lecture will be delivered by Professor Robert Johnson, who is from the Department of English Literature at the University of Pennsylvania. Professor Johnson is renowned for his unique research on the relation between literate activities and new information technologies. He will present, in his humorous style, his research findings on the relation between culture and technological development, which you will surely enjoy very much."],
+      ["邀请与落款","All the teachers and students are cordially welcome to attend this lecture. Department of Chinese"]
+    ]
+  },
+  {
+    id: "en-10-takeaway", num: "10", title: "饼图：外卖消费频次",
+    trigger: "饼图、外卖、消费频次、生活方式变化",
+    tags: ["英语一","图表作文·饼图"],
+    prompt: "根据 2014 与 2024 年消费者每月点外卖次数比例图，描述变化、分析原因并评论。",
+    keywords: ["pie graphs","remarkable changes","accounting for","sharp increase","quickening pace of urban life","work pressure","cozy and comfortable life","express delivery business","Time tells"],
+    cues: ["描述两饼图变化","1～5 次下降","10 次以上上升","城市节奏与压力","追求舒适便利","电商快递发展"],
+    outline: [["描述","对比 2014 与 2024 的外卖频次占比。"],["原因","生活节奏、工作压力、便利需求、电商快递。"],["评论","行业促进经济，趋势仍将持续。"]],
+    note: "图表作文先写最显著变化，再给三点原因，最后作预测或评价。",
+    paragraphs: [
+      ["图表描述","The pie graphs above clearly reveal the remarkable changes in the proportion of the average times Chinese consumers ordered takeaway per month. According to the data, in 2014 the percentage of those ordering takeaway one to five times was the largest, accounting for 38.3%, while the percentage of those ordering six to ten times was 28.5%. By contrast, the following ten years witnessed a sharp increase to 47.3% in the percentage of consumers ordering food delivery over ten times, while a mere 2.1% chose not to order takeaway."],
+      ["原因分析","Primary factors that result in this obvious change may be summarized as follows. To begin with, with the quickening pace of urban life and ever-increasing work pressure in recent years, a good many people prefer ordering takeaway to going to a restaurant. In addition, in a bid to enjoy a cozy and comfortable life, instead of cooking by themselves, consumers in mounting numbers are willing to order takeaway at their workplaces or at home. Lastly, the prosperous takeaway industry can be ascribed to the speedy development of online shopping and express delivery business."],
+      ["结论评论","Briefly speaking, the booming takeaway delivery industry undoubtedly contributes to the prosperity of the economy. Based on the above analyses, a safe conclusion can be reached that the trend reflected in the graphs will continue in the years ahead. Time tells."]
+    ]
+  },
+  {
+    id: "en-11-electric-cars", num: "11", title: "柱状图：电动汽车销量",
+    trigger: "柱状图、电动汽车、环保、新能源、政策支持",
+    tags: ["英语一","图表作文·柱状图"],
+    prompt: "根据 2019 至 2025 年中国电动汽车销量柱状图，描述趋势、分析原因并评论。",
+    keywords: ["bar chart","upward trend","1.21 million","17 million","environmental protection","technologically qualified","preferential policies","climate change","right direction"],
+    cues: ["销量从 121 万增至 1700 万","环保意识增强","技术成熟","政策支持","应对气候变化","积极趋势"],
+    outline: [["描述","电动汽车销量七年显著上升。"],["原因","环保意识、技术条件、政策支持。"],["评论","使用电动车是应对环境问题的正确方向。"]],
+    note: "数据要具体，趋势、原因、评价三段式。",
+    paragraphs: [
+      ["数据描述","The bar chart clearly reflects dramatic changes in the number of electric vehicle sales in China from 2019 to 2025. Based on the chart given above, there was a remarkable upward trend in sales from 1.21 million in 2019 to nearly 17 million in 2025, the year of peak sales over the seven-year period."],
+      ["原因分析","The upward trend can be attributed to a couple of relevant reasons. At the top of the list is that due to people's increasing awareness of environmental protection, a growing number of people choose to buy an electric vehicle. In addition, electric cars are technologically qualified so that a growing number of people opt to purchase them. Last but not least, governments have issued a series of preferential policies to promote the electric car industry, which is a key factor we cannot ignore."],
+      ["评论结论","Undoubtedly, this trend reflected in the chart is positive. The issue of climate change and environmental problems is an alarming one that requires our immediate and long-term attention and action. The widespread use of electric cars is a step in the right direction."]
+    ]
+  },
+  {
+    id: "en-12-guochao", num: "12", title: "柱状图：国潮品牌市场份额",
+    trigger: "国潮、国产品牌、市场份额、文化自信、年轻消费者",
+    tags: ["英语一","图表作文·柱状图"],
+    prompt: "根据国潮品牌与国际品牌市场份额变化图，描述趋势、分析原因并评论文化意义。",
+    keywords: ["market share","domestic trendy brands","rose steadily","international brands","cultural elements","traditional aesthetics","national cultural confidence","global influence"],
+    cues: ["国潮 38% 升至 72%","国际品牌 62% 降至 28%","传统文化认同","传统美学 + 现代科技","电商与社交媒体","文化自信"],
+    outline: [["描述","国潮份额上升，国际品牌下降。"],["原因","文化认同、设计融合、传播渠道。"],["评论","体现品牌崛起与文化自信。"]],
+    note: "两个主体的数据必须都写出来，原因最好结合文化、产品和传播三层。",
+    paragraphs: [
+      ["数据描述","The bar chart vividly illustrates the changes in the market share of domestic trendy brands, or guochao, and international competitors in China. To be specific, guochao brands rose steadily from 38% in 2021 to an overwhelming 72% in 2024, while the proportion of international brands dropped sharply from 62% to 28% during the same period. It is not difficult to discover that people in mounting numbers prefer domestic trendy brands."],
+      ["原因分析","The following reasons are chiefly responsible for the upward trend. At the top of the list is that young consumers' growing recognition of traditional culture has driven their preference for guochao products with cultural elements. Furthermore, domestic brands have integrated traditional aesthetics with modern technology, thus meeting diverse consumer needs. Last but not least, e-commerce platforms and social media promotion have effectively expanded the reach of guochao brands among young groups."],
+      ["评论结论","This trend not only reflects the rise of China's domestic brands but also symbolizes the strengthening of national cultural confidence. It is predicted that guochao brands will continue to dominate the market in the future, as they launch more innovative products and gain broader global influence."]
+    ]
+  },
+  {
+    id: "en-13-travel-modes", num: "13", title: "表格：假期出行方式",
+    trigger: "表格、出行方式、飞机高铁、私家车、低碳生活",
+    tags: ["英语一","图表作文·表格"],
+    prompt: "根据 2014 与 2024 年假期出行方式比例表，描述变化、分析原因并预测趋势。",
+    keywords: ["trip modes","general trend of increase","by plane and high-speed train","private car","living standards","environmentally friendly lifestyles","low-carbon trip modes","economic situation"],
+    cues: ["飞机和高铁比例上升","私家车比例下降","收入与生活水平提高","环保意识增强","低碳出行","经济发展"],
+    outline: [["描述","飞机、高铁上升，私家车下降。"],["原因","生活水平提高与环保意识增强。"],["预测","低碳出行将继续增加。"]],
+    note: "表格题重点写“升降对比”，不要把每个数字都机械罗列。",
+    paragraphs: [
+      ["表格描述","From the above table, we can clearly see that great changes have taken place in the trip modes people use to spend their holidays in 2014 and 2024. In the past decade, there has been a general trend of increase in the proportion of people traveling by plane and high-speed train from 19% and 21% to 31% and 40% respectively. However, the proportion of people choosing to travel by private car has gone down from 45% to 15%."],
+      ["原因分析","There are chiefly two reasons for the changes. In the first place, with the improvement in people's living standards, they become richer and richer and can afford to travel by plane and high-speed train. Secondly, people nowadays attach greater importance to environmentally friendly lifestyles. They think that traveling by plane or high-speed train is better than traveling by private car and contributes to the protection of our environment."],
+      ["结论预测","In conclusion, it can be predicted that the number of people opting for low-carbon trip modes will be on the rise in the future. Meanwhile, the changes in holiday travel also show that the economic situation in our country is becoming better and better."]
+    ]
+  },
+  {
+    id: "en-14-fitness", num: "14", title: "组合图：健身房与运动人数",
+    trigger: "折线图、柱状图、健身、运动动机、健康生活",
+    tags: ["英语一","图表作文·组合图"],
+    prompt: "根据健身房数量、运动人数和运动动机组合图，描述趋势、分析原因并评论。",
+    keywords: ["line chart","gymnasiums","physical activities","gradual increase","exercise motivations","physique","stress relief","socializing","mental as well as physical health"],
+    cues: ["健身房数量上升","运动人数增加","动机：体质、减压、社交、习惯","健康意识","减压有效","社交机会"],
+    outline: [["描述","健身房、运动人数及四类动机。"],["原因","健康意识、减压、社交互动。"],["评论","运动有益身心。"]],
+    note: "组合图要分别写折线和柱状图，再合并解释同一主题。",
+    paragraphs: [
+      ["图表描述","The line chart clearly reflects the dramatic changes in the number of gymnasiums and people taking part in physical activities in a certain city from 2023 to 2025. The number of gyms rose sharply from 600 in 2023 to roughly 810 in 2025. During the same period, the figure for people doing exercise showed a gradual increase, reaching 2 million in 2025. The column chart illustrates exercise motivations: physique 40%, stress relief 35%, socializing 20%, and habit 5%."],
+      ["原因分析","The trend, in my eyes, can be ascribed to a couple of relevant factors. First of all, a growing number of people, especially young adults, are aware of the importance of improving physical conditions, so they make use of their leisure time to take physical exercise. Secondly, physical exercise is undeniably an effective way to relieve stress in our routine life. Meanwhile, we can also engage in social interactions while working out."],
+      ["评论结论","To conclude, a fitness routine is a positive addition to any individual's life, as it enhances our mental as well as physical health."]
+    ]
+  },
+  {
+    id: "en-15-independence", num: "15", title: "图画作文：独立能力",
+    trigger: "图画作文、独立、解决问题、个人成长",
+    tags: ["英语一","图画作文·品质"],
+    prompt: "根据两幅图对比孩子遇事求助与独立整理床铺，说明独立品质的重要性。",
+    keywords: ["symbolically depicted","trying to be independent","indispensable role","personal growth","spirit of independence","determining factors","Albert Einstein","place emphasis on"],
+    cues: ["左图依赖母亲","右图独立整理","独立促进成长","爱因斯坦案例","大学生应增强独立意识"],
+    outline: [["描述","对比两幅图的行为。"],["寓意","独立分析与解决问题是成功关键。"],["例证","用爱因斯坦证明独立精神。"],["结论","大学生应重视并培养独立性。"]],
+    note: "图画作文用“描述画面—点明寓意—举例论证—提出行动”四步。",
+    paragraphs: [
+      ["图画描述","As is symbolically depicted in the drawings, the boy in the left picture is asking his mother for help when encountering difficulties, while the boy in the right picture is making great efforts to make his bed by himself. The images reveal an undeniable fact that the quality of trying to be independent plays an indispensable role in our personal growth and social development, which is thought-provoking and deserves further analysis."],
+      ["寓意与例证","It can be seen that the author of the pictures is drawing our attention to the spirit of independence. It is not hard to understand that the quality of analyzing and solving problems on one's own is one of the determining factors in personal success and accomplishments. Take Albert Einstein as a typical example. Without the spirit of independence, he would not have achieved such great success in the field of physics."],
+      ["结论行动","With all the analyses taken into consideration, a conclusion can be drawn: it is advisable that we place emphasis on the quality of independence. As college students, we should enhance our awareness of the importance of being independent."]
+    ]
+  },
+  {
+    id: "en-16-reading", num: "16", title: "图画作文：阅读与娱乐",
+    trigger: "图画作文、阅读、休闲时间、知识积累",
+    tags: ["英语一","图画作文·阅读"],
+    prompt: "根据两个男孩对休闲方式的不同态度，说明多读书的重要性并举例论证。",
+    keywords: ["contrasting attitudes","spend leisure time","reading is more meaningful","treasury of all knowledge","inspired to develop","academic field","Karl Marx","benefit from good books"],
+    cues: ["左图主张出去玩","右图主张阅读","书是知识宝库","阅读促进创新","马克思读书案例"],
+    outline: [["描述","对比两种休闲方式。"],["寓意","阅读积累知识并激发创新。"],["例证","马克思在大英图书馆读书。"],["结论","人人都能从好书中受益。"]],
+    note: "阅读主题可以用“知识积累 + 创新启发 + 名人例证”展开。",
+    paragraphs: [
+      ["图画描述","As is vividly depicted in the simple cartoon, two individuals express contrasting attitudes toward how to spend leisure time. The boy on the left, with obvious delight, says, 'Going out to play is so much fun!' Meanwhile, the other boy believes devoting more time to reading is more meaningful. The picture is meant to encourage us to read more books in our spare time."],
+      ["寓意与例证","Books, undoubtedly, are a treasury of all knowledge accumulated over thousands of years. Through reading, we can not only learn what mankind has achieved, but also be greatly inspired to develop and innovate on the basis of existing knowledge. This truth can be particularly proven in the academic field, where reading previous literature is essential for new discoveries. Karl Marx, for example, read so many books in the British Library before writing his new theories that his footprints were left on the ground where he usually sat."],
+      ["结论","The same principle applies to common people as well, and I am sure everybody can benefit from good books."]
+    ]
+  },
+  {
+    id: "en-17-innovation", num: "17", title: "图画作文：科研创新",
+    trigger: "图画作文、科研创新、研究生、常规与突破",
+    tags: ["英语一","图画作文·创新"],
+    prompt: "根据两位研究者关于固守常规与持续创新的争论，论述科研创新的重要性。",
+    keywords: ["debate work styles","sticking to routine","continuous innovation","lifeline of scientific progress","over-reliance on conventions","Einstein","BYD","bold innovation"],
+    cues: ["一人守常规","一人主张创新","创新是科研生命线","爱因斯坦与比亚迪","研究生要批判思考","常规基础 + 大胆创新"],
+    outline: [["描述","两位研究者对工作方式的不同态度。"],["寓意","常规保证稳定，创新推动科研。"],["例证","爱因斯坦与比亚迪。"],["结论","研究生应结合严谨常规和大胆创新。"]],
+    note: "创新主题不要完全否定常规，要写成“常规是基础，创新是动力”。",
+    paragraphs: [
+      ["图画描述与寓意","In the thought-provoking cartoon, two researchers debate work styles. One insists that sticking to routine and finishing assigned tasks suffices. In contrast, the other, holding a glowing experimental blueprint, argues that scientific research relies on continuous innovation rather than rigid compliance. Simple as it is, the image highlights a core truth: innovation is the lifeline of scientific progress."],
+      ["例证与论证","Following routines ensures work stability and avoids mistakes, yet over-reliance on conventions will stall scientific development. History abounds with examples: Einstein revolutionized physics by challenging traditional theories with the theory of relativity, while BYD led the automotive industry's green shift through innovative electric vehicle technologies. These pioneers broke the shackles of the status quo to make groundbreaking contributions. For postgraduates, an innovative mindset is crucial. In an era of rapid technological change, we should question existing theories, think critically and explore new solutions instead of repeating others' work."],
+      ["结论","Only by combining rigorous routine work with bold innovation can we achieve meaningful academic progress. In conclusion, routine is the foundation, but innovation is the driving force of scientific research. We must embrace innovation to unlock new possibilities for scientific development."]
+    ]
+  },
+  {
+    id: "en-18-economy", num: "18", title: "图画作文：节约用水",
+    trigger: "图画作文、节约、环保、水资源、公共参与",
+    tags: ["英语一","图画作文·节约"],
+    prompt: "根据家庭循环用水的图画，说明节约资源的意义并提出个人与社会层面的措施。",
+    keywords: ["wisely using water","praiseworthy","practise economy","second-hand textbooks","public participation","active involvement","raise their awareness","coordinated mechanism"],
+    cues: ["家庭一水多用","节约值得推广","大学生节约纸张","公众参与是基础","宣传提高意识","教育形成社会"],
+    outline: [["描述","家庭循环用水。"],["寓意","节约与日常生活密切相关。"],["措施","个人参与、宣传倡导、教育推动。"],["结论","形成节约型社会。"]],
+    note: "建议段用 On the one hand / On the other hand，分别写宣传与教育。",
+    paragraphs: [
+      ["图画描述","As is vividly revealed in the drawing above, there is a family wisely using water in daily life, from washing rice and vegetables to cleaning the mop and flushing the toilet. The good conduct is indeed praiseworthy and should be popularized in our society."],
+      ["寓意说明","To practise economy is closely related to our daily life. For example, we, as university students, should make wise use of paper and second-hand textbooks. Public participation is the foundation of a society in which economy is advocated and treasured. Since the social environment is shaped by the public, the cultivation of an economy-practising society depends on the active involvement of every member of society, old or young."],
+      ["措施结论","In my view, necessary measures should be taken to practise economy. On the one hand, we should launch a public campaign to help people raise their awareness of practicing economy in our routine life. On the other hand, education on how to practise economy must be promoted by relevant government departments and professionals at different levels. It is in this way that we can create a real economy-practising society."]
+    ]
+  },
+  {
+    id: "en-19-short-video", num: "19", title: "组合作文：短视频与深度阅读",
+    trigger: "图画 + 柱状图、短视频、碎片化信息、深度阅读",
+    tags: ["英语一","组合作文·热点"],
+    prompt: "根据孩子在图书馆刷短视频的图画和年轻人每日屏幕时间柱状图，分析短视频沉迷并提出建议。",
+    keywords: ["simple sketch","short videos","in-depth reading","worrying trend","fast-paced","algorithmic recommendations","fragmented information","strike a balance","profound thinking"],
+    cues: ["图书馆刷视频","短视频 180 分钟 vs 阅读 20 分钟","沉迷趋势","内容快节奏 + 算法推荐","削弱批判思考","限制时长 + 深度阅读"],
+    outline: [["描述","图画场景与柱状图数据。"],["解释","短视频沉迷的原因与危害。"],["建议","平衡娱乐与自我提升。"]],
+    note: "组合作文必须同时覆盖图画和图表，不能只写其中一项。",
+    paragraphs: [
+      ["图文描述","As is vividly depicted in the simple sketch, sitting in a library—an environment supposedly for quiet reading—is a child who is enjoying short videos and saying, 'Reading is so tiring; watching short videos is much more enjoyable.' Complementing the scene, the bar chart compares the daily time young people in a city spend on social media: they spend an average of 180 minutes on short videos, while only 20 minutes on in-depth reading."],
+      ["趋势与原因","These images reveal a worrying trend: young people are increasingly indulging in short videos at the cost of in-depth reading. In my view, several factors contribute to this phenomenon. For one thing, short videos feature fast-paced and entertaining content, which can instantly satisfy people's need for relaxation in a busy life. For another, the algorithmic recommendations of social media platforms keep pushing tailored content, making it easy for young people to become addicted. However, excessive reliance on short videos may weaken our critical thinking and deep comprehension abilities, as they often deliver fragmented information."],
+      ["评论建议","As young individuals, we should strike a balance between entertainment and self-improvement. We can limit daily short-video time and allocate more time to in-depth reading, which enriches knowledge and fosters profound thinking. Only by avoiding blind indulgence in superficial entertainment can we attain steady personal growth and embrace a more meaningful life."]
+    ]
+  },
+  {
+    id: "en-20-online-shopping", num: "20", title: "组合作文：线上购物利弊",
+    trigger: "材料作文、线上购物、实体店、观点论证",
+    tags: ["英语一","组合作文·观点"],
+    prompt: "阅读关于实体店与网店的材料，说明你是否同意作者观点，并用理由和例子支持论证。",
+    keywords: ["gaining popularity","no consensus","lower prices","uncontrollable delivery time","dishonest online shopkeepers","advantages","far outweigh","more a blessing than a curse"],
+    cues: ["概括材料观点","线上购物日益流行","支持者看重低价便利","反对者担心物流与欺诈","利大于弊","结论 blessing"],
+    outline: [["概括","材料认为网购日益流行。"],["分歧","一方赞便利低价，一方忧风险。"],["立场","利大于弊，但需完善措施。"],["结论","网购更接近 blessing 而非 curse。"]],
+    note: "观点题先用 Some people... Others contend... 展示争议，再明确自己的立场。",
+    paragraphs: [
+      ["材料观点","From what the excerpt has given, we can extract the author's point that while entity stores are still common in our routine life, online shopping has been gaining popularity in recent years, particularly among young people. As is reported in a recent survey, an increasing number of people choose to shop online instead of going to department stores or shopping malls."],
+      ["争议分析","As to online shopping, there is no consensus among the public. Some people hold that online shopping is a real blessing, because you can buy products at much lower prices almost anytime and anywhere as long as you have access to the Internet. Others contend that online shopping is not a blessing. For one thing, online shopping still has some obvious shortcomings, such as uncontrollable delivery time. For another, chances are that buyers might be cheated by dishonest online shopkeepers."],
+      ["立场结论","I am convinced that the advantages of online shopping far outweigh its disadvantages. Admittedly, online shopping has its shortcomings, but measures can be taken to change them for the better. So, for my part, online shopping is more a blessing than a curse."]
+    ]
+  }
+];
+
+DATA.push({
+  id: "english",
+  short: "英语作文",
+  title: "考研英语一作文 · 应用文与图画图表作文",
+  accent: "violet",
+  cards: ENGLISH_CARDS
+});
+
 
 const ALL_CARDS = DATA.flatMap(deck => deck.cards.map(card => ({
   ...card,
@@ -1058,7 +1517,9 @@ const RING_CIRCUMFERENCE = 2 * Math.PI * 70;
 let state = loadState();
 let view = {
   deckFilter: "all", statusFilter: "all", search: "", currentCardId: null, mode: "full", clozeLevel: "standard",
-  maskRevealed: false, revealedBlanks: new Set(), dictationResult: null, timerRunning: true, timerStartedAt: null,
+  maskRevealed: false, revealedBlanks: new Set(), dictationResult: null,
+  dictationTimerStartedAt: null, dictationTimerAccumulated: 0, dictationTimerRunning: false, dictationTimerInterval: null,
+  timerRunning: true, timerStartedAt: null,
   timerBaseSeconds: 0, timerInterval: null
 };
 function todayKey() { const d = new Date(); const p = n => String(n).padStart(2,"0"); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
@@ -1204,15 +1665,96 @@ function getLcsLength(a, b) {
   }
   return previous[b.length];
 }
+function tokenizeForDiff(text) {
+  const normalized = [];
+  const charIndexes = new Int32Array(text.length);
+  charIndexes.fill(-1);
+  for (let i = 0; i < text.length; i++) {
+    const norm = normalizeForCompare(text[i]);
+    if (!norm) continue;
+    charIndexes[i] = normalized.length;
+    normalized.push(norm);
+  }
+  return { normalized, charIndexes };
+}
+function computeDiffMatches(a, b) {
+  const table = Array.from({ length: a.length + 1 }, () => new Uint16Array(b.length + 1));
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      table[i][j] = a[i - 1] === b[j - 1] ? table[i - 1][j - 1] + 1 : Math.max(table[i - 1][j], table[i][j - 1]);
+    }
+  }
+  const matchedA = new Uint8Array(a.length);
+  const matchedB = new Uint8Array(b.length);
+  let i = a.length, j = b.length;
+  while (i > 0 && j > 0) {
+    if (a[i - 1] === b[j - 1]) { matchedA[i - 1] = 1; matchedB[j - 1] = 1; i--; j--; }
+    else if (table[i - 1][j] >= table[i][j - 1]) i--;
+    else j--;
+  }
+  return { missingA: Array.from(matchedA, value => !value), extraB: Array.from(matchedB, value => !value) };
+}
+function renderDiffText(text, tokens, flags) {
+  let html = "";
+  for (let i = 0; i < text.length; i++) {
+    const char = escapeHtml(text[i]);
+    const normalizedIndex = tokens.charIndexes[i];
+    html += normalizedIndex >= 0 && flags[normalizedIndex] ? `<mark class="diff-mark">${char}</mark>` : char;
+  }
+  return html;
+}
 function evaluateDictation(card, typed) {
-  const answer = normalizeForCompare(card.paragraphs.map(paragraph => paragraph[1]).join(""));
+  const answerText = card.paragraphs.map(paragraph => paragraph[1]).join("\n\n");
+  const answer = normalizeForCompare(answerText);
   const input = normalizeForCompare(typed);
   const lcs = getLcsLength(answer, input);
   const similarity = answer.length && input.length ? Math.round((2 * lcs / (answer.length + input.length)) * 100) : 0;
   const missingKeywords = card.keywords.filter(keyword => !input.includes(normalizeForCompare(keyword)));
   const coverage = card.keywords.length ? Math.round(((card.keywords.length - missingKeywords.length) / card.keywords.length) * 100) : 100;
   const score = Math.round(similarity * .7 + coverage * .3);
-  return { cardId: card.id, score, similarity, coverage, missingKeywords, typedLength: input.length, answerLength: answer.length };
+  return { cardId: card.id, score, similarity, coverage, missingKeywords, typedText: typed, typedLength: input.length, answerLength: answer.length };
+}
+function currentDictationSeconds() {
+  const runningSeconds = view.dictationTimerRunning && view.dictationTimerStartedAt ? Math.floor((Date.now() - view.dictationTimerStartedAt) / 1000) : 0;
+  return view.dictationTimerAccumulated + runningSeconds;
+}
+function updateDictationTimerDisplay() {
+  const timer = document.getElementById("dictationTimer");
+  if (timer) timer.textContent = formatDuration(currentDictationSeconds());
+  const toggle = document.getElementById("dictationTimerToggle");
+  if (toggle) {
+    toggle.disabled = Boolean(view.dictationResult);
+    toggle.textContent = view.dictationResult ? "完成" : view.dictationTimerRunning ? "暂停" : "继续";
+  }
+}
+function startDictationTimer() {
+  if (view.dictationResult || view.dictationTimerRunning) { updateDictationTimerDisplay(); return; }
+  view.dictationTimerRunning = true;
+  view.dictationTimerStartedAt = Date.now();
+  if (view.dictationTimerInterval) clearInterval(view.dictationTimerInterval);
+  view.dictationTimerInterval = window.setInterval(updateDictationTimerDisplay, 1000);
+  updateDictationTimerDisplay();
+}
+function pauseDictationTimer() {
+  if (view.dictationTimerRunning && view.dictationTimerStartedAt) {
+    view.dictationTimerAccumulated += Math.floor((Date.now() - view.dictationTimerStartedAt) / 1000);
+  }
+  view.dictationTimerRunning = false;
+  view.dictationTimerStartedAt = null;
+  if (view.dictationTimerInterval) { clearInterval(view.dictationTimerInterval); view.dictationTimerInterval = null; }
+  updateDictationTimerDisplay();
+}
+function resetDictationTimer() {
+  view.dictationTimerRunning = false;
+  view.dictationTimerStartedAt = null;
+  view.dictationTimerAccumulated = 0;
+  if (view.dictationTimerInterval) { clearInterval(view.dictationTimerInterval); view.dictationTimerInterval = null; }
+  updateDictationTimerDisplay();
+}
+function toggleDictationTimer() {
+  if (view.dictationResult) return;
+  if (view.dictationTimerRunning) pauseDictationTimer();
+  else startDictationTimer();
 }
 function dictationFeedback(score) {
   if (score >= 85) return "非常稳：结构和关键词都基本到位，可以进入下一篇。";
@@ -1225,6 +1767,11 @@ function renderDictationResult(card, result) {
   const missing = result.missingKeywords.length
     ? `<div class="missing-chips">${result.missingKeywords.map(word => `<span class="missing-chip">${escapeHtml(word)}</span>`).join("")}</div>`
     : `<div class="missing-ok">关键词均已覆盖。</div>`;
+  const originalText = card.paragraphs.map(paragraph => paragraph[1]).join("\n\n");
+  const typedText = result.typedText || "";
+  const originalTokens = tokenizeForDiff(originalText);
+  const typedTokens = tokenizeForDiff(typedText);
+  const diff = computeDiffMatches(originalTokens.normalized, typedTokens.normalized);
   return `
     <section class="dictation-result" id="dictationResult">
       <div class="dictation-result-head"><h3>默写对照</h3><span>${escapeHtml(dictationFeedback(result.score))}</span></div>
@@ -1232,18 +1779,26 @@ function renderDictationResult(card, result) {
         <div class="score-card"><span>文字相似度</span><strong>${result.similarity}%</strong><div class="score-track"><div class="score-fill" style="width:${result.similarity}%"></div></div></div>
         <div class="score-card ${scoreClass}"><span>关键词覆盖</span><strong>${result.coverage}%</strong><div class="score-track"><div class="score-fill" style="width:${result.coverage}%"></div></div></div>
       </div>
-      <div class="dictation-feedback">综合得分 <strong>${result.score} 分</strong> · 你写了 ${result.typedLength} 字，标准答案 ${result.answerLength} 字（均不计标点）</div>
+      <div class="dictation-feedback">综合得分 <strong>${result.score} 分</strong> · 用时 <strong>${formatDuration(result.seconds || 0)}</strong> · 你写了 ${result.typedLength} 字，标准答案 ${result.answerLength} 字（均不计标点）</div>
       <div class="dictation-missing"><div class="dictation-missing-title">遗漏关键词</div>${missing}</div>
-      <div class="dictation-answer"><div class="dictation-answer-title">原文对照</div>${card.paragraphs.map(paragraph => `<div class="paragraph"><div class="paragraph-label">${escapeHtml(paragraph[0])}</div><p>${highlightKeywords(paragraph[1], card.keywords)}</p></div>`).join("")}</div>
+      <div class="dictation-diff">
+        <div class="diff-legend"><span class="diff-dot"></span>红色内容表示遗漏、错误或多出的部分</div>
+        <div class="diff-columns">
+          <section class="diff-panel"><div class="diff-panel-title">你的默写</div><div class="diff-text">${renderDiffText(typedText, typedTokens, diff.extraB)}</div></section>
+          <section class="diff-panel"><div class="diff-panel-title">标准原文</div><div class="diff-text">${renderDiffText(originalText, originalTokens, diff.missingA)}</div></section>
+        </div>
+      </div>
     </section>`;
 }
 function renderDictation(card) {
   const draft = (state.drafts && state.drafts[card.id]) || "";
   const count = normalizeForCompare(draft).length;
   const result = view.dictationResult && view.dictationResult.cardId === card.id ? renderDictationResult(card, view.dictationResult) : "";
+  const timerText = formatDuration(currentDictationSeconds());
+  const toggleText = view.dictationResult ? "完成" : view.dictationTimerRunning ? "暂停" : "继续";
   return `
     <div class="dictation-panel">
-      <div class="dictation-head"><strong>默写区</strong><span id="dictationCount">${count} 字</span></div>
+      <div class="dictation-head"><strong>默写区</strong><div class="dictation-head-meta"><span id="dictationCount">${count} 字</span><span class="dictation-clock"><span>用时</span><strong id="dictationTimer">${timerText}</strong><button id="dictationTimerToggle"${view.dictationResult ? " disabled" : ""}>${toggleText}</button></span></div></div>
       <textarea class="dictation-input" id="dictationInput" spellcheck="false" placeholder="在这里默写完整答案，标点可以省略……">${escapeHtml(draft)}</textarea>
       <div class="dictation-actions"><button class="btn btn-primary" id="dictationCheck">提交对照</button><button class="btn" id="dictationClear">清空重写</button></div>
       <div class="dictation-note">文字相似度与关键词覆盖共同计分，标点、空格不计分。草稿会自动保存在本机；电脑端可按 Ctrl + Enter 提交。</div>
@@ -1255,8 +1810,10 @@ function submitDictation() {
   const input = document.getElementById("dictationInput");
   if (!card || !input) return;
   if (normalizeForCompare(input.value).length < 5) { toast("先写下几句再提交对照"); return; }
+  pauseDictationTimer();
   state.drafts[card.id] = input.value;
   view.dictationResult = evaluateDictation(card, input.value);
+  view.dictationResult.seconds = view.dictationTimerAccumulated;
   saveState();
   renderStudyContent(card);
   requestAnimationFrame(() => { const node = document.getElementById("dictationResult"); if (node) node.scrollIntoView({ behavior: "smooth", block: "nearest" }); });
@@ -1266,11 +1823,12 @@ function clearDictation() {
   if (!card) return;
   delete state.drafts[card.id];
   view.dictationResult = null;
+  resetDictationTimer();
   saveState();
   renderStudyContent(card);
+  startDictationTimer();
   requestAnimationFrame(() => { const input = document.getElementById("dictationInput"); if (input) input.focus(); });
-}
-function renderDashboard() {
+}function renderDashboard() {
   const today = ensureToday();
   const counts = { new: 0, fuzzy: 0, mastered: 0 };
   ALL_CARDS.forEach(card => { counts[getStatus(card.id)] += 1; });
@@ -1308,7 +1866,7 @@ function openStudy(id) {
   if (!card) return;
   stopSpeech();
   if (view.currentCardId && view.currentCardId !== id) flushTimer(false);
-  view.currentCardId = id; view.mode = "full"; view.maskRevealed = false; view.revealedBlanks = new Set(); view.dictationResult = null;
+  view.currentCardId = id; view.mode = "full"; view.maskRevealed = false; view.revealedBlanks = new Set(); view.dictationResult = null; resetDictationTimer();
   view.timerRunning = true; state.lastCard = id;
   ensureToday().reviewed = [...new Set([...ensureToday().reviewed,id])];
   saveState();
@@ -1318,7 +1876,7 @@ function openStudy(id) {
   startTimer(); renderStudy();
 }
 function showDashboard() {
-  stopSpeech(); flushTimer(true); stopTimer(); view.currentCardId = null;
+  stopSpeech(); flushTimer(true); stopTimer(); pauseDictationTimer(); view.currentCardId = null;
   document.getElementById("studyView").classList.add("hidden");
   document.getElementById("dashboardView").classList.remove("hidden");
   renderDashboard(); window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1421,9 +1979,11 @@ function revealNextCloze() {
 }
 function changeMode(mode) {
   if (!["full","cloze","dictation","mask","outline"].includes(mode)) return;
+  if (view.mode === "dictation" && mode !== "dictation") pauseDictationTimer();
   view.mode = mode; view.maskRevealed = false;
   if (mode !== "cloze") view.revealedBlanks = new Set();
   renderStudy();
+  if (mode === "dictation" && !view.dictationResult) startDictationTimer();
 }
 function changeClozeLevel(level) {
   if (!["standard","advanced","challenge"].includes(level)) return;
@@ -1562,6 +2122,7 @@ document.addEventListener("click", event => {
     return;
   }
   if (event.target.closest("#maskRevealBtn")) { revealAll(); return; }
+  if (event.target.closest("#dictationTimerToggle")) { toggleDictationTimer(); return; }
   if (event.target.closest("#dictationCheck")) { submitDictation(); return; }
   if (event.target.closest("#dictationClear")) { clearDictation(); return; }
   const cue = event.target.closest("[data-cue]");
@@ -1572,6 +2133,12 @@ document.addEventListener("input", event => {
   if (event.target && event.target.id === "dictationInput") {
     const card = CARD_MAP.get(view.currentCardId);
     if (!card) return;
+    if (view.dictationResult) {
+      view.dictationResult = null;
+      const oldResult = document.getElementById("dictationResult");
+      if (oldResult) oldResult.remove();
+      startDictationTimer();
+    }
     state.drafts[card.id] = event.target.value;
     saveState();
     const count = document.getElementById("dictationCount");
@@ -1617,17 +2184,26 @@ document.addEventListener("keydown", event => {
   if (event.key === "2") setStatus("mastered");
   if (event.key === "3") setStatus("new");
 });
-window.addEventListener("beforeunload", () => { flushTimer(true); stopSpeech(); });
-window.addEventListener("visibilitychange", () => { if (document.hidden && view.currentCardId) flushTimer(true); });
+window.addEventListener("beforeunload", () => { flushTimer(true); pauseDictationTimer(); stopSpeech(); });
+window.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    if (view.currentCardId) flushTimer(true);
+    if (view.mode === "dictation") pauseDictationTimer();
+  } else if (view.currentCardId && view.mode === "dictation" && !view.dictationResult) {
+    startDictationTimer();
+  }
+});
 function syncCatalogMeta() {
   const counts = Object.fromEntries(DATA.map(deck => [deck.id, deck.cards.length]));
   const uxCount = counts.ux || 0;
-  document.getElementById("brandSub").textContent = `马原 ${counts.mayuan || 0} 篇 · 思修 ${counts.sishu || 0} 篇 · 用户研究 ${uxCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
-  document.getElementById("heroLead").textContent = `把 ${(counts.mayuan || 0) + (counts.sishu || 0)} 篇政治模板与 ${uxCount} 篇用户研究必背高频拆成“触发词 → 答题骨架 → 完整表述”。先看提示复述，再揭晓对照，最后给自己评级。`;
+  const mzCount = counts.mzsg || 0;
+  const englishCount = counts.english || 0;
+  document.getElementById("brandSub").textContent = `马原 ${counts.mayuan || 0} 篇 · 思修 ${counts.sishu || 0} 篇 · 毛中特史纲 ${mzCount} 篇 · 用户研究 ${uxCount} 篇 · 英语作文 ${englishCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
+  document.getElementById("heroLead").textContent = `把政治分析题、毛中特史纲专题、用户研究高频与英语作文模板拆成“触发词 → 答题骨架 → 完整表述”。先看提示复述，再揭晓对照，最后给自己评级。`;
   document.getElementById("sideTotal").textContent = `${ALL_CARDS.length} 篇`;
   document.querySelector(".hero").dataset.count = String(ALL_CARDS.length);
   document.querySelector('[data-deck-filter="all"] .nav-count').textContent = String(ALL_CARDS.length);
-  ["mayuan", "sishu", "ux"].forEach(id => {
+  ["mayuan", "sishu", "mzsg", "ux", "english"].forEach(id => {
     const badge = document.querySelector(`[data-deck-filter="${id}"] .nav-count`);
     if (badge) badge.textContent = String(counts[id] || 0);
   });
