@@ -165,6 +165,7 @@
   .topic-card.sishu::before { background: var(--jade); }
   .topic-card.ux::before { background: var(--blue); }
   .topic-card.mzsg::before { background: var(--amber); }
+  .topic-card.politics::before { background: var(--red); }
   .topic-card.english::before { background: var(--violet); }
   .topic-card:hover { transform: translateY(-3px); border-color: var(--line-strong); box-shadow: 0 15px 35px rgba(51,43,31,.08); }
   .card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
@@ -183,6 +184,7 @@
   .sishu .card-open { color: var(--jade); }
   .ux .card-open { color: var(--blue); }
   .mzsg .card-open { color: var(--amber); }
+  .politics .card-open { color: var(--red-deep); }
   .english .card-open { color: var(--violet); }
   .card-open:hover { text-decoration: underline; text-underline-offset: 4px; }
   .empty-state { padding: 50px 20px; text-align: center; border: 1px dashed var(--line-strong); border-radius: 16px; color: var(--muted); background: rgba(255,255,255,.25); }
@@ -197,6 +199,7 @@
   .study-eyebrow.sishu { color: var(--jade); }
   .study-eyebrow.ux { color: var(--blue); }
   .study-eyebrow.mzsg { color: var(--amber); }
+  .study-eyebrow.politics { color: var(--red); }
   .study-eyebrow.english { color: var(--violet); }
   .study-top h2 { margin: 3px 0 0; font-family: var(--serif); font-size: 25px; letter-spacing: .03em; }
   .study-nav { display: flex; align-items: center; gap: 7px; }
@@ -226,6 +229,8 @@
   .question-box.ux .question-label { color: var(--blue); }
   .question-box.mzsg { background: linear-gradient(90deg,rgba(244,234,216,.78),rgba(244,234,216,.14)); border-color: var(--amber); }
   .question-box.mzsg .question-label { color: var(--amber); }
+  .question-box.politics { background: linear-gradient(90deg,rgba(243,226,220,.63),rgba(243,226,220,.16)); border-color: var(--red); }
+  .question-box.politics .question-label { color: var(--red); }
   .question-box.english { background: linear-gradient(90deg,rgba(236,231,244,.8),rgba(236,231,244,.14)); border-color: var(--violet); }
   .question-box.english .question-label { color: var(--violet); }
   .question-box p { margin: 0; font-size: 13px; line-height: 1.8; }
@@ -304,6 +309,12 @@
   .dictation-answer { margin-top: 18px; padding-top: 17px; border-top: 1px solid #ece4d8; }
   .dictation-answer-title { margin-bottom: 13px; color: #81786d; font-size: 10px; font-weight: 700; letter-spacing: .11em; }
   .dictation-answer .paragraph { margin-bottom: 19px; }
+  .translation-panel { margin-top: 22px; padding: 19px 20px; border: 1px solid #e7dfd1; border-radius: 12px; background: #faf7f0; }
+  .translation-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: #81786d; font-size: 10px; font-weight: 700; letter-spacing: .1em; }
+  .translation-item { margin-bottom: 14px; }
+  .translation-item:last-child { margin-bottom: 0; }
+  .translation-label { margin-bottom: 4px; color: #9a8f81; font-size: 9px; font-weight: 700; letter-spacing: .08em; }
+  .translation-text { color: #575d56; font-size: 13px; line-height: 1.95; }
   .dictation-diff { margin-top: 18px; }
   .diff-legend { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; color: var(--muted); font-size: 10px; }
   .diff-dot { width: 9px; height: 9px; border-radius: 3px; background: #e9b9b3; border-bottom: 2px solid #a63f33; }
@@ -414,9 +425,7 @@
     <div class="side-label"><span>题库</span><span id="sideTotal">63 篇</span></div>
     <nav class="deck-nav" id="deckNav">
       <button class="nav-item active" data-deck-filter="all">全部模板 <span class="nav-count">63</span></button>
-      <button class="nav-item" data-deck-filter="mayuan">马原 34题 <span class="nav-count">6</span></button>
-      <button class="nav-item" data-deck-filter="sishu">思修 37题 <span class="nav-count">5</span></button>
-      <button class="nav-item" data-deck-filter="mzsg">毛中特史纲 <span class="nav-count">7</span></button>
+      <button class="nav-item" data-deck-filter="politics">政治 <span class="nav-count">18</span></button>
       <button class="nav-item" data-deck-filter="ux">用户研究 <span class="nav-count">25</span></button>
       <button class="nav-item" data-deck-filter="english">英语作文 <span class="nav-count">20</span></button>
     </nav>
@@ -503,6 +512,7 @@
                 <button class="tool-btn hidden" id="recoverBtn">重新遮盖</button>
                 <button class="tool-btn" id="speakBtn">朗读</button>
                 <button class="tool-btn" id="copyBtn">复制</button>
+                <button class="tool-btn hidden" id="translationBtn">查看译文</button>
                 <button class="tool-btn" id="printBtn">打印</button>
               </div>
             </div>
@@ -522,6 +532,7 @@
                 <div class="level-hint" id="clozeLevelHint">隐藏全部关键词，检查完整表述。</div>
               </div>
               <div id="studyContent"></div>
+              <div class="translation-panel hidden" id="cardTranslation"></div>
             </div>
           </section>
           <div class="study-bottom">
@@ -1494,6 +1505,112 @@ const ENGLISH_CARDS = [
   }
 ];
 
+const ENGLISH_TRANSLATIONS = {
+  "en-01-recommendation": [
+    ["开头","亲爱的保罗：欢迎来中国！得知你下个月将访问中国，我非常高兴，特此写信向你推荐一座城市，并提供一些实用建议。"],
+    ["主体","我强烈推荐北京，理由如下。首先，北京是中国的首都，也是政治、文化、国际交流与科技创新的中心。其次，北京历史悠久，拥有长城、颐和园和故宫等著名历史遗迹。此外，建议你留意停留期间的天气变化，并遵守相关规定。"],
+    ["结尾","如有任何问题，请随时联系我。期待在中国与你见面。谨启，李明"]
+  ],
+  "en-02-inquiry": [
+    ["开头","尊敬的先生/女士：我计划今年夏天在九月初读研之前，随贵旅行社前往欧洲进行休闲旅行，特此写信询问需要做哪些准备。"],
+    ["主体","首先，我想了解两周旅行的全部费用，以及应携带欧元还是人民币。其次，我希望了解大致的行程安排，以便提前通知当地朋友并约定聚会时间。"],
+    ["结尾","提前致谢，期待您的回复。谨启，李明"]
+  ],
+  "en-03-lost-items": [
+    ["开头","尊敬的先生/女士：我是贵酒店的常客。昨天我匆忙赶往机场，将 iPhone 17 和 MacBook Air 落在了 111 房间。能否请您联系负责收集客人遗失物品的部门，确认是否已经找到？"],
+    ["主体","我的手机里有数百张与父母和同学拍摄的照片，这些照片对我非常珍贵。此外，我的电脑中存有一篇学期论文、大量数据以及研究资料，论文截止日期临近，我昨晚因此无法入睡。"],
+    ["结尾","如已找到遗失物品，请通过邮件回复我，或拨打 010-66xxxx66 联系我。我会请朋友代取。感谢您的帮助。谨启，李明"]
+  ],
+  "en-04-consolation": [
+    ["开头","亲爱的汤姆：得知你竞选学生会主席失败，我感到非常难过，也完全理解你此刻的失望与沮丧。"],
+    ["主体","你花了大量时间准备演讲、组织活动。毫无疑问，你出色的能力和热情的性格一直给同学们留下深刻印象。失败并不代表彻底的失败，而是一段宝贵的经历，它能帮助你发现不足并继续进步。"],
+    ["结尾","不要灰心，未来还有更多机会。我相信你迟早会实现目标。如果你情绪低落，我们可以一起出去走走、聊聊天。谨启，李明"]
+  ],
+  "en-05-gratitude": [
+    ["开头","亲爱的史密斯夫妇：我已平安回到中国。在此，我想衷心感谢你们全家在我纽约停留期间给予我的善意与热情款待。"],
+    ["主体","你们慷慨的帮助和细致的照顾让我感到温暖，也把我的第一次美国之旅变成了一段美好回忆。我真诚希望你们将来能来中国，让我有机会回报你们的善意。我相信你们会像我喜欢纽约一样喜欢中国。"],
+    ["结尾","请允许我再次表达感谢，并代我向家人问好。谨启，李明"]
+  ],
+  "en-06-apology": [
+    ["开头","亲爱的杰克：感谢你邀请我到你家吃晚饭。很遗憾，我无法参加。"],
+    ["主体","我正在全力准备后天举行的一场重要考试。这场考试对我非常重要，因为它直接影响我能否毕业。错过这样一次愉快的聚会，我感到非常抱歉，希望你们玩得开心。我们之后能否单独见面？如果可以，请告诉我你方便的日期，我很想和你好好聊聊。"],
+    ["结尾","请允许我再次表达歉意。谨启，李明"]
+  ],
+  "en-07-job": [
+    ["开头","尊敬的先生/女士：作为一名重点大学的应届毕业生，我很高兴从招聘广告中得知贵公司正在招聘商务经理，特此写信申请该职位。"],
+    ["主体","简要介绍自己：我主修工商管理，预计明年六月毕业。我不仅各科成绩优异，还曾在毕马威、微软等多家知名国际公司工作，积累了丰富经验。此外，我的人际交往能力和团队合作精神也适合这一岗位。"],
+    ["结尾","如能在您方便时安排面试，我将不胜感激。谨启，李明"]
+  ],
+  "en-08-major": [
+    ["开头","亲爱的吉姆：最近好吗？针对你关于如何选择大学专业的咨询，我写信向你推荐应用心理学，理由如下。"],
+    ["主体","首先，在当代社会，越来越多人把学习和工作中的个人成就置于心理健康之上。通过提供心理指导，你可以帮助他们积极乐观地生活。其次，由于缺乏良好心态，一些人会伤害自己和他人。运用心理学知识，可以有效降低此类冲突的发生率。"],
+    ["结尾","为帮助你学好这个专业，我提出两点建议：第一，把理论与案例结合，提高分析能力；第二，广泛阅读期刊和核心教材。希望我的推荐和建议对你有帮助，如有问题请随时联系我。谨启，李明"]
+  ],
+  "en-09-notice": [
+    ["通知标题与活动信息","通知：为丰富课外生活、加深对文化与科技的理解，题为“跨越文化：数字媒体与读写活动”的讲座将于 12 月 11 日星期一上午 9 点至 11 点，在中文系会议室举行。"],
+    ["主讲人与内容","讲座由宾夕法尼亚大学英语文学系的罗伯特·约翰逊教授主讲。约翰逊教授以研究读写活动与新媒体技术的关系而闻名。他将以幽默的风格介绍文化与科技发展关系方面的研究成果，相信大家会很喜欢。"],
+    ["邀请与落款","欢迎全体师生参加。中文系"]
+  ],
+  "en-10-takeaway": [
+    ["图表描述","以上饼图清楚揭示了中国人每月平均点外卖次数比例发生的显著变化。数据显示，2014 年每月点外卖 1 至 5 次的人占比最高，为 38.3%；点 6 至 10 次的人占 28.5%。相比之下，此后十年间，每月点外卖超过 10 次的人比例大幅上升至 47.3%，而只有 2.1% 的人选择不点外卖。"],
+    ["原因分析","造成这一明显变化的主要原因可概括如下。首先，随着城市生活节奏加快、工作压力增大，很多人更愿意点外卖而不是去餐馆。其次，为了享受舒适便利的生活，越来越多消费者不愿自己做饭，而选择在工作地点或家中点外卖。最后，外卖行业的繁荣也得益于网络购物和快递业务的快速发展。"],
+    ["结论评论","简而言之，蓬勃发展的外卖行业无疑促进了经济繁荣。基于以上分析，可以稳妥地得出结论：图表所反映的趋势在未来几年仍将持续。时间会证明一切。"]
+  ],
+  "en-11-electric-cars": [
+    ["数据描述","柱状图清楚反映了 2019 至 2025 年中国电动汽车销量的巨大变化。根据图表，销量从 2019 年的 121 万辆显著上升至 2025 年的近 1700 万辆，2025 年也是这七年中的销量峰值。"],
+    ["原因分析","这一上升趋势可归因于多方面原因。首先，随着环保意识增强，越来越多人选择购买电动汽车。其次，电动汽车技术日益成熟，吸引了更多消费者。最后，政府出台了一系列优惠政策推动电动汽车产业发展，这是不可忽视的关键因素。"],
+    ["评论结论","毫无疑问，图表反映的趋势是积极的。气候变化和环境问题需要我们从当下到长期持续关注并采取行动。电动汽车的普及是朝着正确方向迈出的一步。"]
+  ],
+  "en-12-guochao": [
+    ["数据描述","柱状图生动展示了中国国潮品牌与国际竞争品牌市场份额的变化。具体而言，国潮品牌份额从 2021 年的 38% 稳步上升至 2024 年的 72%，而国际品牌份额同期从 62% 大幅下降至 28%。不难发现，越来越多人偏爱国潮品牌。"],
+    ["原因分析","造成这一趋势的原因主要有以下几点。首先，年轻消费者对传统文化的认同不断增强，推动他们偏爱带有文化元素的国潮产品。其次，国产品牌将传统美学与现代科技相结合，满足了多样化消费需求。最后，电商平台和社交媒体推广有效扩大了国潮品牌在年轻群体中的影响。"],
+    ["评论结论","这一趋势不仅反映中国国产品牌的崛起，也象征民族文化自信的增强。随着国潮品牌推出更多创新产品并扩大全球影响，预计它们未来仍将占据市场主导地位。"]
+  ],
+  "en-13-travel-modes": [
+    ["表格描述","从上表可以清楚看到，2014 至 2024 年人们假期出行方式发生了巨大变化。过去十年，选择飞机和高铁出行的人比例总体上升，分别从 19% 和 21% 增至 31% 和 40%；选择私家车出行的人比例则从 45% 降至 15%。"],
+    ["原因分析","变化主要有两个原因。第一，随着生活水平提高，人们越来越富裕，能够承担飞机和高铁出行费用。第二，人们如今更重视环保生活方式，认为飞机或高铁比私家车更有利于环境保护。"],
+    ["结论预测","总之，可以预测未来选择低碳出行方式的人会继续增加。与此同时，假期出行方式的变化也表明我国经济状况正在不断改善。"]
+  ],
+  "en-14-fitness": [
+    ["图表描述","折线图清楚反映了 2023 至 2025 年某城市健身房数量和参加体育锻炼人数的显著变化。健身房数量从 2023 年的 600 家迅速上升至 2025 年的约 810 家；同期锻炼人数逐渐增加，2025 年达到 200 万。柱状图显示运动动机：增强体质 40%，缓解压力 35%，社交 20%，习惯 5%。"],
+    ["原因分析","在我看来，这一趋势可归因于几个因素。首先，越来越多人尤其是年轻人意识到改善身体状况的重要性，因此利用闲暇时间锻炼。其次，体育锻炼无疑是缓解日常压力的有效方式。同时，我们还能在运动过程中进行社交互动。"],
+    ["评论结论","总之，健身习惯对任何人的生活都是积极补充，因为它能同时改善心理和身体健康。"]
+  ],
+  "en-15-independence": [
+    ["图画描述","如图所示，左图中的男孩遇到困难时向母亲求助，而右图中的男孩正努力自己整理床铺。这两幅图揭示了一个不可否认的事实：努力独立的品质在个人成长和社会发展中不可或缺，发人深省，值得进一步分析。"],
+    ["寓意与例证","可以看出，图画作者想让我们关注独立精神。不难理解，独立分析和解决问题的能力是个人成功的重要因素之一。以爱因斯坦为例，如果没有独立精神，他不可能在物理学领域取得如此巨大的成就。"],
+    ["结论行动","综合以上分析可以得出结论：我们应当重视独立品质。作为大学生，我们应增强对独立重要性的认识。"]
+  ],
+  "en-16-reading": [
+    ["图画描述","漫画生动描绘了两个人对如何度过闲暇时间的不同态度。左边的男孩高兴地说：“出去玩多有趣！”另一个男孩则认为把更多时间用于阅读更有意义。这幅图旨在鼓励我们在空闲时间多读书。"],
+    ["寓意与例证","书籍无疑是数千年积累的知识宝库。通过阅读，我们不仅能了解人类取得的成就，还能在已有知识基础上获得发展与创新的启发。这一真理在学术领域尤为明显，阅读某一学科的既有文献是取得新发现的基础。例如，马克思在写作新理论前曾在大英图书馆阅读大量书籍，常坐的位置甚至留下了脚印。"],
+    ["结论","同样的道理也适用于普通人，我相信每个人都能从好书中受益。"]
+  ],
+  "en-17-innovation": [
+    ["图画描述与寓意","在这幅发人深省的漫画中，两位研究者正在争论工作方式。一位坚持只要按常规完成分配任务即可；另一位手持发光的实验蓝图，认为科学研究依靠持续创新而非僵化服从。画面虽简单，却揭示了一个核心真理：创新是科学进步的生命线。"],
+    ["例证与论证","遵循常规能保证工作稳定、避免错误，但过度依赖惯例会阻碍科学发展。历史上例子众多：爱因斯坦用相对论挑战传统理论，推动物理学革命；比亚迪则通过电动汽车技术创新引领汽车产业绿色转型。这些先驱打破现状束缚，作出了开创性贡献。对研究生而言，创新思维至关重要。在科技快速变化的时代，我们应质疑既有理论、批判性思考、探索新方案，而不是重复他人的工作。"],
+    ["结论","只有把严谨的常规工作与大胆创新结合起来，才能取得有意义的学术进步。总之，常规是基础，创新是科学研究的动力。我们必须拥抱创新，为科学发展开辟新的可能。"]
+  ],
+  "en-18-economy": [
+    ["图画描述","上图生动展示了一家人日常生活中节约用水的情景，从洗米洗菜到洗拖把、冲厕所，一水多用。这种良好行为值得赞扬，也应在社会中推广。"],
+    ["寓意说明","节约与我们的日常生活密切相关。例如，作为大学生，我们应合理使用纸张和二手教材。公众参与是建设节约型社会的基础。社会环境由公众塑造，因此节约型社会的形成有赖于每个社会成员不论老少的积极参与。"],
+    ["措施结论","在我看来，应采取必要措施践行节约。一方面，应开展公共宣传活动，帮助人们提高日常生活中节约的意识；另一方面，政府相关部门和各级专业人士应推动节约教育。只有这样才能建设真正的节约型社会。"]
+  ],
+  "en-19-short-video": [
+    ["图文描述","如图所示，一个孩子坐在本应安静阅读的图书馆里刷短视频，还说：“读书太累了，看短视频有趣多了。”与之相呼应，柱状图比较了某城市年轻人每天在社交媒体上的时间：平均 180 分钟用于短视频，而深度阅读只有 20 分钟。"],
+    ["趋势与原因","这些图揭示了一个令人担忧的趋势：年轻人越来越多地沉迷短视频，牺牲了深度阅读。我认为这一现象有几个原因。一方面，短视频节奏快、娱乐性强，能迅速满足人们在忙碌生活中的放松需求；另一方面，社交媒体平台的算法推荐不断推送定制内容，使年轻人容易上瘾。然而，过度依赖短视频可能削弱批判性思维和深度理解能力，因为这类内容往往传递碎片化信息。"],
+    ["评论建议","作为年轻人，我们应在娱乐与自我提升之间取得平衡。可以限制每天刷短视频的时间，把更多时间用于深度阅读，从而丰富知识、培养深刻思考。只有避免盲目沉迷于浅层娱乐，才能实现稳步成长，拥抱更有意义的人生。"]
+  ],
+  "en-20-online-shopping": [
+    ["材料观点","从材料中可以提炼出作者的观点：实体店在日常生活中仍很常见，但近年来网络购物日益流行，尤其是在年轻人中。最近一项调查显示，越来越多人选择网上购物，而不是去百货商店或购物中心。"],
+    ["争议分析","对于网络购物，公众意见并不一致。一些人认为网络购物是真正的福音，因为只要有网络，几乎随时随地都能以更低价格买到商品。另一些人则认为网络购物并非福音：一方面，它仍有明显缺点，例如配送时间不可控；另一方面，买家可能被不诚信的网店欺骗。"],
+    ["立场结论","我认为网络购物的优点远大于缺点。诚然，它存在不足，但可以采取措施加以改善。因此，在我看来，网络购物更接近福音，而不是灾祸。"]
+  ]
+};
+
+ENGLISH_CARDS.forEach(card => { card.translation = ENGLISH_TRANSLATIONS[card.id] || []; });
+
+
 DATA.push({
   id: "english",
   short: "英语作文",
@@ -1502,6 +1619,27 @@ DATA.push({
   cards: ENGLISH_CARDS
 });
 
+
+const POLITICAL_DECK_IDS = ["mayuan", "sishu", "mzsg"];
+const politicalDecks = DATA.filter(deck => POLITICAL_DECK_IDS.includes(deck.id));
+let politicalNumber = 0;
+const POLITICS_CARDS = politicalDecks.flatMap(deck => deck.cards.map(card => {
+  politicalNumber += 1;
+  const subjectTag = deck.id === "mayuan" ? "马原" : deck.id === "sishu" ? "思修" : "毛中特史纲";
+  return {
+    ...card,
+    num: String(politicalNumber).padStart(2, "0"),
+    tags: [...new Set([subjectTag, ...(card.tags || [])])]
+  };
+}));
+const OTHER_DECKS = DATA.filter(deck => !POLITICAL_DECK_IDS.includes(deck.id));
+DATA.splice(0, DATA.length, {
+  id: "politics",
+  short: "政治",
+  title: "考研政治 · 马原 / 思修 / 毛中特史纲",
+  accent: "red",
+  cards: POLITICS_CARDS
+}, ...OTHER_DECKS);
 
 const ALL_CARDS = DATA.flatMap(deck => deck.cards.map(card => ({
   ...card,
@@ -1516,7 +1654,7 @@ const DAILY_GOAL = 3;
 const RING_CIRCUMFERENCE = 2 * Math.PI * 70;
 let state = loadState();
 let view = {
-  deckFilter: "all", statusFilter: "all", search: "", currentCardId: null, mode: "full", clozeLevel: "standard",
+  deckFilter: "all", statusFilter: "all", search: "", currentCardId: null, mode: "full", clozeLevel: "standard", translationVisible: false,
   maskRevealed: false, revealedBlanks: new Set(), dictationResult: null,
   dictationTimerStartedAt: null, dictationTimerAccumulated: 0, dictationTimerRunning: false, dictationTimerInterval: null,
   timerRunning: true, timerStartedAt: null,
@@ -1866,7 +2004,7 @@ function openStudy(id) {
   if (!card) return;
   stopSpeech();
   if (view.currentCardId && view.currentCardId !== id) flushTimer(false);
-  view.currentCardId = id; view.mode = "full"; view.maskRevealed = false; view.revealedBlanks = new Set(); view.dictationResult = null; resetDictationTimer();
+  view.currentCardId = id; view.mode = "full"; view.maskRevealed = false; view.revealedBlanks = new Set(); view.dictationResult = null; view.translationVisible = false; resetDictationTimer();
   view.timerRunning = true; state.lastCard = id;
   ensureToday().reviewed = [...new Set([...ensureToday().reviewed,id])];
   saveState();
@@ -1913,13 +2051,30 @@ function renderStudy() {
   document.getElementById("speakBtn").textContent = ("speechSynthesis" in window) && speechSynthesis.speaking ? "停止朗读" : "朗读";
   document.getElementById("cueList").innerHTML = card.cues.map(cue => `<button class="cue-chip" data-cue="${escapeHtml(cue)}">${escapeHtml(cue)}</button>`).join("");
   document.getElementById("cueNote").textContent = card.note;
-  renderStudyContent(card); updateTimerDisplay();
+  renderStudyContent(card); renderTranslationPanel(card); updateTimerDisplay();
 }
 function syncClozeControls() {
   const recoverBtn = document.getElementById("recoverBtn");
   if (!recoverBtn) return;
   recoverBtn.classList.toggle("hidden", view.mode !== "cloze");
   recoverBtn.disabled = view.revealedBlanks.size === 0;
+}
+function renderTranslationPanel(card) {
+  const panel = document.getElementById("cardTranslation");
+  const button = document.getElementById("translationBtn");
+  if (!panel || !button) return;
+  const hasTranslation = Array.isArray(card.translation) && card.translation.length > 0;
+  button.classList.toggle("hidden", !hasTranslation);
+  button.textContent = view.translationVisible ? "隐藏译文" : "查看译文";
+  panel.classList.toggle("hidden", !hasTranslation || !view.translationVisible);
+  if (!hasTranslation || !view.translationVisible) { panel.innerHTML = ""; return; }
+  panel.innerHTML = `<div class="translation-head"><span>中文译文</span><span>建议先背英文，再看译文</span></div>${card.translation.map(item => `<div class="translation-item"><div class="translation-label">${escapeHtml(item[0])}</div><div class="translation-text">${escapeHtml(item[1])}</div></div>`).join("")}`;
+}
+function toggleTranslation() {
+  const card = CARD_MAP.get(view.currentCardId);
+  if (!card || !Array.isArray(card.translation) || !card.translation.length) return;
+  view.translationVisible = !view.translationVisible;
+  renderTranslationPanel(card);
 }
 function renderStudyContent(card) {
   const content = document.getElementById("studyContent");
@@ -2161,6 +2316,7 @@ document.getElementById("revealAllBtn").addEventListener("click", revealAll);
 document.getElementById("recoverBtn").addEventListener("click", recoverAll);
 document.getElementById("speakBtn").addEventListener("click", speakCard);
 document.getElementById("copyBtn").addEventListener("click", copyCard);
+document.getElementById("translationBtn").addEventListener("click", toggleTranslation);
 document.getElementById("printBtn").addEventListener("click", () => window.print());
 document.getElementById("timerToggle").addEventListener("click", toggleTimer);
 document.addEventListener("keydown", event => {
@@ -2195,15 +2351,15 @@ window.addEventListener("visibilitychange", () => {
 });
 function syncCatalogMeta() {
   const counts = Object.fromEntries(DATA.map(deck => [deck.id, deck.cards.length]));
+  const politicsCount = counts.politics || 0;
   const uxCount = counts.ux || 0;
-  const mzCount = counts.mzsg || 0;
   const englishCount = counts.english || 0;
-  document.getElementById("brandSub").textContent = `马原 ${counts.mayuan || 0} 篇 · 思修 ${counts.sishu || 0} 篇 · 毛中特史纲 ${mzCount} 篇 · 用户研究 ${uxCount} 篇 · 英语作文 ${englishCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
-  document.getElementById("heroLead").textContent = `把政治分析题、毛中特史纲专题、用户研究高频与英语作文模板拆成“触发词 → 答题骨架 → 完整表述”。先看提示复述，再揭晓对照，最后给自己评级。`;
+  document.getElementById("brandSub").textContent = `政治 ${politicsCount} 篇 · 用户研究 ${uxCount} 篇 · 英语作文 ${englishCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
+  document.getElementById("heroLead").textContent = `把政治、用户研究与英语作文模板拆成“触发词 → 答题骨架 → 完整表述”。先看提示复述，再揭晓对照，最后给自己评级。`;
   document.getElementById("sideTotal").textContent = `${ALL_CARDS.length} 篇`;
   document.querySelector(".hero").dataset.count = String(ALL_CARDS.length);
   document.querySelector('[data-deck-filter="all"] .nav-count').textContent = String(ALL_CARDS.length);
-  ["mayuan", "sishu", "mzsg", "ux", "english"].forEach(id => {
+  ["politics", "ux", "english"].forEach(id => {
     const badge = document.querySelector(`[data-deck-filter="${id}"] .nav-count`);
     if (badge) badge.textContent = String(counts[id] || 0);
   });
