@@ -87,6 +87,17 @@
   .nav-item.active[data-deck-filter="mzsg"] .nav-count { background: var(--amber-soft); color: var(--amber); }
   .nav-item.active[data-deck-filter="english"] { color: var(--violet); }
   .nav-item.active[data-deck-filter="english"] .nav-count { background: var(--violet-soft); color: var(--violet); }
+  .subdeck-nav { display: grid; gap: 4px; margin: 1px 0 5px 14px; padding-left: 11px; border-left: 1px solid var(--line); }
+  .nav-subitem { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; padding: 7px 9px; border: 1px solid transparent; border-radius: 7px; background: transparent; color: #747a73; font-size: 11px; text-align: left; }
+  .nav-subitem:hover { color: var(--red-deep); background: rgba(255,255,255,.45); }
+  .nav-subitem.active { color: var(--red-deep); background: var(--red-soft); border-color: #e6c8c1; font-weight: 700; }
+  .nav-subitem .nav-count { min-width: 21px; padding: 1px 6px; font-size: 9px; background: rgba(255,255,255,.55); }
+  .subject-group { margin-bottom: 34px; }
+  .subject-group-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 15px; margin: 0 2px 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .subject-group-heading span { color: var(--red); font-size: 9px; font-weight: 700; letter-spacing: .15em; }
+  .subject-group-heading h3 { margin: 3px 0 2px; font-family: var(--serif); font-size: 24px; }
+  .subject-group-heading p { margin: 0; color: var(--muted); font-size: 10px; }
+  .subject-group-total { color: var(--muted); font-size: 10px; white-space: nowrap; }
   .side-rule { height: 1px; margin: 18px 2px; background: var(--line); }
   .side-plan { margin: 0 2px 12px; padding: 13px; border-radius: 12px; background: #202721; color: #f9f5eb; }
   .side-plan-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12px; color: #bfc6bd; }
@@ -373,7 +384,9 @@
   @media (max-width: 940px) {
     .layout { display: block; width: min(100% - 28px,980px); margin-top: 16px; }
     .sidebar { position: static; margin-bottom: 16px; padding: 13px; }
-    .deck-nav { display: flex; overflow-x: auto; } .nav-item { width: auto; flex: 0 0 auto; min-width: 110px; }
+    .deck-nav { display: flex; overflow-x: auto; align-items: center; } .nav-item { width: auto; flex: 0 0 auto; min-width: 110px; }
+    .subdeck-nav { display: flex; flex: 0 0 auto; gap: 5px; margin: 0; padding: 0; border: 0; }
+    .nav-subitem { width: auto; flex: 0 0 auto; min-width: 86px; }
     .side-rule,.side-plan,.side-actions,.reset-link,.keyboard-tip { display: none; }
     .hero { min-height: auto; grid-template-columns: 1fr; }
     .hero-progress { justify-self: start; grid-template-columns: auto auto; align-items: center; }
@@ -435,9 +448,12 @@
     <div class="side-label"><span>题库</span><span id="sideTotal">63 篇</span></div>
     <nav class="deck-nav" id="deckNav">
       <button class="nav-item active" data-deck-filter="all">全部模板 <span class="nav-count">63</span></button>
-      <button class="nav-item" data-deck-filter="mayuan">马原 34题 <span class="nav-count">6</span></button>
-      <button class="nav-item" data-deck-filter="sishu">思修 37题 <span class="nav-count">5</span></button>
-      <button class="nav-item" data-deck-filter="mzsg">毛中特+史纲 <span class="nav-count">7</span></button>
+      <button class="nav-item" data-deck-filter="politics">政治 <span class="nav-count">18</span></button>
+      <div class="subdeck-nav" id="politicsSubnav">
+        <button class="nav-subitem" data-deck-filter="mayuan">马原 34题 <span class="nav-count">6</span></button>
+        <button class="nav-subitem" data-deck-filter="sishu">思修 37题 <span class="nav-count">5</span></button>
+        <button class="nav-subitem" data-deck-filter="mzsg">毛中特+史纲 <span class="nav-count">7</span></button>
+      </div>
       <button class="nav-item" data-deck-filter="ux">用户研究 <span class="nav-count">25</span></button>
       <button class="nav-item" data-deck-filter="english">英语作文 <span class="nav-count">20</span></button>
     </nav>
@@ -1634,6 +1650,7 @@ DATA.push({
 });
 
 
+const POLITICAL_DECK_IDS = ["mayuan", "sishu", "mzsg"];
 const ALL_CARDS = DATA.flatMap(deck => deck.cards.map(card => ({
   ...card,
   words: card.words || card.paragraphs.reduce((sum, paragraph) => sum + paragraph[1].length, 0),
@@ -1674,7 +1691,9 @@ function ensureToday() {
 function getStatus(id) { return state.status[id] || "new"; }
 function statusLabel(status) { return status === "mastered" ? "已掌握" : status === "fuzzy" ? "需巩固" : "未开始"; }
 function cardMatches(card) {
-  if (view.deckFilter !== "all" && card.deckId !== view.deckFilter) return false;
+  if (view.deckFilter === "politics") {
+    if (!POLITICAL_DECK_IDS.includes(card.deckId)) return false;
+  } else if (view.deckFilter !== "all" && card.deckId !== view.deckFilter) return false;
   if (view.statusFilter !== "all" && getStatus(card.id) !== view.statusFilter) return false;
   const q = view.search.trim().toLowerCase();
   if (!q) return true;
@@ -1986,14 +2005,26 @@ function clearDictation() {
     sections.innerHTML = `<div class="empty-state"><strong>没有找到匹配的模板</strong>换一个关键词，或把状态筛选切回“全部状态”。</div>`;
     return;
   }
-  sections.innerHTML = DATA.map(deck => {
+  const renderDeckSection = deck => {
     const cards = deck.cards.map(card => CARD_MAP.get(card.id)).filter(Boolean).filter(cardMatches);
     if (!cards.length) return "";
     return `<section class="deck-section"><div class="deck-heading"><h3>${escapeHtml(deck.short)}</h3><span>${escapeHtml(deck.title)} · ${cards.length} 篇</span></div><div class="card-grid">${cards.map(card => {
       const status = getStatus(card.id);
       return `<article class="topic-card ${deck.id !== "mayuan" ? deck.id : ""}"><div class="card-top"><span class="card-num">NO. ${card.num}</span><span class="status-badge ${status}"><span class="status-dot"></span>${statusLabel(status)}</span></div><h4>${escapeHtml(card.title)}</h4><div class="card-trigger">${escapeHtml(card.trigger)}</div><div class="card-tags">${card.tags.map(tag => `<span class="card-tag">${escapeHtml(tag)}</span>`).join("")}</div><div class="card-foot"><span class="card-meta">${card.words} 字 · ${card.paragraphs.length} 段</span><button class="card-open" data-open-card="${card.id}">${status === "new" ? "开始背诵" : "继续背诵"} →</button></div></article>`;
     }).join("")}</div></section>`;
-  }).join("");
+  };
+  const politicalDecks = DATA.filter(deck => POLITICAL_DECK_IDS.includes(deck.id));
+  const otherDecks = DATA.filter(deck => !POLITICAL_DECK_IDS.includes(deck.id));
+  const politicalVisibleCards = ALL_CARDS.filter(card => POLITICAL_DECK_IDS.includes(card.deckId) && cardMatches(card));
+  const showPoliticalGroup = politicalVisibleCards.length > 0 && (view.deckFilter === "all" || view.deckFilter === "politics" || POLITICAL_DECK_IDS.includes(view.deckFilter));
+  let allSections = "";
+  if (showPoliticalGroup) {
+    allSections += `<section class="subject-group"><div class="subject-group-heading"><div><span>大类</span><h3>政治</h3><p>马原 / 思修 / 毛中特+史纲</p></div><div class="subject-group-total">${politicalVisibleCards.length} 篇</div></div>${politicalDecks.map(renderDeckSection).join("")}</section>`;
+  }
+  if (view.deckFilter === "all" || (!POLITICAL_DECK_IDS.includes(view.deckFilter) && view.deckFilter !== "politics")) {
+    allSections += otherDecks.map(renderDeckSection).join("");
+  }
+  sections.innerHTML = allSections;
 }
 function openStudy(id) {
   const card = CARD_MAP.get(id);
@@ -2351,7 +2382,7 @@ document.addEventListener("click", event => {
   const statusBtn = event.target.closest("[data-status]");
   if (statusBtn) { setStatus(statusBtn.dataset.status); return; }
   const deckBtn = event.target.closest("[data-deck-filter]");
-  if (deckBtn) { view.deckFilter = deckBtn.dataset.deckFilter; document.querySelectorAll("[data-deck-filter]").forEach(btn => btn.classList.toggle("active",btn === deckBtn)); renderDashboard(); return; }
+  if (deckBtn) { view.deckFilter = deckBtn.dataset.deckFilter; updateDeckNavState(); renderDashboard(); return; }
   const statusFilterBtn = event.target.closest("[data-status-filter]");
   if (statusFilterBtn) { view.statusFilter = statusFilterBtn.dataset.statusFilter; document.querySelectorAll("[data-status-filter]").forEach(btn => btn.classList.toggle("active",btn === statusFilterBtn)); renderDashboard(); return; }
   const blank = event.target.closest("[data-blank-key]");
@@ -2440,6 +2471,13 @@ window.addEventListener("visibilitychange", () => {
     if (view.currentCardId && view.mode === "dictation" && view.dictationStarted && !view.dictationResult) startDictationTimer();
   }
 });
+function updateDeckNavState() {
+  const politicalChildActive = POLITICAL_DECK_IDS.includes(view.deckFilter);
+  document.querySelectorAll("[data-deck-filter]").forEach(button => {
+    const filter = button.dataset.deckFilter;
+    button.classList.toggle("active", filter === view.deckFilter || (filter === "politics" && politicalChildActive));
+  });
+}
 function syncCatalogMeta() {
   const counts = Object.fromEntries(DATA.map(deck => [deck.id, deck.cards.length]));
   const uxCount = counts.ux || 0;
@@ -2449,6 +2487,8 @@ function syncCatalogMeta() {
   document.getElementById("sideTotal").textContent = `${ALL_CARDS.length} 篇`;
   document.querySelector(".hero").dataset.count = String(ALL_CARDS.length);
   document.querySelector('[data-deck-filter="all"] .nav-count').textContent = String(ALL_CARDS.length);
+  const politicsBadge = document.querySelector('[data-deck-filter="politics"] .nav-count');
+  if (politicsBadge) politicsBadge.textContent = String((counts.mayuan || 0) + (counts.sishu || 0) + (counts.mzsg || 0));
   ["mayuan", "sishu", "mzsg", "ux", "english"].forEach(id => {
     const badge = document.querySelector(`[data-deck-filter="${id}"] .nav-count`);
     if (badge) badge.textContent = String(counts[id] || 0);
