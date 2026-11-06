@@ -221,6 +221,7 @@
   .tool-btn:hover { color: var(--jade); background: var(--jade-soft); }
   .tool-btn:disabled { opacity: .38; cursor: not-allowed; background: transparent; color: var(--muted); }
   .study-body { padding: clamp(21px,3.2vw,40px); }
+  .article-cloze-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; padding-top: 16px; border-top: 1px dashed var(--line); }
   .question-box { position: relative; padding: 17px 19px 17px 21px; margin-bottom: 27px; background: linear-gradient(90deg,rgba(243,226,220,.63),rgba(243,226,220,.16)); border-left: 3px solid var(--red); border-radius: 3px 11px 11px 3px; }
   .question-box.sishu { background: linear-gradient(90deg,rgba(223,236,230,.7),rgba(223,236,230,.12)); border-color: var(--jade); }
   .question-label { margin-bottom: 7px; color: var(--red); font-size: 10px; font-weight: 700; letter-spacing: .14em; }
@@ -240,6 +241,11 @@
   .paragraph-label::before { content: ""; width: 16px; height: 1px; background: #b7aa98; }
   .paragraph p { margin: 0; font-family: var(--serif); font-size: clamp(16px,1.55vw,18px); line-height: 2.08; letter-spacing: .045em; text-align: justify; }
   .paragraph mark { color: inherit; background: linear-gradient(transparent 61%,rgba(216,179,119,.38) 61%); padding: 0 1px; }
+  .sentence-read-row { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-top: 8px; color: #918b80; font-size: 9px; }
+  .sentence-read-row > span { margin-right: 2px; letter-spacing: .06em; }
+  .sentence-read-btn { width: 25px; height: 25px; padding: 0; border: 1px solid #ded4c4; border-radius: 50%; background: #fffdf8; color: #6b716a; font-size: 9px; }
+  .sentence-read-btn:hover { color: var(--red); border-color: var(--red); }
+  .sentence-read-btn.speaking { background: var(--red); border-color: var(--red); color: #fff; }
   .blank { display: inline-flex; align-items: center; justify-content: center; min-width: 52px; min-height: 1.5em; margin: 0 3px; padding: 0 7px; border: 0; border-bottom: 2px solid var(--red); border-radius: 3px 3px 0 0; background: var(--red-soft); color: var(--red-deep); font-family: var(--sans); font-size: .78em; font-weight: 700; vertical-align: baseline; }
   .blank::after { content: "点击揭晓"; } .blank.revealed { background: transparent; color: var(--red-deep); } .blank.revealed::after { content: ""; }
   .cloze-levelbar { display: flex; align-items: center; gap: 13px; margin: -5px 0 24px; padding: 12px; border: 1px solid #e7dfd1; border-radius: 12px; background: #f9f5ed; }
@@ -275,6 +281,10 @@
   .clause-blank.revealed { margin: 0; padding: 0; border: 0; background: transparent; color: inherit; font-family: var(--serif); font-size: inherit; }
   .clause-blank.revealed:hover { background: transparent; }
   .dictation-panel { padding: 18px; border: 1px solid #e6ddd0; border-radius: 14px; background: #fcfaf5; }
+  .dictation-start-panel { display: grid; justify-items: center; padding: 42px 24px; border: 1px dashed var(--line-strong); border-radius: 14px; background: #fcfaf5; text-align: center; }
+  .dictation-start-mark { width: 56px; height: 56px; display: grid; place-items: center; margin-bottom: 14px; border-radius: 50%; background: var(--red-soft); color: var(--red); font-family: var(--serif); font-size: 25px; }
+  .dictation-start-panel h3 { margin: 0 0 8px; font-family: var(--serif); font-size: 21px; }
+  .dictation-start-panel p { max-width: 420px; margin: 0 0 20px; color: var(--muted); font-size: 11px; line-height: 1.8; }
   .dictation-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .dictation-head-meta { display: flex; align-items: center; gap: 12px; }
   .dictation-clock { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: 9px; font-weight: 400; }
@@ -400,7 +410,7 @@
   @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
   @media print {
     body { background: #fff; }
-    .topbar,.sidebar,.study-top,.study-toolbar,.study-side,.study-bottom,#toast { display: none !important; }
+    .topbar,.sidebar,.study-top,.study-toolbar,.study-side,.study-bottom,.article-cloze-actions,#toast { display: none !important; }
     .layout { display: block; width: 100%; margin: 0; } .study-grid { display: block; }
     .paper-panel { border: 0; box-shadow: none; } .study-body { padding: 0; }
     .question-box,.paragraph { break-inside: avoid; } .paragraph p { font-size: 12pt; line-height: 1.8; }
@@ -425,7 +435,9 @@
     <div class="side-label"><span>题库</span><span id="sideTotal">63 篇</span></div>
     <nav class="deck-nav" id="deckNav">
       <button class="nav-item active" data-deck-filter="all">全部模板 <span class="nav-count">63</span></button>
-      <button class="nav-item" data-deck-filter="politics">政治 <span class="nav-count">18</span></button>
+      <button class="nav-item" data-deck-filter="mayuan">马原 34题 <span class="nav-count">6</span></button>
+      <button class="nav-item" data-deck-filter="sishu">思修 37题 <span class="nav-count">5</span></button>
+      <button class="nav-item" data-deck-filter="mzsg">毛中特+史纲 <span class="nav-count">7</span></button>
       <button class="nav-item" data-deck-filter="ux">用户研究 <span class="nav-count">25</span></button>
       <button class="nav-item" data-deck-filter="english">英语作文 <span class="nav-count">20</span></button>
     </nav>
@@ -508,8 +520,6 @@
                 <button class="mode-btn" data-mode="outline">提纲</button>
               </div>
               <div class="toolbar-actions">
-                <button class="tool-btn" id="revealAllBtn">全部揭晓</button>
-                <button class="tool-btn hidden" id="recoverBtn">重新遮盖</button>
                 <button class="tool-btn" id="speakBtn">朗读</button>
                 <button class="tool-btn" id="copyBtn">复制</button>
                 <button class="tool-btn hidden" id="translationBtn">查看译文</button>
@@ -533,6 +543,10 @@
               </div>
               <div id="studyContent"></div>
               <div class="translation-panel hidden" id="cardTranslation"></div>
+              <div class="article-cloze-actions hidden" id="articleClozeActions">
+                <button class="btn btn-small" id="revealAllBtn">全部揭晓</button>
+                <button class="btn btn-small" id="recoverBtn">重新遮盖</button>
+              </div>
             </div>
           </section>
           <div class="study-bottom">
@@ -1620,27 +1634,6 @@ DATA.push({
 });
 
 
-const POLITICAL_DECK_IDS = ["mayuan", "sishu", "mzsg"];
-const politicalDecks = DATA.filter(deck => POLITICAL_DECK_IDS.includes(deck.id));
-let politicalNumber = 0;
-const POLITICS_CARDS = politicalDecks.flatMap(deck => deck.cards.map(card => {
-  politicalNumber += 1;
-  const subjectTag = deck.id === "mayuan" ? "马原" : deck.id === "sishu" ? "思修" : "毛中特史纲";
-  return {
-    ...card,
-    num: String(politicalNumber).padStart(2, "0"),
-    tags: [...new Set([subjectTag, ...(card.tags || [])])]
-  };
-}));
-const OTHER_DECKS = DATA.filter(deck => !POLITICAL_DECK_IDS.includes(deck.id));
-DATA.splice(0, DATA.length, {
-  id: "politics",
-  short: "政治",
-  title: "考研政治 · 马原 / 思修 / 毛中特史纲",
-  accent: "red",
-  cards: POLITICS_CARDS
-}, ...OTHER_DECKS);
-
 const ALL_CARDS = DATA.flatMap(deck => deck.cards.map(card => ({
   ...card,
   words: card.words || card.paragraphs.reduce((sum, paragraph) => sum + paragraph[1].length, 0),
@@ -1655,7 +1648,7 @@ const RING_CIRCUMFERENCE = 2 * Math.PI * 70;
 let state = loadState();
 let view = {
   deckFilter: "all", statusFilter: "all", search: "", currentCardId: null, mode: "full", clozeLevel: "standard", translationVisible: false,
-  maskRevealed: false, revealedBlanks: new Set(), dictationResult: null,
+  maskRevealed: false, revealedBlanks: new Set(), dictationResult: null, dictationStarted: false,
   dictationTimerStartedAt: null, dictationTimerAccumulated: 0, dictationTimerRunning: false, dictationTimerInterval: null,
   timerRunning: true, timerStartedAt: null,
   timerBaseSeconds: 0, timerInterval: null
@@ -1929,6 +1922,9 @@ function renderDictationResult(card, result) {
     </section>`;
 }
 function renderDictation(card) {
+  if (!view.dictationStarted) {
+    return `<div class="dictation-start-panel"><div class="dictation-start-mark">默</div><h3>准备开始默写</h3><p>点击开始后计时才会启动。退出默写模式或切换文章时，当前默写内容会自动清空。</p><button class="btn btn-primary" id="dictationStart">开始默写</button></div>`;
+  }
   const draft = (state.drafts && state.drafts[card.id]) || "";
   const count = normalizeForCompare(draft).length;
   const result = view.dictationResult && view.dictationResult.cardId === card.id ? renderDictationResult(card, view.dictationResult) : "";
@@ -1939,7 +1935,7 @@ function renderDictation(card) {
       <div class="dictation-head"><strong>默写区</strong><div class="dictation-head-meta"><span id="dictationCount">${count} 字</span><span class="dictation-clock"><span>用时</span><strong id="dictationTimer">${timerText}</strong><button id="dictationTimerToggle"${view.dictationResult ? " disabled" : ""}>${toggleText}</button></span></div></div>
       <textarea class="dictation-input" id="dictationInput" spellcheck="false" placeholder="在这里默写完整答案，标点可以省略……">${escapeHtml(draft)}</textarea>
       <div class="dictation-actions"><button class="btn btn-primary" id="dictationCheck">提交对照</button><button class="btn" id="dictationClear">清空重写</button></div>
-      <div class="dictation-note">文字相似度与关键词覆盖共同计分，标点、空格不计分。草稿会自动保存在本机；电脑端可按 Ctrl + Enter 提交。</div>
+      <div class="dictation-note">文字相似度与关键词覆盖共同计分，标点、空格不计分。当前内容会在退出默写时自动清空；电脑端可按 Ctrl + Enter 提交。</div>
       ${result}
     </div>`;
 }
@@ -2003,8 +1999,9 @@ function openStudy(id) {
   const card = CARD_MAP.get(id);
   if (!card) return;
   stopSpeech();
+  if (view.mode === "dictation" && view.currentCardId) exitDictationSession();
   if (view.currentCardId && view.currentCardId !== id) flushTimer(false);
-  view.currentCardId = id; view.mode = "full"; view.maskRevealed = false; view.revealedBlanks = new Set(); view.dictationResult = null; view.translationVisible = false; resetDictationTimer();
+  view.currentCardId = id; view.mode = "full"; view.maskRevealed = false; view.revealedBlanks = new Set(); view.dictationResult = null; view.dictationStarted = false; view.translationVisible = false; delete state.drafts[id]; resetDictationTimer();
   view.timerRunning = true; state.lastCard = id;
   ensureToday().reviewed = [...new Set([...ensureToday().reviewed,id])];
   saveState();
@@ -2014,7 +2011,7 @@ function openStudy(id) {
   startTimer(); renderStudy();
 }
 function showDashboard() {
-  stopSpeech(); flushTimer(true); stopTimer(); pauseDictationTimer(); view.currentCardId = null;
+  stopSpeech(); pauseTimer(true); stopTimer(); if (view.mode === "dictation") exitDictationSession(); pauseDictationTimer(); view.currentCardId = null;
   document.getElementById("studyView").classList.add("hidden");
   document.getElementById("dashboardView").classList.remove("hidden");
   renderDashboard(); window.scrollTo({ top: 0, behavior: "smooth" });
@@ -2046,6 +2043,8 @@ function renderStudy() {
     challenge: "看句首和字数提示复述整句；按空格可逐句揭晓。"
   };
   document.getElementById("clozeLevelHint").textContent = levelHints[view.clozeLevel];
+  const articleClozeActions = document.getElementById("articleClozeActions");
+  articleClozeActions.classList.toggle("hidden", !["cloze","mask"].includes(view.mode));
   document.getElementById("revealAllBtn").classList.toggle("hidden", !["cloze","mask"].includes(view.mode));
   syncClozeControls();
   document.getElementById("speakBtn").textContent = ("speechSynthesis" in window) && speechSynthesis.speaking ? "停止朗读" : "朗读";
@@ -2101,7 +2100,8 @@ function renderStudyContent(card) {
   }
   content.innerHTML = card.paragraphs.map((paragraph, paragraphIndex) => {
     const body = view.mode === "cloze" ? clozeText(paragraph[1],getClozeKeywords(card),view.revealedBlanks,paragraphIndex) : highlightKeywords(paragraph[1],card.keywords);
-    return `<div class="paragraph"><div class="paragraph-label">${escapeHtml(paragraph[0])}</div><p>${body}</p></div>`;
+    const readRow = view.mode === "full" ? renderSentenceReadRow(card, paragraph[1], paragraphIndex) : "";
+    return `<div class="paragraph"><div class="paragraph-label">${escapeHtml(paragraph[0])}</div><p>${body}</p>${readRow}</div>`;
   }).join("");
 }
 function getCurrentClozeKeys(card) {
@@ -2132,13 +2132,30 @@ function revealNextCloze() {
   view.revealedBlanks.add(key);
   renderStudyContent(card);
 }
+function exitDictationSession() {
+  const card = CARD_MAP.get(view.currentCardId);
+  if (card) delete state.drafts[card.id];
+  view.dictationResult = null;
+  view.dictationStarted = false;
+  resetDictationTimer();
+  saveState();
+}
+function startDictationSession() {
+  const card = CARD_MAP.get(view.currentCardId);
+  if (!card) return;
+  delete state.drafts[card.id];
+  view.dictationResult = null;
+  view.dictationStarted = true;
+  resetDictationTimer();
+  renderStudyContent(card);
+  startDictationTimer();
+}
 function changeMode(mode) {
   if (!["full","cloze","dictation","mask","outline"].includes(mode)) return;
-  if (view.mode === "dictation" && mode !== "dictation") pauseDictationTimer();
+  if (view.mode === "dictation" && mode !== "dictation") exitDictationSession();
   view.mode = mode; view.maskRevealed = false;
   if (mode !== "cloze") view.revealedBlanks = new Set();
   renderStudy();
-  if (mode === "dictation" && !view.dictationResult) startDictationTimer();
 }
 function changeClozeLevel(level) {
   if (!["standard","advanced","challenge"].includes(level)) return;
@@ -2175,19 +2192,66 @@ function startWeak() {
   if (fresh.length) { openStudy(fresh[0].id); toast("暂无“需巩固”，先练一篇未开始的模板"); return; }
   toast("所有模板都已掌握，随机再巩固一篇"); randomCard();
 }
+function getSpeechLanguage(card) {
+  return card && card.deckId === "english" ? "en-US" : "zh-CN";
+}
+function getSpeechVoice(lang) {
+  if (!("speechSynthesis" in window)) return null;
+  const voices = speechSynthesis.getVoices();
+  return voices.find(voice => voice.lang === lang) || voices.find(voice => voice.lang.startsWith(lang.split("-")[0])) || null;
+}
+function createSpeechUtterance(text, card) {
+  const utterance = new SpeechSynthesisUtterance(text);
+  const lang = getSpeechLanguage(card);
+  utterance.lang = lang;
+  utterance.rate = card.deckId === "english" ? .82 : .9;
+  utterance.pitch = 1;
+  const voice = getSpeechVoice(lang);
+  if (voice) utterance.voice = voice;
+  return utterance;
+}
+function restoreSpeechButtons() {
+  const speakBtn = document.getElementById("speakBtn");
+  if (speakBtn) speakBtn.textContent = "朗读";
+  document.querySelectorAll(".sentence-read-btn.speaking").forEach(button => button.classList.remove("speaking"));
+}
 function speakCard() {
   if (!("speechSynthesis" in window)) { toast("当前浏览器暂不支持朗读"); return; }
   if (speechSynthesis.speaking || speechSynthesis.pending) { stopSpeech(); return; }
   const card = CARD_MAP.get(view.currentCardId); if (!card) return;
-  const text = card.paragraphs.map(p => `${p[0]}。${p[1]}`).join("。");
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "zh-CN"; utterance.rate = .88; utterance.pitch = 1;
-  utterance.onend = () => { if (view.currentCardId) renderStudy(); };
-  utterance.onerror = () => { if (view.currentCardId) renderStudy(); };
+  const text = card.deckId === "english"
+    ? card.paragraphs.map(paragraph => paragraph[1]).join(" ")
+    : card.paragraphs.map(paragraph => paragraph[1]).join("。");
+  const utterance = createSpeechUtterance(text, card);
+  utterance.onend = restoreSpeechButtons;
+  utterance.onerror = restoreSpeechButtons;
   speechSynthesis.speak(utterance);
   document.getElementById("speakBtn").textContent = "停止朗读";
 }
-function stopSpeech() { if ("speechSynthesis" in window) speechSynthesis.cancel(); const btn = document.getElementById("speakBtn"); if (btn) btn.textContent = "朗读"; }
+function speakSentence(cardId, paragraphIndex, sentenceIndex, button) {
+  if (!("speechSynthesis" in window)) { toast("当前浏览器暂不支持朗读"); return; }
+  const card = CARD_MAP.get(cardId);
+  if (!card) return;
+  const paragraph = card.paragraphs[paragraphIndex];
+  const sentence = paragraph ? splitIntoSentences(paragraph[1])[sentenceIndex] : "";
+  if (!sentence) return;
+  stopSpeech();
+  const utterance = createSpeechUtterance(sentence, card);
+  utterance.onend = restoreSpeechButtons;
+  utterance.onerror = restoreSpeechButtons;
+  if (button) button.classList.add("speaking");
+  speechSynthesis.speak(utterance);
+  const speakBtn = document.getElementById("speakBtn");
+  if (speakBtn) speakBtn.textContent = "停止朗读";
+}
+function renderSentenceReadRow(card, text, paragraphIndex) {
+  const sentences = splitIntoSentences(text);
+  return `<div class="sentence-read-row"><span>单句朗读</span>${sentences.map((sentence, sentenceIndex) => `<button class="sentence-read-btn" data-read-card="${card.id}" data-read-paragraph="${paragraphIndex}" data-read-sentence="${sentenceIndex}" aria-label="朗读第 ${sentenceIndex + 1} 句" title="朗读第 ${sentenceIndex + 1} 句">${sentenceIndex + 1}</button>`).join("")}</div>`;
+}
+function stopSpeech() {
+  if ("speechSynthesis" in window) speechSynthesis.cancel();
+  restoreSpeechButtons();
+}
 async function copyCard() {
   const card = CARD_MAP.get(view.currentCardId); if (!card) return;
   const text = `${card.title}\n触发词：${card.trigger}\n\n` + card.paragraphs.map(p => `【${p[0]}】\n${p[1]}`).join("\n\n");
@@ -2199,7 +2263,10 @@ async function copyCard() {
   toast("模板全文已复制");
 }
 function startTimer() {
-  stopTimer(); view.timerBaseSeconds = ensureToday().seconds; view.timerStartedAt = Date.now(); view.timerRunning = true;
+  stopTimer();
+  view.timerBaseSeconds = ensureToday().seconds;
+  view.timerStartedAt = Date.now();
+  view.timerRunning = true;
   updateTimerDisplay();
   view.timerInterval = window.setInterval(() => { if (view.timerRunning) updateTimerDisplay(); }, 1000);
 }
@@ -2207,29 +2274,47 @@ function stopTimer() { if (view.timerInterval) { clearInterval(view.timerInterva
 function currentSessionSeconds() { if (!view.timerRunning || !view.timerStartedAt) return 0; return Math.floor((Date.now() - view.timerStartedAt) / 1000); }
 function updateTimerDisplay() {
   if (!view.currentCardId) return;
-  const totalToday = ensureToday().seconds + currentSessionSeconds();
-  const shown = view.timerBaseSeconds + currentSessionSeconds();
+  const sessionSeconds = currentSessionSeconds();
+  const shown = view.timerBaseSeconds + sessionSeconds;
+  const totalToday = ensureToday().seconds + sessionSeconds;
   document.getElementById("timerDisplay").textContent = formatDuration(shown);
   document.getElementById("timerTotal").textContent = `今日累计 ${Math.floor(totalToday / 60)} 分钟`;
 }
-function flushTimer(save) {
-  if (!view.timerStartedAt || !view.currentCardId) return;
-  const elapsed = currentSessionSeconds();
-  if (elapsed > 0) { ensureToday().seconds += elapsed; view.timerBaseSeconds = ensureToday().seconds; }
-  view.timerStartedAt = view.timerRunning ? Date.now() : null;
-  if (save) saveState();
-}
-function toggleTimer() {
-  if (view.timerRunning) {
-    view.timerRunning = false; flushTimer(true); view.timerStartedAt = null;
-    document.getElementById("timerToggle").textContent = "继续";
-  } else {
-    view.timerRunning = true; view.timerStartedAt = Date.now(); view.timerBaseSeconds = ensureToday().seconds;
-    document.getElementById("timerToggle").textContent = "暂停";
+function pauseTimer(save) {
+  if (view.timerRunning && view.timerStartedAt) {
+    const elapsed = Math.floor((Date.now() - view.timerStartedAt) / 1000);
+    if (elapsed > 0) ensureToday().seconds += elapsed;
   }
+  view.timerRunning = false;
+  view.timerStartedAt = null;
+  view.timerBaseSeconds = ensureToday().seconds;
+  if (save) saveState();
+  updateTimerDisplay();
+  const button = document.getElementById("timerToggle");
+  if (button) button.textContent = "继续";
+}
+function resumeTimer() {
+  if (view.timerRunning || !view.currentCardId) return;
+  view.timerBaseSeconds = ensureToday().seconds;
+  view.timerStartedAt = Date.now();
+  view.timerRunning = true;
+  updateTimerDisplay();
+  const button = document.getElementById("timerToggle");
+  if (button) button.textContent = "暂停";
+}
+function flushTimer(save) {
+  if (!view.timerRunning || !view.timerStartedAt || !view.currentCardId) return;
+  const elapsed = Math.floor((Date.now() - view.timerStartedAt) / 1000);
+  if (elapsed > 0) ensureToday().seconds += elapsed;
+  view.timerBaseSeconds = ensureToday().seconds;
+  view.timerStartedAt = Date.now();
+  if (save) saveState();
   updateTimerDisplay();
 }
-function formatDuration(seconds) {
+function toggleTimer() {
+  if (view.timerRunning) pauseTimer(true);
+  else resumeTimer();
+}function formatDuration(seconds) {
   const safe = Math.max(0,Math.floor(seconds)); const m = Math.floor(safe / 60); const s = safe % 60;
   return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 }
@@ -2277,6 +2362,9 @@ document.addEventListener("click", event => {
     return;
   }
   if (event.target.closest("#maskRevealBtn")) { revealAll(); return; }
+  if (event.target.closest("#dictationStart")) { startDictationSession(); return; }
+  const sentenceReadBtn = event.target.closest("[data-read-card]");
+  if (sentenceReadBtn) { speakSentence(sentenceReadBtn.dataset.readCard, Number(sentenceReadBtn.dataset.readParagraph), Number(sentenceReadBtn.dataset.readSentence), sentenceReadBtn); return; }
   if (event.target.closest("#dictationTimerToggle")) { toggleDictationTimer(); return; }
   if (event.target.closest("#dictationCheck")) { submitDictation(); return; }
   if (event.target.closest("#dictationClear")) { clearDictation(); return; }
@@ -2340,26 +2428,28 @@ document.addEventListener("keydown", event => {
   if (event.key === "2") setStatus("mastered");
   if (event.key === "3") setStatus("new");
 });
-window.addEventListener("beforeunload", () => { flushTimer(true); pauseDictationTimer(); stopSpeech(); });
+window.addEventListener("beforeunload", () => { pauseTimer(true); pauseDictationTimer(); stopSpeech(); });
 window.addEventListener("visibilitychange", () => {
   if (document.hidden) {
-    if (view.currentCardId) flushTimer(true);
+    view.timerWasRunningBeforeHidden = view.timerRunning;
+    if (view.timerRunning) pauseTimer(true);
     if (view.mode === "dictation") pauseDictationTimer();
-  } else if (view.currentCardId && view.mode === "dictation" && !view.dictationResult) {
-    startDictationTimer();
+  } else {
+    if (view.timerWasRunningBeforeHidden && view.currentCardId) resumeTimer();
+    view.timerWasRunningBeforeHidden = false;
+    if (view.currentCardId && view.mode === "dictation" && view.dictationStarted && !view.dictationResult) startDictationTimer();
   }
 });
 function syncCatalogMeta() {
   const counts = Object.fromEntries(DATA.map(deck => [deck.id, deck.cards.length]));
-  const politicsCount = counts.politics || 0;
   const uxCount = counts.ux || 0;
   const englishCount = counts.english || 0;
-  document.getElementById("brandSub").textContent = `政治 ${politicsCount} 篇 · 用户研究 ${uxCount} 篇 · 英语作文 ${englishCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
-  document.getElementById("heroLead").textContent = `把政治、用户研究与英语作文模板拆成“触发词 → 答题骨架 → 完整表述”。先看提示复述，再揭晓对照，最后给自己评级。`;
+  document.getElementById("brandSub").textContent = `马原 ${counts.mayuan || 0} 篇 · 思修 ${counts.sishu || 0} 篇 · 毛中特史纲 ${counts.mzsg || 0} 篇 · 用户研究 ${uxCount} 篇 · 英语作文 ${englishCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
+  document.getElementById("heroLead").textContent = `把政治分析题、用户研究高频与英语作文模板拆成“触发词 → 答题骨架 → 完整表述”。先看提示复述，再揭晓对照，最后给自己评级。`;
   document.getElementById("sideTotal").textContent = `${ALL_CARDS.length} 篇`;
   document.querySelector(".hero").dataset.count = String(ALL_CARDS.length);
   document.querySelector('[data-deck-filter="all"] .nav-count').textContent = String(ALL_CARDS.length);
-  ["politics", "ux", "english"].forEach(id => {
+  ["mayuan", "sishu", "mzsg", "ux", "english"].forEach(id => {
     const badge = document.querySelector(`[data-deck-filter="${id}"] .nav-count`);
     if (badge) badge.textContent = String(counts[id] || 0);
   });
