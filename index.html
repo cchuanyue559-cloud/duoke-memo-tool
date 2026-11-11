@@ -59,6 +59,9 @@
   .btn:hover { border-color: var(--jade); color: var(--jade); transform: translateY(-1px); }
   .btn-primary { border-color: var(--red); background: var(--red); color: #fffaf2; box-shadow: 0 8px 20px rgba(126,46,38,.18); }
   .btn-primary:hover { color: #fff; background: var(--red-deep); border-color: var(--red-deep); }
+  .btn-add-content { border-color: var(--jade); background: var(--jade); color: #fff; font-weight: 700; box-shadow: 0 8px 20px rgba(47,107,91,.2); }
+  .btn-add-content:hover { border-color: #245649; background: #245649; color: #fff; }
+  .add-content-short { display: none; }
   .btn-ghost { border-color: transparent; background: transparent; }
   .btn-small { padding: 7px 11px; font-size: 12px; border-radius: 8px; }
   .btn-icon { display: inline-grid; place-items: center; width: 38px; height: 38px; padding: 0; }
@@ -422,6 +425,8 @@
     .topbar { height: 65px; padding: 0 15px; } .brand-seal { width: 33px; height: 33px; font-size: 18px; }
     .brand-title { font-size: 16px; } .brand-sub,.date-label,#randomTop { display: none; }
     .top-actions .btn { padding: 8px 11px; font-size: 11px; }
+    .add-content-long { display: none; }
+    .add-content-short { display: inline; }
     .layout { width: calc(100% - 20px); margin-bottom: 24px; }
     .hero { padding: 28px 24px; border-radius: 18px; } .hero h1 { font-size: 34px; } .hero p { font-size: 12px; } .hero-progress { margin-top: 4px; }
     .stats-row { grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 27px; } .stat-card { padding: 13px 14px; } .stat-card strong { font-size: 22px; }
@@ -462,6 +467,7 @@
   </div>
   <div class="top-actions">
     <span class="date-label" id="dateLabel"></span>
+    <button class="btn btn-add-content" id="addContentBtn" aria-label="添加背诵内容"><span class="add-content-long">＋ 添加内容</span><span class="add-content-short">＋ 添加</span></button>
     <button class="btn" id="randomTop">随机抽背</button>
     <button class="btn btn-primary" id="todayTop">今日计划</button>
   </div>
@@ -481,7 +487,7 @@
       <button class="nav-item" data-deck-filter="ux">用户研究 <span class="nav-count">25</span></button>
       <button class="nav-item" data-deck-filter="english">英语作文 <span class="nav-count">20</span></button>
       <button class="nav-item" data-deck-filter="custom">我的内容 <span class="nav-count">0</span></button>
-      <button class="side-add-content" id="addContentBtn">＋ 添加背诵内容</button>
+
     </nav>
     <div class="side-rule"></div>
     <div class="side-plan">
