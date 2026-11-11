@@ -92,6 +92,10 @@
   .nav-subitem:hover { color: var(--red-deep); background: rgba(255,255,255,.45); }
   .nav-subitem.active { color: var(--red-deep); background: var(--red-soft); border-color: #e6c8c1; font-weight: 700; }
   .nav-subitem .nav-count { min-width: 21px; padding: 1px 6px; font-size: 9px; background: rgba(255,255,255,.55); }
+  .nav-item.active[data-deck-filter="custom"] { color: var(--jade); }
+  .nav-item.active[data-deck-filter="custom"] .nav-count { background: var(--jade-soft); color: var(--jade); }
+  .side-add-content { width: 100%; margin-top: 10px; padding: 9px 11px; border: 1px dashed var(--line-strong); border-radius: 9px; background: rgba(255,255,255,.35); color: var(--jade); font-size: 11px; font-weight: 700; }
+  .side-add-content:hover { border-color: var(--jade); background: var(--jade-soft); }
   .subject-group { margin-bottom: 34px; }
   .subject-group-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 15px; margin: 0 2px 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
   .subject-group-heading span { color: var(--red); font-size: 9px; font-weight: 700; letter-spacing: .15em; }
@@ -177,6 +181,7 @@
   .topic-card.ux::before { background: var(--blue); }
   .topic-card.mzsg::before { background: var(--amber); }
   .topic-card.politics::before { background: var(--red); }
+  .topic-card.custom::before { background: var(--jade); }
   .topic-card.english::before { background: var(--violet); }
   .topic-card:hover { transform: translateY(-3px); border-color: var(--line-strong); box-shadow: 0 15px 35px rgba(51,43,31,.08); }
   .card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
@@ -196,6 +201,10 @@
   .ux .card-open { color: var(--blue); }
   .mzsg .card-open { color: var(--amber); }
   .politics .card-open { color: var(--red-deep); }
+  .custom .card-open { color: var(--jade); }
+  .card-foot-actions { display: flex; align-items: center; gap: 10px; }
+  .custom-delete { border: 0; background: transparent; color: #a68d82; font-size: 10px; padding: 0; }
+  .custom-delete:hover { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
   .english .card-open { color: var(--violet); }
   .card-open:hover { text-decoration: underline; text-underline-offset: 4px; }
   .empty-state { padding: 50px 20px; text-align: center; border: 1px dashed var(--line-strong); border-radius: 16px; color: var(--muted); background: rgba(255,255,255,.25); }
@@ -211,6 +220,7 @@
   .study-eyebrow.ux { color: var(--blue); }
   .study-eyebrow.mzsg { color: var(--amber); }
   .study-eyebrow.politics { color: var(--red); }
+  .study-eyebrow.custom { color: var(--jade); }
   .study-eyebrow.english { color: var(--violet); }
   .study-top h2 { margin: 3px 0 0; font-family: var(--serif); font-size: 25px; letter-spacing: .03em; }
   .study-nav { display: flex; align-items: center; gap: 7px; }
@@ -243,6 +253,8 @@
   .question-box.mzsg .question-label { color: var(--amber); }
   .question-box.politics { background: linear-gradient(90deg,rgba(243,226,220,.63),rgba(243,226,220,.16)); border-color: var(--red); }
   .question-box.politics .question-label { color: var(--red); }
+  .question-box.custom { background: linear-gradient(90deg,rgba(223,236,230,.7),rgba(223,236,230,.12)); border-color: var(--jade); }
+  .question-box.custom .question-label { color: var(--jade); }
   .question-box.english { background: linear-gradient(90deg,rgba(236,231,244,.8),rgba(236,231,244,.14)); border-color: var(--violet); }
   .question-box.english .question-label { color: var(--violet); }
   .question-box p { margin: 0; font-size: 13px; line-height: 1.8; }
@@ -330,6 +342,18 @@
   .dictation-answer { margin-top: 18px; padding-top: 17px; border-top: 1px solid #ece4d8; }
   .dictation-answer-title { margin-bottom: 13px; color: #81786d; font-size: 10px; font-weight: 700; letter-spacing: .11em; }
   .dictation-answer .paragraph { margin-bottom: 19px; }
+  .modal-backdrop { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 18px; background: rgba(25,29,25,.48); backdrop-filter: blur(5px); }
+  .custom-modal { width: min(640px,100%); max-height: calc(100vh - 36px); overflow-y: auto; padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: var(--card); box-shadow: 0 28px 80px rgba(20,25,21,.24); }
+  .custom-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; margin-bottom: 18px; }
+  .custom-modal-head h2 { margin: 0; font-family: var(--serif); font-size: 24px; }
+  .custom-modal-head p { margin: 5px 0 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
+  .custom-close { width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--muted); font-size: 18px; }
+  .custom-field { display: grid; gap: 6px; margin-bottom: 14px; }
+  .custom-field label { color: #666d66; font-size: 10px; font-weight: 700; letter-spacing: .06em; }
+  .custom-field input, .custom-field textarea { width: 100%; border: 1px solid var(--line); border-radius: 9px; background: #fffdf8; color: var(--ink); padding: 10px 12px; font-size: 12px; line-height: 1.75; }
+  .custom-field textarea { resize: vertical; }
+  .custom-field small { color: #9a958c; font-size: 9px; line-height: 1.5; }
+  .custom-modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 19px; }
   .translation-panel { margin-top: 22px; padding: 19px 20px; border: 1px solid #e7dfd1; border-radius: 12px; background: #faf7f0; }
   .translation-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: #81786d; font-size: 10px; font-weight: 700; letter-spacing: .1em; }
   .translation-item { margin-bottom: 14px; }
@@ -456,6 +480,8 @@
       </div>
       <button class="nav-item" data-deck-filter="ux">用户研究 <span class="nav-count">25</span></button>
       <button class="nav-item" data-deck-filter="english">英语作文 <span class="nav-count">20</span></button>
+      <button class="nav-item" data-deck-filter="custom">我的内容 <span class="nav-count">0</span></button>
+      <button class="side-add-content" id="addContentBtn">＋ 添加背诵内容</button>
     </nav>
     <div class="side-rule"></div>
     <div class="side-plan">
@@ -596,6 +622,19 @@
     </div>
   </section>
 </main>
+<div class="modal-backdrop hidden" id="customModal" role="dialog" aria-modal="true" aria-labelledby="customModalTitle">
+  <div class="custom-modal">
+    <div class="custom-modal-head"><div><h2 id="customModalTitle">添加背诵内容</h2><p>内容保存在当前设备浏览器中，不会修改内置题库。</p></div><button class="custom-close" id="closeCustomModal" aria-label="关闭">×</button></div>
+    <form id="customForm">
+      <div class="custom-field"><label for="customTitle">标题 *</label><input id="customTitle" maxlength="80" required placeholder="例如：马原第一章重点"></div>
+      <div class="custom-field"><label for="customTrigger">触发词 / 提示</label><input id="customTrigger" maxlength="160" placeholder="例如：实践、认识、真理、知行关系"></div>
+      <div class="custom-field"><label for="customBody">背诵正文 *</label><textarea id="customBody" rows="9" required placeholder="粘贴需要背诵的内容。用空行分隔多个段落。"></textarea><small>支持多段内容；段落会自动生成。</small></div>
+      <div class="custom-field"><label for="customKeywords">关键词</label><input id="customKeywords" placeholder="用逗号分隔；留空会自动提取"></div>
+      <div class="custom-field"><label for="customTags">标签</label><input id="customTags" placeholder="例如：马原, 易错"></div>
+      <div class="custom-modal-actions"><button type="button" class="btn" id="cancelCustomModal">取消</button><button type="submit" class="btn btn-primary">保存并开始背诵</button></div>
+    </form>
+  </div>
+</div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>
 const DATA = [
@@ -1651,33 +1690,59 @@ DATA.push({
 
 
 const POLITICAL_DECK_IDS = ["mayuan", "sishu", "mzsg"];
-const ALL_CARDS = DATA.flatMap(deck => deck.cards.map(card => ({
+const CUSTOM_DECK_ID = "custom";
+const STORAGE_KEY = "kaoyan-zhengzhi-memo-v1";
+const DAILY_GOAL = 3;
+const RING_CIRCUMFERENCE = 2 * Math.PI * 70;
+let state = loadState();
+function rebuildCustomDeck() {
+  const existingIndex = DATA.findIndex(deck => deck.id === CUSTOM_DECK_ID);
+  if (existingIndex >= 0) DATA.splice(existingIndex, 1);
+  const customCards = Array.isArray(state.customCards) ? state.customCards : [];
+  if (customCards.length) {
+    DATA.push({
+      id: CUSTOM_DECK_ID,
+      short: "我的内容",
+      title: "自定义背诵内容",
+      accent: "jade",
+      cards: customCards.map((card, index) => ({ ...card, num: String(index + 1).padStart(2, "0") }))
+    });
+  }
+}
+rebuildCustomDeck();
+let ALL_CARDS = DATA.flatMap(deck => deck.cards.map(card => ({
   ...card,
   words: card.words || card.paragraphs.reduce((sum, paragraph) => sum + paragraph[1].length, 0),
   deckId: deck.id,
   deckShort: deck.short,
   deckTitle: deck.title
 })));
-const CARD_MAP = new Map(ALL_CARDS.map(card => [card.id, card]));
-const STORAGE_KEY = "kaoyan-zhengzhi-memo-v1";
-const DAILY_GOAL = 3;
-const RING_CIRCUMFERENCE = 2 * Math.PI * 70;
-let state = loadState();
-let view = {
-  deckFilter: "all", statusFilter: "all", search: "", currentCardId: null, mode: "full", clozeLevel: "standard", translationVisible: false,
+let CARD_MAP = new Map(ALL_CARDS.map(card => [card.id, card]));
+function rebuildCatalog() {
+  rebuildCustomDeck();
+  ALL_CARDS = DATA.flatMap(deck => deck.cards.map(card => ({
+    ...card,
+    words: card.words || card.paragraphs.reduce((sum, paragraph) => sum + paragraph[1].length, 0),
+    deckId: deck.id,
+    deckShort: deck.short,
+    deckTitle: deck.title
+  })));
+  CARD_MAP = new Map(ALL_CARDS.map(card => [card.id, card]));
+}
+let view = {  deckFilter: "all", statusFilter: "all", search: "", currentCardId: null, mode: "full", clozeLevel: "standard", translationVisible: false,
   maskRevealed: false, revealedBlanks: new Set(), dictationResult: null, dictationStarted: false,
   dictationTimerStartedAt: null, dictationTimerAccumulated: 0, dictationTimerRunning: false, dictationTimerInterval: null,
   timerRunning: true, timerStartedAt: null,
   timerBaseSeconds: 0, timerInterval: null
 };
 function todayKey() { const d = new Date(); const p = n => String(n).padStart(2,"0"); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`; }
-function defaultState() { return { status: {}, favorites: {}, daily: {}, drafts: {}, lastCard: null }; }
+function defaultState() { return { status: {}, favorites: {}, daily: {}, drafts: {}, customCards: [], lastCard: null }; }
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultState();
     const parsed = JSON.parse(raw);
-    return { ...defaultState(), ...parsed, status: parsed.status || {}, favorites: parsed.favorites || {}, daily: parsed.daily || {}, drafts: parsed.drafts || {} };
+    return { ...defaultState(), ...parsed, status: parsed.status || {}, favorites: parsed.favorites || {}, daily: parsed.daily || {}, drafts: parsed.drafts || {}, customCards: Array.isArray(parsed.customCards) ? parsed.customCards : [] };
   } catch (error) { return defaultState(); }
 }
 function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (error) {} }
@@ -2010,7 +2075,7 @@ function clearDictation() {
     if (!cards.length) return "";
     return `<section class="deck-section"><div class="deck-heading"><h3>${escapeHtml(deck.short)}</h3><span>${escapeHtml(deck.title)} · ${cards.length} 篇</span></div><div class="card-grid">${cards.map(card => {
       const status = getStatus(card.id);
-      return `<article class="topic-card ${deck.id !== "mayuan" ? deck.id : ""}"><div class="card-top"><span class="card-num">NO. ${card.num}</span><span class="status-badge ${status}"><span class="status-dot"></span>${statusLabel(status)}</span></div><h4>${escapeHtml(card.title)}</h4><div class="card-trigger">${escapeHtml(card.trigger)}</div><div class="card-tags">${card.tags.map(tag => `<span class="card-tag">${escapeHtml(tag)}</span>`).join("")}</div><div class="card-foot"><span class="card-meta">${card.words} 字 · ${card.paragraphs.length} 段</span><button class="card-open" data-open-card="${card.id}">${status === "new" ? "开始背诵" : "继续背诵"} →</button></div></article>`;
+      return `<article class="topic-card ${deck.id !== "mayuan" ? deck.id : ""}"><div class="card-top"><span class="card-num">NO. ${card.num}</span><span class="status-badge ${status}"><span class="status-dot"></span>${statusLabel(status)}</span></div><h4>${escapeHtml(card.title)}</h4><div class="card-trigger">${escapeHtml(card.trigger)}</div><div class="card-tags">${card.tags.map(tag => `<span class="card-tag">${escapeHtml(tag)}</span>`).join("")}</div><div class="card-foot"><span class="card-meta">${card.words} 字 · ${card.paragraphs.length} 段</span><div class="card-foot-actions">${card.isCustom ? `<button class="custom-delete" data-delete-card="${card.id}">删除</button>` : ""}<button class="card-open" data-open-card="${card.id}">${status === "new" ? "开始背诵" : "继续背诵"} →</button></div></div></article>`;
     }).join("")}</div></section>`;
   };
   const politicalDecks = DATA.filter(deck => POLITICAL_DECK_IDS.includes(deck.id));
@@ -2359,6 +2424,8 @@ function resetProgress() {
   saveState(); renderDashboard(); if (view.currentCardId) renderStudy(); toast("背诵进度已清空");
 }
 document.addEventListener("click", event => {
+  const deleteBtn = event.target.closest("[data-delete-card]");
+  if (deleteBtn) { deleteCustomCard(deleteBtn.dataset.deleteCard); return; }
   const openBtn = event.target.closest("[data-open-card]");
   if (openBtn) { openStudy(openBtn.dataset.openCard); return; }
   const modeBtn = event.target.closest("[data-mode]");
@@ -2403,6 +2470,11 @@ document.addEventListener("click", event => {
   if (cue) { if (view.mode !== "outline") changeMode("outline"); toast("提纲模式：" + cue.dataset.cue); }
 });
 document.getElementById("searchInput").addEventListener("input", event => { view.search = event.target.value; renderDashboard(); });
+document.getElementById("addContentBtn").addEventListener("click", openCustomModal);
+document.getElementById("closeCustomModal").addEventListener("click", closeCustomModal);
+document.getElementById("cancelCustomModal").addEventListener("click", closeCustomModal);
+document.getElementById("customForm").addEventListener("submit", saveCustomCard);
+document.getElementById("customModal").addEventListener("click", event => { if (event.target.id === "customModal") closeCustomModal(); });
 document.addEventListener("input", event => {
   if (event.target && event.target.id === "dictationInput") {
     const card = CARD_MAP.get(view.currentCardId);
@@ -2439,6 +2511,7 @@ document.getElementById("translationBtn").addEventListener("click", toggleTransl
 document.getElementById("printBtn").addEventListener("click", () => window.print());
 document.getElementById("timerToggle").addEventListener("click", toggleTimer);
 document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !document.getElementById("customModal").classList.contains("hidden")) { closeCustomModal(); return; }
   const tag = document.activeElement && document.activeElement.tagName;
   if (!view.currentCardId) return;
   if (tag === "TEXTAREA" && event.target.id === "dictationInput" && event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
@@ -2478,6 +2551,74 @@ function updateDeckNavState() {
     button.classList.toggle("active", filter === view.deckFilter || (filter === "politics" && politicalChildActive));
   });
 }
+function refreshCatalogView() {
+  rebuildCatalog();
+  syncCatalogMeta();
+  updateDeckNavState();
+  renderDashboard();
+}
+function splitCustomList(value, pattern = /[，,、;；\n]+/) {
+  return String(value || "").split(pattern).map(item => item.trim()).filter(Boolean);
+}
+function inferCustomKeywords(text) {
+  const clauses = String(text || "").split(/[，。；！？：,.;!?\n]+/).map(item => item.trim()).filter(item => item.length >= 2);
+  return clauses.sort((a, b) => b.length - a.length).slice(0, 6);
+}
+function openCustomModal() {
+  const modal = document.getElementById("customModal");
+  const form = document.getElementById("customForm");
+  if (!modal || !form) return;
+  form.reset();
+  modal.classList.remove("hidden");
+  requestAnimationFrame(() => document.getElementById("customTitle").focus());
+}
+function closeCustomModal() {
+  const modal = document.getElementById("customModal");
+  if (modal) modal.classList.add("hidden");
+}
+function saveCustomCard(event) {
+  event.preventDefault();
+  const title = document.getElementById("customTitle").value.trim();
+  const body = document.getElementById("customBody").value.trim();
+  if (!title || !body) { toast("请填写标题和背诵正文"); return; }
+  const trigger = document.getElementById("customTrigger").value.trim() || "自定义背诵内容";
+  const paragraphTexts = body.split(/\n\s*\n/).map(item => item.trim()).filter(Boolean);
+  const providedKeywords = splitCustomList(document.getElementById("customKeywords").value);
+  const keywords = providedKeywords.length ? providedKeywords : inferCustomKeywords(body);
+  const tags = [...new Set(["自定义", ...splitCustomList(document.getElementById("customTags").value)])];
+  const card = {
+    id: "custom-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7),
+    title,
+    trigger,
+    prompt: `请根据提示复述「${title}」的完整内容。`,
+    keywords,
+    cues: splitCustomList(trigger).slice(0, 6),
+    outline: paragraphTexts.slice(0, 8).map((text, index) => [`第 ${index + 1} 段`, text.replace(/\s+/g, " ").slice(0, 55) + (text.length > 55 ? "…" : "")]),
+    note: "这是自定义背诵内容；退出默写会清空本次草稿，可在卡片底部删除。",
+    paragraphs: paragraphTexts.map((text, index) => [`内容 ${index + 1}`, text]),
+    isCustom: true,
+    tags
+  };
+  state.customCards.push(card);
+  saveState();
+  closeCustomModal();
+  view.deckFilter = CUSTOM_DECK_ID;
+  refreshCatalogView();
+  openStudy(card.id);
+  toast("已添加自定义背诵内容");
+}
+function deleteCustomCard(cardId) {
+  const card = CARD_MAP.get(cardId);
+  if (!card || !card.isCustom) return;
+  if (!window.confirm(`确定删除「${card.title}」吗？`)) return;
+  state.customCards = state.customCards.filter(item => item.id !== cardId);
+  delete state.status[cardId];
+  delete state.drafts[cardId];
+  saveState();
+  if (view.deckFilter === CUSTOM_DECK_ID && state.customCards.length === 0) view.deckFilter = "all";
+  refreshCatalogView();
+  toast("已删除自定义内容");
+}
 function syncCatalogMeta() {
   const counts = Object.fromEntries(DATA.map(deck => [deck.id, deck.cards.length]));
   const uxCount = counts.ux || 0;
@@ -2489,7 +2630,7 @@ function syncCatalogMeta() {
   document.querySelector('[data-deck-filter="all"] .nav-count').textContent = String(ALL_CARDS.length);
   const politicsBadge = document.querySelector('[data-deck-filter="politics"] .nav-count');
   if (politicsBadge) politicsBadge.textContent = String((counts.mayuan || 0) + (counts.sishu || 0) + (counts.mzsg || 0));
-  ["mayuan", "sishu", "mzsg", "ux", "english"].forEach(id => {
+  ["mayuan", "sishu", "mzsg", "ux", "english", "custom"].forEach(id => {
     const badge = document.querySelector(`[data-deck-filter="${id}"] .nav-count`);
     if (badge) badge.textContent = String(counts[id] || 0);
   });
