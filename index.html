@@ -17,7 +17,7 @@
     --paper: #f2ede3; --paper-2: #e9e1d3; --card: #fffdf8;
     --ink: #202721; --muted: #747a73; --line: #d9d0c0; --line-strong: #c7bba8;
     --red: #a63f33; --red-deep: #7e2e26; --red-soft: #f3e2dc;
-    --jade: #2f6b5b; --jade-soft: #dfece6; --blue: #355f88; --blue-soft: #e4edf5; --violet: #675688; --violet-soft: #ece7f4;
+    --jade: #2f6b5b; --jade-soft: #dfece6; --blue: #355f88; --blue-soft: #e4edf5; --violet: #675688; --violet-soft: #ece7f4; --burgundy: #7b4055; --burgundy-soft: #f0e2e8; --slate: #416573; --slate-soft: #e3edf0;
     --amber: #b07d3b; --amber-soft: #f4ead8;
     --shadow: 0 20px 56px rgba(51, 43, 31, .09);
     --serif: "STZhongsong", "Songti SC", "SimSun", "Noto Serif CJK SC", serif;
@@ -185,6 +185,8 @@
   .topic-card.mzsg::before { background: var(--amber); }
   .topic-card.politics::before { background: var(--red); }
   .topic-card.custom::before { background: var(--jade); }
+  .topic-card.newthought::before { background: var(--burgundy); }
+  .topic-card.policy::before { background: var(--slate); }
   .topic-card.english::before { background: var(--violet); }
   .topic-card:hover { transform: translateY(-3px); border-color: var(--line-strong); box-shadow: 0 15px 35px rgba(51,43,31,.08); }
   .card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
@@ -205,6 +207,8 @@
   .mzsg .card-open { color: var(--amber); }
   .politics .card-open { color: var(--red-deep); }
   .custom .card-open { color: var(--jade); }
+  .newthought .card-open { color: var(--burgundy); }
+  .policy .card-open { color: var(--slate); }
   .card-foot-actions { display: flex; align-items: center; gap: 10px; }
   .custom-delete { border: 0; background: transparent; color: #a68d82; font-size: 10px; padding: 0; }
   .custom-delete:hover { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
@@ -224,6 +228,8 @@
   .study-eyebrow.mzsg { color: var(--amber); }
   .study-eyebrow.politics { color: var(--red); }
   .study-eyebrow.custom { color: var(--jade); }
+  .study-eyebrow.newthought { color: var(--burgundy); }
+  .study-eyebrow.policy { color: var(--slate); }
   .study-eyebrow.english { color: var(--violet); }
   .study-top h2 { margin: 3px 0 0; font-family: var(--serif); font-size: 25px; letter-spacing: .03em; }
   .study-nav { display: flex; align-items: center; gap: 7px; }
@@ -258,6 +264,10 @@
   .question-box.politics .question-label { color: var(--red); }
   .question-box.custom { background: linear-gradient(90deg,rgba(223,236,230,.7),rgba(223,236,230,.12)); border-color: var(--jade); }
   .question-box.custom .question-label { color: var(--jade); }
+  .question-box.newthought { background: linear-gradient(90deg,rgba(240,226,232,.75),rgba(240,226,232,.13)); border-color: var(--burgundy); }
+  .question-box.newthought .question-label { color: var(--burgundy); }
+  .question-box.policy { background: linear-gradient(90deg,rgba(227,237,240,.78),rgba(227,237,240,.13)); border-color: var(--slate); }
+  .question-box.policy .question-label { color: var(--slate); }
   .question-box.english { background: linear-gradient(90deg,rgba(236,231,244,.8),rgba(236,231,244,.14)); border-color: var(--violet); }
   .question-box.english .question-label { color: var(--violet); }
   .question-box p { margin: 0; font-size: 13px; line-height: 1.8; }
@@ -291,6 +301,10 @@
   .cloze-levelbar.mzsg .level-btn.active { background: var(--amber-soft); }
   .cloze-levelbar.english .level-btn:hover, .cloze-levelbar.english .level-btn.active { border-color: var(--violet); color: var(--violet); }
   .cloze-levelbar.english .level-btn.active { background: var(--violet-soft); }
+  .cloze-levelbar.newthought .level-btn:hover, .cloze-levelbar.newthought .level-btn.active { border-color: var(--burgundy); color: var(--burgundy); }
+  .cloze-levelbar.newthought .level-btn.active { background: var(--burgundy-soft); }
+  .cloze-levelbar.policy .level-btn:hover, .cloze-levelbar.policy .level-btn.active { border-color: var(--slate); color: var(--slate); }
+  .cloze-levelbar.policy .level-btn.active { background: var(--slate-soft); }
   .level-hint { flex: 0 0 auto; max-width: 205px; color: #908980; font-size: 9px; line-height: 1.55; }
   .sentence-flow { font-family: var(--serif); font-size: clamp(16px,1.55vw,18px); line-height: 2.08; letter-spacing: .045em; text-align: justify; }
   .sentence-blank { display: inline; margin: 0 2px; padding: 2px 8px; border: 1px dashed #cbb7a7; border-radius: 6px; background: #fbf0ea; color: var(--red-deep); font-family: var(--sans); font-size: .82em; line-height: 1.65; vertical-align: baseline; }
@@ -475,14 +489,16 @@
 
 <main class="layout">
   <aside class="sidebar" aria-label="题库导航">
-    <div class="side-label"><span>题库</span><span id="sideTotal">63 篇</span></div>
+    <div class="side-label"><span>题库</span><span id="sideTotal">73 篇</span></div>
     <nav class="deck-nav" id="deckNav">
-      <button class="nav-item active" data-deck-filter="all">全部模板 <span class="nav-count">63</span></button>
-      <button class="nav-item" data-deck-filter="politics">政治 <span class="nav-count">18</span></button>
+      <button class="nav-item active" data-deck-filter="all">全部模板 <span class="nav-count">73</span></button>
+      <button class="nav-item" data-deck-filter="politics">政治 <span class="nav-count">28</span></button>
       <div class="subdeck-nav" id="politicsSubnav">
         <button class="nav-subitem" data-deck-filter="mayuan">马原 34题 <span class="nav-count">6</span></button>
         <button class="nav-subitem" data-deck-filter="sishu">思修 37题 <span class="nav-count">5</span></button>
         <button class="nav-subitem" data-deck-filter="mzsg">毛中特+史纲 <span class="nav-count">7</span></button>
+        <button class="nav-subitem" data-deck-filter="newthought">新思想 35题 <span class="nav-count">5</span></button>
+        <button class="nav-subitem" data-deck-filter="policy">政经及形势政策 <span class="nav-count">5</span></button>
       </div>
       <button class="nav-item" data-deck-filter="ux">用户研究 <span class="nav-count">25</span></button>
       <button class="nav-item" data-deck-filter="english">英语作文 <span class="nav-count">20</span></button>
@@ -504,7 +520,7 @@
 
   <section class="workspace">
     <div id="dashboardView">
-      <section class="hero" aria-labelledby="heroTitle" data-count="63">
+      <section class="hero" aria-labelledby="heroTitle" data-count="73">
         <div class="hero-copy">
           <span class="kicker">冲刺背诵 · 先骨架，后血肉</span>
           <h1 id="heroTitle">背考点，先背骨架，<br><em>再补血肉。</em></h1>
@@ -526,7 +542,7 @@
       <section class="stats-row" aria-label="学习统计">
         <div class="stat-card mastered"><span>已掌握</span><strong id="statMastered">0<small>篇</small></strong></div>
         <div class="stat-card fuzzy"><span>需要巩固</span><strong id="statFuzzy">0<small>篇</small></strong></div>
-        <div class="stat-card"><span>尚未开始</span><strong id="statNew">63<small>篇</small></strong></div>
+        <div class="stat-card"><span>尚未开始</span><strong id="statNew">73<small>篇</small></strong></div>
         <div class="stat-card"><span>今日专注</span><strong id="statMinutes">0<small>分钟</small></strong></div>
       </section>
 
@@ -1695,7 +1711,167 @@ DATA.push({
 });
 
 
-const POLITICAL_DECK_IDS = ["mayuan", "sishu", "mzsg"];
+const NEW_THOUGHT_CARDS = [
+  {
+    id: "nt-2026-general", num: "01", title: "2026 通用模板",
+    trigger: "2026、建党 105 周年、十五五开局、中国式现代化",
+    tags: ["新思想","2026通用"],
+    prompt: "题目涉及 2026 年时政、新时代成就或中国式现代化时，怎样展开？",
+    keywords: ["建党 105 周年","十五五","党中央坚强领导","新时代伟大成就","中国式现代化","高质量发展","新质生产力","统筹发展和安全","民族复兴"],
+    cues: ["2026 / 105 周年 / 十五五开局","新时代实践成果","党和人民共同奋斗","高质量发展","新质生产力","统筹发展和安全"],
+    outline: [["时代坐标","2026 年是建党 105 周年和“十五五”规划开局之年。"],["伟大成就","在党中央领导下取得崭新实践成果。"],["根本原因","新时代成就是党和人民共同奋斗的结果。"],["新征程","推动高质量发展、新质生产力与统筹发展和安全。"]],
+    note: "开头写时间坐标，中段写成就与原因，结尾落到高质量发展和新质生产力。",
+    paragraphs: [
+      ["时代坐标与伟大成就","2026 年是建党 105 周年，也是“十五五”规划的开局之年。在以习近平同志为核心的党中央坚强领导下，我们迎难而上、砥砺奋进，在各项事业方面取得一系列崭新的实践成果。事实充分昭示，新时代的伟大成就是党和人民一道拼出来、干出来、奋斗出来的，彰显中国式现代化蕴含的蓬勃生机与显著制度优势。"],
+      ["新征程与行动","新征程上，我们要紧紧依靠党中央的集中统一领导，牢牢把握高质量发展这一首要任务，着力发展新质生产力，统筹发展和安全，坚定不移深化改革扩大开放，凝心聚力攻坚克难，持续巩固拓展良好发展态势，奋力谱写以中国式现代化全面推进强国建设、民族复兴伟业的崭新篇章。"]
+    ]
+  },
+  {
+    id: "nt-fifth-plenum", num: "02", title: "二十届五中全会专题",
+    trigger: "二十届五中全会、自我革命、两个确立、两个维护",
+    tags: ["新思想","党的会议"],
+    prompt: "题目涉及二十届五中全会、自我革命或党的建设时，怎样作答？",
+    keywords: ["二十届五中全会","世情国情党情","大党独有难题","自我革命","先进性纯洁性","两个确立","两个维护","正确政绩观","为民造福"],
+    cues: ["重要会议","世情国情党情","大党独有难题","自我革命","两个确立 / 两个维护","正确政绩观"],
+    outline: [["会议定位","新征程上的一次十分重要的会议。"],["自我革命","直面大党独有难题，保持先进性纯洁性。"],["政治要求","领悟“两个确立”，做到“两个维护”。"],["行动落点","树立正确政绩观，坚持为民造福。"]],
+    note: "以“会议定位—自我革命—政治要求—为民行动”为四层结构。",
+    paragraphs: [
+      ["会议定位与自我革命","党的二十届五中全会是新征程上一次十分重要的会议。立足世情国情党情深刻变化，会议直面大党独有难题，彰显党推进自我革命的高度历史自觉。勇于自我革命，是我们党永葆先进性纯洁性的关键，为各项事业稳步前行筑牢坚实的政治根基。"],
+      ["政治要求与行动","学习领会全会精神，就要深刻领悟“两个确立”的决定性意义，自觉做到“两个维护”。广大党员干部要牢固树立正确政绩观，重潜功、忌短视，始终把为民造福作为干事创业的出发点。发扬彻底的自我革命精神，以自我革命引领社会革命，为推进中国式现代化、实现强国建设、民族复兴的宏伟目标提供坚强政治保证。"]
+    ]
+  },
+  {
+    id: "nt-five-year-plan", num: "03", title: "“十五五”规划专题",
+    trigger: "十五五规划、五年规划、2035 远景目标、高质量发展",
+    tags: ["新思想","发展规划"],
+    prompt: "题目涉及“十五五”规划、五年规划制度或未来发展部署时，怎样作答？",
+    keywords: ["五年规划","治国理政","制度优势","十五五","关键时期","高质量发展","新质生产力","2035 年远景目标","顶层部署"],
+    cues: ["五年规划是治国理政方式","制度优势","十五五关键时期","全局部署","高质量发展和新质生产力","落实蓝图"],
+    outline: [["制度定位","五年规划是党治国理政的重要方式。"],["规划背景","“十五五”处于中国式现代化推进的关键时期。"],["核心部署","锚定高质量发展、新质生产力与统筹发展和安全。"],["落实要求","凝聚力量、求真务实、把蓝图变为成果。"]],
+    note: "前半回答“为什么制定”，后半回答“怎样落实”。",
+    paragraphs: [
+      ["规划定位与核心部署","制定和实施五年规划，是党治国理政的重要方式，彰显我国独特的制度优势。“十五五”处于中国式现代化推进的关键时期，面对复杂严峻的内外环境，规划对未来五年发展作出全局性部署。它锚定高质量发展，着力发展新质生产力，统筹发展和安全，为迈向 2035 年远景目标筑牢坚实基础，展现出党中央深邃的战略眼光。"],
+      ["落实要求","推动“十五五”规划落地见效，是全社会共同的使命。我们应当凝聚各方面力量，主动对接顶层部署，沉着应对各类风险挑战。坚持求真务实抓落实，以苦干实干把规划描绘的发展蓝图转化为现实成果，在接续奋斗中奋力书写中国式现代化的新篇章。"]
+    ]
+  },
+  {
+    id: "nt-livelihood", num: "04", title: "民生专题",
+    trigger: "人民至上、为民造福、共同富裕、民生保障",
+    tags: ["新思想","民生"],
+    prompt: "题目涉及人民至上、民生保障或共同富裕时，怎样组织答案？",
+    keywords: ["人民至上","为民造福","社会稳定之基","共同富裕","民生薄弱环节","公共服务体系","社会保障机制","首创精神","民心根基"],
+    cues: ["人民至上","为民造福","共同富裕","补齐民生短板","公共服务 / 社会保障","激发群众首创精神"],
+    outline: [["价值立场","坚持人民至上，为民造福。"],["民生意义","民生是社会稳定之基，共同富裕是中国式现代化方向。"],["保障措施","健全公共服务体系和社会保障机制。"],["力量来源","激发人民群众首创精神，汇聚民智民力。"]],
+    note: "民生题要兼顾价值立场、现实措施和群众力量三个方面。",
+    paragraphs: [
+      ["价值立场与民生意义","坚持人民至上是中国共产党一以贯之的价值追求，为民造福彰显共产党人的政绩观。民生是社会稳定之基，推进中国式现代化，必须牢牢锚定共同富裕的方向。新时代持续补齐民生领域薄弱环节，回应群众现实诉求，让发展红利直达基层，深刻诠释我们党始终不变的初心使命。"],
+      ["保障措施与群众力量","踏上新征程，要始终把人民安危冷暖放在工作的突出位置，健全基本公共服务体系，完善社会保障机制，切实维护好群众切身利益。充分激发人民群众的首创精神，汇聚民智民力，依靠广大人民群众的磅礴力量，为推进强国建设、民族复兴凝聚深厚的民心根基。"]
+    ]
+  },
+  {
+    id: "nt-economy", num: "05", title: "经济专题",
+    trigger: "高质量发展、习近平经济思想、新质生产力、扩大内需",
+    tags: ["新思想","经济"],
+    prompt: "题目涉及高质量发展、新质生产力或经济工作时，怎样作答？",
+    keywords: ["高质量发展","习近平经济思想","稳中求进","提质增效","新质生产力","现代化产业体系","扩大内需","质的有效提升","量的合理增长","全国统一大市场"],
+    cues: ["高质量发展是首要任务","稳中求进 / 提质增效","新质生产力","现代化产业体系","扩大内需","深化改革 / 统一大市场"],
+    outline: [["首要任务","高质量发展是全面建设社会主义现代化国家的首要任务。"],["思想指引","以习近平经济思想为科学指引。"],["重点举措","新质生产力、现代化产业体系、扩大内需。"],["安全保障","深化改革、科技自立自强、统筹发展和安全。"]],
+    note: "经济题用“首要任务—核心举措—动力与安全—物质基础”展开。",
+    paragraphs: [
+      ["首要任务与重点举措","高质量发展是全面建设社会主义现代化国家的首要任务。习近平经济思想为我国经济工作提供科学指引。立足“十五五”开局之年，坚持稳中求进、提质增效，因地制宜发展新质生产力，加快构建现代化产业体系，实施扩大内需战略，努力实现质的有效提升和量的合理增长，持续巩固回升向好态势，夯实中国式现代化的物质基础。"],
+      ["动力与安全保障","新征程上，要持续深化改革，建设全国统一大市场，着力稳定市场预期，充分激发各类经营主体活力。更好统筹发展和安全，推动科技自立自强，不断塑造发展新动能，为强国建设、民族复兴筑牢坚实的物质技术根基。"]
+    ]
+  }
+];
+const POLICY_CARDS = [
+  {
+    id: "pp-global-governance", num: "01", title: "当代全球治理通用模板",
+    trigger: "百年变局、四大赤字、人类命运共同体、全球治理",
+    tags: ["政经形势","全球治理"],
+    prompt: "题目涉及全球性挑战、人类命运共同体或全球治理时，怎样展开？",
+    keywords: ["传统与非传统风险","和平、发展、安全、治理","人类命运共同体","联合国宪章","中国方案","劝和促谈","国际公平正义","多边平台","全人类共同价值"],
+    cues: ["四大赤字","人类命运共同体","联合国核心地位","气候与公共卫生合作","劝和促谈","多边平台"],
+    outline: [["世界背景","传统与非传统风险交织，四大赤字突出。"],["中国方案","人类命运共同体契合联合国宪章宗旨。"],["中国行动","维护联合国、参与合作、劝和促谈。"],["治理方向","反对阵营对抗，推动全球治理变革。"]],
+    note: "先写世界问题，再写理念方案，最后写中国行动和治理方向。",
+    paragraphs: [
+      ["世界背景与中国方案","当今世界传统与非传统风险交织，和平、发展、安全、治理四大赤字愈发突出。人类命运共同体理念契合联合国宪章宗旨原则，为破解全球困境提供中国方案。中国坚定维护联合国核心地位，积极参与气候、公共卫生领域合作，面对地区热点坚持劝和促谈，以实际行动捍卫国际公平正义。"],
+      ["治理行动","中国反对阵营对抗，尊重各国自主选择发展道路。依托多边平台汇聚国际合力，推动全球治理体系变革，践行全人类共同价值，携手各国共克时艰，扎实推进人类命运共同体建设。"]
+    ]
+  },
+  {
+    id: "pp-diplomacy", num: "02", title: "外交模板",
+    trigger: "中国外交、元首外交、全球南方、负责任大国",
+    tags: ["政经形势","外交"],
+    prompt: "题目涉及中国外交、元首外交或大国担当时，怎样作答？",
+    keywords: ["百年变局","元首外交","主场多边外交","全球南方","务实外交","不确定性","负责任大国","主权","发展道路","世界和平发展"],
+    cues: ["百年变局","元首外交和主场外交","全球南方","务实行动","以自身发展赋能世界","主权与发展道路"],
+    outline: [["世界背景","百年变局加速演进，动荡不安持续蔓延。"],["中国行动","开展元首外交、主场多边外交和务实对话。"],["大国担当","倾听全球南方呼声，对冲不确定性。"],["世界意义","以自身发展赋能世界，维护和平发展。"]],
+    note: "外交题突出“行动—立场—世界意义”三步。",
+    paragraphs: [
+      ["外交行动与大国担当","当今世界百年变局加速演进，动荡与不安持续蔓延。通过一系列元首外交与主场多边外事活动，中国积极开展对外沟通对话，主动加强同世界各国的协调，重视倾听全球南方国家呼声，以务实外交行动对冲世界的不确定性，充分展现负责任大国的历史担当。"],
+      ["立场与世界意义","中国坚持以自身发展赋能世界，持续拓展多边协作的广度与深度。始终尊重各国主权与发展道路选择，努力维护全球大局总体稳定，为世界和平发展事业不断贡献中国力量。"]
+    ]
+  },
+  {
+    id: "pp-trade", num: "03", title: "经贸与全球化模板",
+    trigger: "高水平对外开放、贸易保护主义、产业链供应链、全球化",
+    tags: ["政经形势","经贸全球化"],
+    prompt: "题目涉及经济全球化、贸易保护主义或高水平对外开放时，怎样作答？",
+    keywords: ["全球经济复苏","贸易保护主义","产业链供应链","高水平对外开放","多边贸易体制","排他性阵营","制度型开放","超大规模市场","南北发展鸿沟","普惠包容"],
+    cues: ["复苏乏力 / 保护主义","高水平对外开放","多边贸易体制","制度型开放","超大规模市场","普惠包容"],
+    outline: [["世界困境","经济复苏乏力，保护主义和产业链压力上升。"],["中国立场","坚持高水平开放，维护多边贸易体制。"],["开放举措","制度型开放，释放超大规模市场优势。"],["全球意义","弥合南北鸿沟，推动普惠包容发展。"]],
+    note: "答案要同时写中国开放政策和全球经贸治理。",
+    paragraphs: [
+      ["世界困境与中国立场","当前全球经济复苏乏力，贸易保护主义暗流涌动，全球产业链供应链承压。中国坚持高水平对外开放，依托各类多边平台深化务实合作，维护多边贸易体制，反对排他性阵营，努力推动世界经济走出困境。"],
+      ["开放举措与全球意义","开放是当代中国的鲜明标识。中国稳步推进制度型开放，释放超大规模市场优势，着力弥合南北发展鸿沟，推动经济全球化普惠包容发展。以互利经贸合作凝聚全球共识，破解发展困境，为世界共同繁荣注入源源不断的动力。"]
+    ]
+  },
+  {
+    id: "pp-initiatives", num: "04", title: "中国倡议模板",
+    trigger: "人类命运共同体、一带一路、四大全球倡议、国际公共产品",
+    tags: ["政经形势","中国倡议"],
+    prompt: "题目涉及中国提出的全球倡议或国际公共产品时，怎样展开？",
+    keywords: ["人类命运共同体","一带一路","四大全球倡议","互联互通","国际公共产品","共商共建共享","发展中国家","共同发展"],
+    cues: ["人类命运共同体 + 一带一路","四大全球倡议","系统完整的公共产品","共商共建共享","发展中国家","共同发展"],
+    outline: [["时代背景","世界百年变局带来各类时代难题。"],["倡议体系","命运共同体、一带一路和四大全球倡议。"],["实践属性","不是抽象理念，而是行动指南。"],["合作方向","共商共建共享，促进共同发展。"]],
+    note: "先写倡议体系，再强调落地实践和共商共建共享。",
+    paragraphs: [
+      ["倡议体系","面对世界百年变局带来的各类时代难题，中国先后提出构建人类命运共同体、共建“一带一路”等重大倡议，相继推出四大全球倡议。从互联互通的合作实践到应对全球性危机的方案构想，形成一套系统完整的国际公共产品，为人类社会发展指明前进方向。"],
+      ["实践与全球意义","这些倡议并非抽象理念，而是扎根现实的行动指南。中国秉持共商共建共享，深化同世界各国特别是广大发展中国家合作，兼顾发展、文明、安全、治理多重诉求，助力各国携手开创人类共同发展光明前景。"]
+    ]
+  },
+  {
+    id: "pp-ai-governance", num: "05", title: "数字人工智能全球治理专题",
+    trigger: "人工智能治理、数字主权、数据安全、数字鸿沟、智能向善",
+    tags: ["政经形势","数字治理"],
+    prompt: "题目涉及人工智能全球治理、数据安全或数字鸿沟时，怎样作答？",
+    keywords: ["科技革命","人工智能","数据治理","公共产品","数字主权","数据安全有序流动","技术壁垒","数字霸权","数字能力","智能向善"],
+    cues: ["科技革命与数据治理","AI 是公共产品","数字主权与数据安全","反对技术壁垒","帮助发展中国家","智能向善"],
+    outline: [["时代课题","人工智能和数据治理成为全球性问题。"],["中国主张","AI 应成为公共产品，维护数字主权。"],["治理行动","参与规则构建，提升发展中国家能力。"],["价值目标","智能向善、开放合作、普惠共享。"]],
+    note: "抓住“公共产品、数字主权、智能向善”三个关键词。",
+    paragraphs: [
+      ["治理主张","新一轮科技革命浪潮下，人工智能、数据治理成为全球性时代课题。中国借助世界人工智能大会倡导，人工智能应成为造福全人类的公共产品，坚持维护各国数字主权，推动数据安全有序流动，反对技术壁垒与数字霸权。"],
+      ["治理行动与目标","中国主动参与新兴领域规则构建，助力发展中国家提升数字能力，弥合数字鸿沟。秉持智能向善、开放合作的理念，推动前沿技术普惠共享，携手各国打造公正合理的数智治理体系，为人类共同发展增添新动力。"]
+    ]
+  }
+];
+
+
+DATA.push({
+  id: "newthought",
+  short: "新思想 35题",
+  title: "习近平新时代中国特色社会主义思想 · 2026分析题模板",
+  accent: "burgundy",
+  cards: NEW_THOUGHT_CARDS
+});
+DATA.push({
+  id: "policy",
+  short: "政经及形势政策",
+  title: "政治经济学与形势政策 · 38题分析题模板",
+  accent: "slate",
+  cards: POLICY_CARDS
+});
+const POLITICAL_DECK_IDS = ["mayuan", "sishu", "mzsg", "newthought", "policy"];
 const CUSTOM_DECK_ID = "custom";
 const STORAGE_KEY = "kaoyan-zhengzhi-memo-v1";
 const DAILY_GOAL = 3;
@@ -2627,16 +2803,17 @@ function deleteCustomCard(cardId) {
 }
 function syncCatalogMeta() {
   const counts = Object.fromEntries(DATA.map(deck => [deck.id, deck.cards.length]));
+  const politicsCount = ["mayuan", "sishu", "mzsg", "newthought", "policy"].reduce((sum, id) => sum + (counts[id] || 0), 0);
   const uxCount = counts.ux || 0;
   const englishCount = counts.english || 0;
-  document.getElementById("brandSub").textContent = `马原 ${counts.mayuan || 0} 篇 · 思修 ${counts.sishu || 0} 篇 · 毛中特史纲 ${counts.mzsg || 0} 篇 · 用户研究 ${uxCount} 篇 · 英语作文 ${englishCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
+  document.getElementById("brandSub").textContent = `政治 ${politicsCount} 篇 · 用户研究 ${uxCount} 篇 · 英语作文 ${englishCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
   document.getElementById("heroLead").textContent = `把政治分析题、用户研究高频与英语作文模板拆成“触发词 → 答题骨架 → 完整表述”。先看提示复述，再揭晓对照，最后给自己评级。`;
   document.getElementById("sideTotal").textContent = `${ALL_CARDS.length} 篇`;
   document.querySelector(".hero").dataset.count = String(ALL_CARDS.length);
   document.querySelector('[data-deck-filter="all"] .nav-count').textContent = String(ALL_CARDS.length);
   const politicsBadge = document.querySelector('[data-deck-filter="politics"] .nav-count');
-  if (politicsBadge) politicsBadge.textContent = String((counts.mayuan || 0) + (counts.sishu || 0) + (counts.mzsg || 0));
-  ["mayuan", "sishu", "mzsg", "ux", "english", "custom"].forEach(id => {
+  if (politicsBadge) politicsBadge.textContent = String((counts.mayuan || 0) + (counts.sishu || 0) + (counts.mzsg || 0) + (counts.newthought || 0) + (counts.policy || 0));
+  ["mayuan", "sishu", "mzsg", "newthought", "policy", "ux", "english", "custom"].forEach(id => {
     const badge = document.querySelector(`[data-deck-filter="${id}"] .nav-count`);
     if (badge) badge.textContent = String(counts[id] || 0);
   });
