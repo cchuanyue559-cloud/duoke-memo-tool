@@ -17,7 +17,7 @@
     --paper: #f2ede3; --paper-2: #e9e1d3; --card: #fffdf8;
     --ink: #202721; --muted: #747a73; --line: #d9d0c0; --line-strong: #c7bba8;
     --red: #a63f33; --red-deep: #7e2e26; --red-soft: #f3e2dc;
-    --jade: #2f6b5b; --jade-soft: #dfece6; --blue: #355f88; --blue-soft: #e4edf5; --violet: #675688; --violet-soft: #ece7f4; --burgundy: #7b4055; --burgundy-soft: #f0e2e8; --slate: #416573; --slate-soft: #e3edf0;
+    --jade: #2f6b5b; --jade-soft: #dfece6; --blue: #355f88; --blue-soft: #e4edf5; --violet: #675688; --violet-soft: #ece7f4; --burgundy: #7b4055; --burgundy-soft: #f0e2e8; --slate: #416573; --slate-soft: #e3edf0; --history: #3f675d; --history-soft: #e1ede8;
     --amber: #b07d3b; --amber-soft: #f4ead8;
     --shadow: 0 20px 56px rgba(51, 43, 31, .09);
     --serif: "STZhongsong", "Songti SC", "SimSun", "Noto Serif CJK SC", serif;
@@ -97,6 +97,8 @@
   .nav-subitem .nav-count { min-width: 21px; padding: 1px 6px; font-size: 9px; background: rgba(255,255,255,.55); }
   .nav-item.active[data-deck-filter="custom"] { color: var(--jade); }
   .nav-item.active[data-deck-filter="custom"] .nav-count { background: var(--jade-soft); color: var(--jade); }
+  .nav-item.active[data-deck-filter="designhistory"] { color: var(--history); }
+  .nav-item.active[data-deck-filter="designhistory"] .nav-count { background: var(--history-soft); color: var(--history); }
   .side-add-content { width: 100%; margin-top: 10px; padding: 9px 11px; border: 1px dashed var(--line-strong); border-radius: 9px; background: rgba(255,255,255,.35); color: var(--jade); font-size: 11px; font-weight: 700; }
   .side-add-content:hover { border-color: var(--jade); background: var(--jade-soft); }
   .subject-group { margin-bottom: 34px; }
@@ -187,6 +189,7 @@
   .topic-card.custom::before { background: var(--jade); }
   .topic-card.newthought::before { background: var(--burgundy); }
   .topic-card.policy::before { background: var(--slate); }
+  .topic-card.designhistory::before { background: var(--history); }
   .topic-card.english::before { background: var(--violet); }
   .topic-card:hover { transform: translateY(-3px); border-color: var(--line-strong); box-shadow: 0 15px 35px rgba(51,43,31,.08); }
   .card-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
@@ -209,6 +212,7 @@
   .custom .card-open { color: var(--jade); }
   .newthought .card-open { color: var(--burgundy); }
   .policy .card-open { color: var(--slate); }
+  .designhistory .card-open { color: var(--history); }
   .card-foot-actions { display: flex; align-items: center; gap: 10px; }
   .custom-delete { border: 0; background: transparent; color: #a68d82; font-size: 10px; padding: 0; }
   .custom-delete:hover { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
@@ -230,6 +234,7 @@
   .study-eyebrow.custom { color: var(--jade); }
   .study-eyebrow.newthought { color: var(--burgundy); }
   .study-eyebrow.policy { color: var(--slate); }
+  .study-eyebrow.designhistory { color: var(--history); }
   .study-eyebrow.english { color: var(--violet); }
   .study-top h2 { margin: 3px 0 0; font-family: var(--serif); font-size: 25px; letter-spacing: .03em; }
   .study-nav { display: flex; align-items: center; gap: 7px; }
@@ -268,6 +273,8 @@
   .question-box.newthought .question-label { color: var(--burgundy); }
   .question-box.policy { background: linear-gradient(90deg,rgba(227,237,240,.78),rgba(227,237,240,.13)); border-color: var(--slate); }
   .question-box.policy .question-label { color: var(--slate); }
+  .question-box.designhistory { background: linear-gradient(90deg,rgba(225,237,232,.78),rgba(225,237,232,.13)); border-color: var(--history); }
+  .question-box.designhistory .question-label { color: var(--history); }
   .question-box.english { background: linear-gradient(90deg,rgba(236,231,244,.8),rgba(236,231,244,.14)); border-color: var(--violet); }
   .question-box.english .question-label { color: var(--violet); }
   .question-box p { margin: 0; font-size: 13px; line-height: 1.8; }
@@ -305,6 +312,43 @@
   .cloze-levelbar.newthought .level-btn.active { background: var(--burgundy-soft); }
   .cloze-levelbar.policy .level-btn:hover, .cloze-levelbar.policy .level-btn.active { border-color: var(--slate); color: var(--slate); }
   .cloze-levelbar.policy .level-btn.active { background: var(--slate-soft); }
+  .history-mode { display: grid; gap: 16px; }
+  .history-intro { padding: 18px 20px; border: 1px solid #dfd8cb; border-radius: 13px; background: #fbf8f2; }
+  .history-intro > span { color: var(--history); font-size: 9px; font-weight: 700; letter-spacing: .14em; }
+  .history-intro h3 { margin: 5px 0 7px; font-family: var(--serif); font-size: 21px; }
+  .history-intro p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.75; }
+  .history-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+  .history-dim { min-height: 145px; padding: 15px; border: 1px solid #dfd8cb; border-radius: 11px; background: #fffdf8; color: var(--ink); text-align: left; }
+  .history-dim:hover { border-color: var(--history); box-shadow: 0 8px 20px rgba(63,103,93,.08); }
+  .history-dim-label { display: block; margin-bottom: 9px; color: var(--history); font-size: 9px; font-weight: 700; letter-spacing: .11em; }
+  .history-dim-content { color: #6f756e; font-size: 12px; line-height: 1.8; }
+  .history-dim.revealed { border-color: #c9ded5; background: #f8fcfa; }
+  .history-dim.revealed .history-dim-content { color: var(--ink); }
+  .history-mnemonic { padding: 13px 15px; border-radius: 9px; background: var(--history-soft); color: #45675e; font-size: 11px; line-height: 1.75; }
+  .history-exam { padding: 13px 15px; border: 1px dashed #d8cdbd; border-radius: 9px; }
+  .history-exam-label { margin-bottom: 7px; color: #8d877d; font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+  .history-exam-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .history-exam-chip { padding: 5px 8px; border-radius: 5px; background: var(--amber-soft); color: #7f6035; font-size: 9px; line-height: 1.45; }
+  .history-actions { display: flex; justify-content: flex-end; }
+  .history-overview { display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin-bottom: 24px; }
+  .history-overview-block { min-width: 0; padding: 18px; border: 1px solid rgba(199,187,168,.7); border-radius: 15px; background: rgba(255,253,248,.68); }
+  .overview-kicker { color: var(--history); font-size: 8px; font-weight: 700; letter-spacing: .16em; }
+  .history-overview-block h3 { margin: 4px 0 14px; font-family: var(--serif); font-size: 19px; }
+  .timeline-track { display: flex; overflow-x: auto; padding: 2px 0 10px; }
+  .timeline-node { position: relative; flex: 0 0 122px; display: grid; justify-items: start; gap: 3px; padding: 0 12px 0 0; border: 0; background: transparent; color: var(--ink); text-align: left; }
+  .timeline-node::after { content: ""; position: absolute; left: 26px; right: -2px; top: 9px; height: 1px; background: #c9d8d2; }
+  .timeline-node:last-child::after { display: none; }
+  .timeline-dot { position: relative; z-index: 1; width: 20px; height: 20px; display: grid; place-items: center; border-radius: 50%; background: var(--history); color: #fff; font-size: 7px; }
+  .timeline-node strong { font-size: 9px; color: var(--history); }
+  .timeline-node > span:last-child { color: var(--muted); font-size: 10px; line-height: 1.45; }
+  .timeline-node:hover > span:last-child { color: var(--red-deep); text-decoration: underline; text-underline-offset: 3px; }
+  .mindmap-core { width: max-content; max-width: 100%; margin: 0 auto 12px; padding: 8px 14px; border-radius: 999px; background: var(--history); color: #fff; font-family: var(--serif); font-size: 12px; text-align: center; }
+  .mindmap-branches { display: grid; gap: 9px; }
+  .mindmap-branch { padding: 9px 10px; border-left: 2px solid #c6d9d1; background: #f8fbf9; border-radius: 0 7px 7px 0; }
+  .mindmap-branch h4 { margin: 0 0 6px; color: var(--history); font-size: 10px; }
+  .mindmap-nodes { display: flex; flex-wrap: wrap; gap: 5px; }
+  .mindmap-nodes button { padding: 4px 7px; border: 1px solid #d5e1dc; border-radius: 5px; background: #fff; color: #60736b; font-size: 9px; }
+  .mindmap-nodes button:hover { border-color: var(--history); color: var(--history); background: var(--history-soft); }
   .level-hint { flex: 0 0 auto; max-width: 205px; color: #908980; font-size: 9px; line-height: 1.55; }
   .sentence-flow { font-family: var(--serif); font-size: clamp(16px,1.55vw,18px); line-height: 2.08; letter-spacing: .045em; text-align: justify; }
   .sentence-blank { display: inline; margin: 0 2px; padding: 2px 8px; border: 1px dashed #cbb7a7; border-radius: 6px; background: #fbf0ea; color: var(--red-deep); font-family: var(--sans); font-size: .82em; line-height: 1.65; vertical-align: baseline; }
@@ -459,6 +503,8 @@
     .dictation-head { align-items: flex-start; flex-direction: column; gap: 7px; }
     .dictation-head-meta { width: 100%; justify-content: space-between; }
     .diff-columns { grid-template-columns: 1fr; }
+    .history-grid { grid-template-columns: 1fr; }
+    .history-overview { grid-template-columns: 1fr; }
     .dictation-score-grid { grid-template-columns: 1fr; }
     .study-side { grid-template-columns: 1fr; } .status-btn { min-height: 58px; }
     .study-bottom { align-items: flex-start; flex-direction: column; }
@@ -489,9 +535,9 @@
 
 <main class="layout">
   <aside class="sidebar" aria-label="题库导航">
-    <div class="side-label"><span>题库</span><span id="sideTotal">73 篇</span></div>
+    <div class="side-label"><span>题库</span><span id="sideTotal">95 篇</span></div>
     <nav class="deck-nav" id="deckNav">
-      <button class="nav-item active" data-deck-filter="all">全部模板 <span class="nav-count">73</span></button>
+      <button class="nav-item active" data-deck-filter="all">全部模板 <span class="nav-count">95</span></button>
       <button class="nav-item" data-deck-filter="politics">政治 <span class="nav-count">28</span></button>
       <div class="subdeck-nav" id="politicsSubnav">
         <button class="nav-subitem" data-deck-filter="mayuan">马原 34题 <span class="nav-count">6</span></button>
@@ -502,6 +548,7 @@
       </div>
       <button class="nav-item" data-deck-filter="ux">用户研究 <span class="nav-count">25</span></button>
       <button class="nav-item" data-deck-filter="english">英语作文 <span class="nav-count">20</span></button>
+      <button class="nav-item" data-deck-filter="designhistory">设计史 <span class="nav-count">22</span></button>
       <button class="nav-item" data-deck-filter="custom">我的内容 <span class="nav-count">0</span></button>
 
     </nav>
@@ -520,7 +567,7 @@
 
   <section class="workspace">
     <div id="dashboardView">
-      <section class="hero" aria-labelledby="heroTitle" data-count="73">
+      <section class="hero" aria-labelledby="heroTitle" data-count="95">
         <div class="hero-copy">
           <span class="kicker">冲刺背诵 · 先骨架，后血肉</span>
           <h1 id="heroTitle">背考点，先背骨架，<br><em>再补血肉。</em></h1>
@@ -542,7 +589,7 @@
       <section class="stats-row" aria-label="学习统计">
         <div class="stat-card mastered"><span>已掌握</span><strong id="statMastered">0<small>篇</small></strong></div>
         <div class="stat-card fuzzy"><span>需要巩固</span><strong id="statFuzzy">0<small>篇</small></strong></div>
-        <div class="stat-card"><span>尚未开始</span><strong id="statNew">73<small>篇</small></strong></div>
+        <div class="stat-card"><span>尚未开始</span><strong id="statNew">95<small>篇</small></strong></div>
         <div class="stat-card"><span>今日专注</span><strong id="statMinutes">0<small>分钟</small></strong></div>
       </section>
 
@@ -582,6 +629,7 @@
                 <button class="mode-btn" data-mode="dictation">默写</button>
                 <button class="mode-btn" data-mode="mask">掩卷</button>
                 <button class="mode-btn" data-mode="outline">提纲</button>
+                <button class="mode-btn hidden" data-mode="history" id="historyModeBtn">四维</button>
               </div>
               <div class="toolbar-actions">
                 <button class="tool-btn" id="speakBtn">朗读</button>
@@ -1871,6 +1919,502 @@ DATA.push({
   accent: "slate",
   cards: POLICY_CARDS
 });
+const DESIGN_HISTORY_CARDS = [
+  {
+    id: "dh-rams", num: "01", title: "迪特·拉姆斯与好设计十原则",
+    trigger: "迪特·拉姆斯、好设计十原则、功能主义、新功能主义",
+    tags: ["设计史","第一章","人物高频"],
+    prompt: "四维串记：迪特·拉姆斯所处时代、设计立场、代表成果与历史贡献是什么？",
+    keywords: ["迪特·拉姆斯","好设计十原则","创新性","实用性","持久耐用","环保","简洁","少设计","新功能主义"],
+    cues: ["德国现代设计","好设计十原则","Braun / 博朗","少即是多","当代功能主义"],
+    outline: [["时代","20世纪后半叶德国现代设计。"],["人物","德国设计师迪特·拉姆斯。"],["创作","提出好设计十原则。"],["贡献","推动新功能主义和简约设计。"]],
+    note: "设计史与设计理论交叉高频；注意与密斯“少即是多”、德国功能主义联系。",
+    exam: ["2026级617论述：好设计的十条原则并结合案例谈理解"],
+    history: {
+      era: "20世纪后半叶，德国现代设计与新功能主义语境。",
+      people: "迪特·拉姆斯（Dieter Rams）。",
+      works: "好设计十原则；Braun（博朗）系列产品设计。",
+      contribution: "以创新、实用、审美、易懂、克制、诚实、耐用、细致、环保、简洁十项原则总结现代产品设计，成为当代功能主义和“少设计”的重要代表。",
+      mnemonic: "创新·实用·审美 / 易懂·克制·诚实 / 耐用·细致·环保·简洁"
+    },
+    paragraphs: [
+      ["人物与理论","迪特·拉姆斯是德国现代设计大师、新功能主义代表人物。他提出好设计的十项原则：创新、实用、唯美、易懂、克制、诚实、持久耐用、细致、环保和简洁，强调设计应回到功能与使用本身。"],
+      ["贡献与影响","拉姆斯把密斯“少即是多”的理念进一步落实为系统的产品设计原则，对现代产品设计、德国功能主义和企业设计语言产生深远影响。"]
+    ]
+  },
+  {
+    id: "dh-papanek", num: "02", title: "巴巴纳克与设计伦理",
+    trigger: "巴巴纳克、为真实的世界设计、设计伦理、绿色设计",
+    tags: ["设计史","第一章","设计伦理"],
+    prompt: "四维串记：巴巴纳克的时代背景、核心著作、设计主张与历史贡献是什么？",
+    keywords: ["巴巴纳克","为真实的世界设计","设计伦理","绿色设计","社会责任","资源浪费","环境污染"],
+    cues: ["20世纪六七十年代","《为真实的世界设计》","设计伦理","绿色设计","社会责任"],
+    outline: [["时代","工业社会资源与环境问题集中显现。"],["人物","设计理论家巴巴纳克。"],["创作","《为真实的世界设计》。"],["贡献","提出设计伦理与绿色设计观念。"]],
+    note: "真题常将设计伦理与环境资源、可持续设计结合考。",
+    exam: ["2025级617简答：设计伦理学"],
+    history: {
+      era: "20世纪六七十年代，工业社会资源浪费、环境污染和人文伦理问题集中显现。",
+      people: "维克多·巴巴纳克（Victor Papanek）。",
+      works: "《为真实的世界设计》（Design for the Real World）。",
+      contribution: "提出设计伦理、绿色设计和社会责任观念，批判消费主义与“为设计而设计”，推动设计关注真实需求与可持续发展。",
+      mnemonic: "真实世界 + 伦理 + 绿色 + 社会责任"
+    },
+    paragraphs: [
+      ["时代与著作","20世纪六七十年代，资源浪费、环境污染和人文伦理问题集中出现。设计理论家巴巴纳克在《为真实的世界设计》中提出设计伦理、绿色设计等观念，批判过度消费和无意义设计。"],
+      ["核心贡献","巴巴纳克强调设计应承担社会责任、服务真实需求，并关注资源与环境后果，为后来的可持续设计和设计伦理学奠定了基础。"]
+    ]
+  },
+  {
+    id: "dh-industrial-revolution", num: "03", title: "工业革命与设计转型",
+    trigger: "第一次工业革命、机器生产、标准化、批量化、设计与制造分离",
+    tags: ["设计史","第二章","时代背景"],
+    prompt: "四维串记：工业革命的时间、技术条件、设计变化与历史影响是什么？",
+    keywords: ["1760年代","1830至1840年代","手工生产","设计与制作销售分离","新能源新材料","标准化","批量化","市场概念"],
+    cues: ["约1760—1840","英国","机器生产","设计与制造分离","标准化批量化","市场概念"],
+    outline: [["时间","约1760年代至1830—1840年代。"],["原因","手工生产无法满足市场需求。"],["变化","设计与制作销售分离，新能源新材料出现。"],["影响","标准化、批量化与市场概念成为现代设计起点。"]],
+    note: "把工业革命作为“时代过渡背景”，重点记它如何改变设计的生产方式。",
+    exam: ["设计史时代背景题、现代设计起源题"],
+    history: {
+      era: "约1760年代兴起，持续到1830—1840年代，首先发生于英国。",
+      people: "英国手工业者、工程师与工厂生产者群体。",
+      works: "瓦特改良蒸汽机；机器生产与工厂制度。",
+      contribution: "导致设计与制作、销售分离，设计成为独立行业；新能源、新材料和标准化批量生产改变了传统设计模式，催生现代市场概念。",
+      mnemonic: "时间—动力—分离—标准—批量—市场"
+    },
+    paragraphs: [
+      ["时代与原因","第一次工业革命约于1760年代兴起，持续到1830至1840年代。英国手工生产已无法满足市场需求，手工业需要技术改革，由此引发生产和科技革命。"],
+      ["设计转型与影响","工业革命使设计与制作、销售完全分离，设计成为独立行业；新能源和新材料改变了设计的材料构成与结构模式，标准化、批量化成为设计目的，并催生市场概念。"]
+    ]
+  },
+  {
+    id: "dh-wedgwood", num: "04", title: "韦奇伍德与近代陶瓷设计",
+    trigger: "韦奇伍德、英国制瓷之父、黑色炻器、骨瓷、劳动分工",
+    tags: ["设计史","第二章","人物高频"],
+    prompt: "四维串记：韦奇伍德的身份、代表作品、设计创新与历史贡献是什么？",
+    keywords: ["英国制瓷之父","1759年","韦奇伍德陶瓷公司","珍珠器","黑色炻器","骨瓷","劳动分工","商业运营"],
+    cues: ["英国制瓷之父","1759 公司","珍珠器","黑色炻器","骨瓷","分工与商业运营"],
+    outline: [["人物","英国制瓷之父韦奇伍德。"],["作品","珍珠器、黑色炻器、骨瓷。"],["创新","材料研发、劳动分工、商业运营。"],["贡献","开辟现代陶瓷生产新纪元。"]],
+    note: "代表作品与风格对应要准确：珍珠器—新古典；黑色炻器—古典古雅；骨瓷—粉白半透明。",
+    exam: ["设计史人物与作品匹配题"],
+    history: {
+      era: "18世纪英国工业革命前夜与早期工业化阶段。",
+      people: "乔赛亚·韦奇伍德（Josiah Wedgwood），被称为“英国制瓷之父”。",
+      works: "珍珠器、黑色炻器、骨瓷、碧玉炻器等。",
+      contribution: "1759年创立韦奇伍德陶瓷公司，推动材料研发、劳动分工、商业运营和新工艺应用，把审美与工业制造结合，开辟现代陶瓷生产新纪元。",
+      mnemonic: "珍珠—黑色—骨瓷 / 研发—分工—运营"
+    },
+    paragraphs: [
+      ["人物与作品","韦奇伍德被誉为“英国制瓷之父”，1759年成立韦奇伍德陶瓷公司。早期“珍珠器”呈新古典主义风格，后期黑色炻器质地坚硬、风格古雅，骨瓷色泽粉白、手感轻盈细腻。"],
+      ["设计与贡献","他在陶瓷制作中注重材料研发和科学制造，采用细化劳动分工与商业运营策略，积极使用新工艺，使产品兼顾审美和工业生产，开辟现代陶瓷生产新纪元。"]
+    ]
+  },
+  {
+    id: "dh-baroque-rococo", num: "05", title: "巴洛克与洛可可",
+    trigger: "巴洛克、洛可可、宫廷艺术、繁复装饰、曲线",
+    tags: ["设计史","第二章","时代风格"],
+    prompt: "四维串记：巴洛克与洛可可的时代、代表场域、形式特征与历史评价是什么？",
+    keywords: ["巴洛克","洛可可","反宗教改革","宫廷艺术","繁复夸饰","曲线","C型","S型","忽略功能"],
+    cues: ["17世纪巴洛克","18世纪法国洛可可","宫廷与教权","繁复夸饰","C/S 曲线","装饰压过功能"],
+    outline: [["巴洛克","17世纪，服务教权与君权，宏伟、动感、富丽。"],["洛可可","18世纪法国宫廷，纤细、轻巧、繁缛。"],["形式","曲线、贝壳、岩石、C/S形涡卷。"],["评价","装饰性强，但忽略功能要求。"]],
+    note: "两者要对比：巴洛克宏伟磅礴、洛可可纤细享乐；共同点是繁复装饰和宫廷性。",
+    exam: ["风格辨识、装饰艺术与功能关系题"],
+    history: {
+      era: "巴洛克约17世纪，洛可可18世纪产生于法国。",
+      people: "罗马天主教反宗教改革力量、法国宫廷与贵族阶层。",
+      works: "教堂与宫殿建筑、室内装饰、家具与贝壳工艺装饰。",
+      contribution: "形成强调动感、曲线、光效与强烈装饰性的宫廷艺术传统；也因忽略功能而成为现代设计反思对象。",
+      mnemonic: "巴洛克：宏伟动感 / 洛可可：纤细享乐"
+    },
+    paragraphs: [
+      ["巴洛克","巴洛克艺术服务于教权与君权，追求宏伟、生动、热情、奔放的效果，强调繁复夸饰、气势磅礴、富丽色彩、强烈对比和光的效果，并融合建筑、雕塑与绘画。"],
+      ["洛可可","洛可可18世纪产生于法国，以贝壳工艺、岩石和蚌壳装饰为特色，风格纤细、轻巧、华丽、繁缛，大量使用C型、S型涡卷曲线，是纯粹的宫廷艺术，带有明显享乐主义色彩，忽略了功能要求。"]
+    ]
+  },
+  {
+    id: "dh-neoclassic-victorian", num: "06", title: "新古典主义、维多利亚与折中主义",
+    trigger: "新古典主义、维多利亚风格、折中主义、古典复兴",
+    tags: ["设计史","第二章","时代风格"],
+    prompt: "四维串记：新古典主义、维多利亚和折中主义各自的时代、特征与历史位置是什么？",
+    keywords: ["新古典主义","古典复兴","简洁典雅","维多利亚风格","折中主义","任意模仿","自由组合","19世纪"],
+    cues: ["18世纪60年代新古典","反对巴洛克洛可可","简洁典雅","维多利亚繁复","折中主义任意模仿"],
+    outline: [["新古典","回归古希腊古罗马，简洁、典雅、理性。"],["维多利亚","19世纪英国，丰富华丽、堆砌甚至杂乱。"],["折中","任意模仿或自由组合历史风格。"],["位置","工业化前夜复杂风格的并存。"]],
+    note: "三种风格用关键词区分：理性复古、华丽折衷、自由拼合。",
+    exam: ["风格比较与设计史阶段题"],
+    history: {
+      era: "18世纪60年代—19世纪，欧洲与美国。",
+      people: "新兴资产阶级、英国维多利亚时期设计者、欧美建筑师。",
+      works: "古典复兴建筑、维多利亚住宅与室内、折中主义公共建筑。",
+      contribution: "新古典以理性复古回应巴洛克洛可可；维多利亚体现工业化前期的繁复审美；折中主义表现历史样式的自由拼合，也暴露形式与功能矛盾。",
+      mnemonic: "新古典求理性 / 维多利亚求华丽 / 折中主义求拼合"
+    },
+    paragraphs: [
+      ["新古典主义","新古典主义18世纪60年代开始，是新兴资产阶级对巴洛克、洛可可的反动。它追求古希腊古罗马的简洁、典雅、节制、高贵淳朴与壮穆宏伟，具有一定理性主义色彩。"],
+      ["维多利亚与折中主义","维多利亚风格是19世纪英国在维多利亚女王在位期间形成的丰富、华丽、堆砌甚至杂乱的建筑与装饰风格；折中主义则任意模仿历史上的各种风格，或自由组合不同历史样式，反映工业化前设计风格的复杂并存。"]
+    ]
+  },
+  {
+    id: "dh-arts-crafts", num: "07", title: "工艺美术运动",
+    trigger: "工艺美术运动、莫里斯、拉斯金、反机械化、手工艺",
+    tags: ["设计史","第三章","运动高频"],
+    prompt: "四维串记：工艺美术运动的时间地点、代表人物、核心创作与历史影响是什么？",
+    keywords: ["19世纪60年代","英国","水晶宫博览会","约翰·拉斯金","威廉·莫里斯","反对机械化","手工艺","诚实质朴","红屋"],
+    cues: ["19世纪60年代英国","水晶宫导火索","拉斯金理论","莫里斯奠基","反机械化","红屋"],
+    outline: [["时代","19世纪60年代起源于英国。"],["人物","理论指导拉斯金，奠基人莫里斯。"],["主张","强调手工艺，反对机械化、繁琐装饰。"],["影响","影响欧美并促进新艺术运动。"]],
+    note: "简答题按“时间地点—原因—理论—主张—影响—代表作”组织。",
+    exam: ["2026级617简答：威廉·莫里斯核心设计思想及对现代设计的影响"],
+    history: {
+      era: "19世纪60年代起源于英国，是范围最广、时间最长、影响最远的设计运动之一。",
+      people: "理论指导约翰·拉斯金，主要奠基人威廉·莫里斯。",
+      works: "红屋；书籍装帧、家具、壁纸、纺织品等。",
+      contribution: "反对工业化造成的设计水准下降和艺术技术分离，强调手工艺、诚实质朴和自然主义；影响欧美，并促进新艺术运动产生。",
+      mnemonic: "水晶宫导火索 / 拉斯金理论 / 莫里斯实践 / 手工艺反机械"
+    },
+    paragraphs: [
+      ["运动背景与主张","工艺美术运动19世纪60年代起源于英国。工业化使批量产品设计水准下降、艺术与技术分离，1851年水晶宫博览会成为导火索。运动以拉斯金为理论指导、莫里斯为主要奠基人，强调手工艺，明确反对机械化和矫揉造作的维多利亚风格，主张诚实、质朴、自然主义和东方装饰。"],
+      ["代表与影响","运动影响其他欧洲国家和美国。19、20世纪之交，它成为影响设计风格的重要因素，并促进新艺术运动的出现。代表作是莫里斯与菲利普·韦伯共同设计的红屋。"]
+    ]
+  },
+  {
+    id: "dh-crystal-palace", num: "08", title: "水晶宫与1851年博览会",
+    trigger: "水晶宫、帕克斯顿、钢铁玻璃、标准化预制、1851博览会",
+    tags: ["设计史","第三章","作品高频"],
+    prompt: "四维串记：水晶宫的时间地点、设计者、材料结构与设计史意义是什么？",
+    keywords: ["1851年","伦敦海德公园","帕克斯顿","钢铁和玻璃","标准化预制单元","第一座大型建筑","分水岭","现代工业产品设计"],
+    cues: ["1851 伦敦海德公园","帕克斯顿","钢铁 + 玻璃","标准预制构件","第一座大型建筑","设计史分水岭"],
+    outline: [["背景","1851年伦敦海德公园博览会。"],["人物","英国工程师帕克斯顿。"],["创作","钢铁玻璃、标准化预制构件。"],["贡献","标志现代工业产品设计开始，暴露艺术技术分离。"]],
+    note: "必背名词解释：时间、地点、设计者、材料、结构、四个意义。",
+    exam: ["2025级617名词解释：水晶宫"],
+    history: {
+      era: "1851年，英国伦敦海德公园。",
+      people: "英国工程师约瑟夫·帕克斯顿。",
+      works: "水晶宫博览会建筑，采用钢铁、玻璃和标准化预制单元。",
+      contribution: "是世界上第一座使用金属与玻璃、以重复生产标准预制构件建造的大型建筑；成为设计史分水岭，标志现代工业产品设计开始，并集中暴露工业时代艺术与技术分离的问题。",
+      mnemonic: "1851 / 海德公园 / 帕克斯顿 / 铁玻璃 / 标准预制 / 分水岭"
+    },
+    paragraphs: [
+      ["建筑特点","1851年，为炫耀英国工业进步、改善公众审美，维多利亚女王在伦敦海德公园举办博览会。帕克斯顿大胆采用钢铁与玻璃结构，外形是简单阶梯形长方体，没有多余装饰，完全体现工业生产的机械特色，并使用标准预制单元建造。"],
+      ["设计史意义","水晶宫是世界上第一座使用金属和玻璃、采用重复生产标准预制单元的大型建筑。它是工业革命成果的展示，也是19世纪技术与艺术分离现状的集中暴露，标志现代工业产品设计的开始。"]
+    ]
+  },
+  {
+    id: "dh-ruskin", num: "09", title: "约翰·拉斯金",
+    trigger: "拉斯金、工艺美术运动理论、向自然学习、设计为大众、现代画家",
+    tags: ["设计史","第三章","人物高频"],
+    prompt: "四维串记：拉斯金的身份、核心观点、代表著作与历史贡献是什么？",
+    keywords: ["约翰·拉斯金","理论提倡者","民主社会主义色彩","为大众服务","向自然学习","回归自然","现代画家","建筑七盏明灯","威尼斯之石"],
+    cues: ["理论奠定者","设计为大众","师承自然","中世纪传统","《现代画家》《建筑七盏明灯》《威尼斯之石》"],
+    outline: [["身份","英国美术理论家、教育家。"],["主张","设计为大众，师承自然，回归中世纪传统。"],["著作","《现代画家》《建筑七盏明灯》《威尼斯之石》。"],["贡献","最早提出现代设计思想，推动艺术与设计区分。"]],
+    note: "辩证评价：发现工业化问题，但方案回到中世纪和自然，未真正解决大众设计问题。",
+    exam: ["工艺美术运动理论题、设计伦理题"],
+    history: {
+      era: "19世纪英国工业化与工艺美术运动前夕。",
+      people: "约翰·拉斯金，英国美术理论家、教育家，工艺美术运动理论提倡者。",
+      works: "《现代画家》《建筑的七盏明灯》《威尼斯之石》。",
+      contribution: "最早提出现代设计思想，强调设计为大众、艺术与技术区别、设计社会功能、向自然学习；但其方案带有道德主义和回归中世纪传统的局限。",
+      mnemonic: "为大众 / 向自然 / 中世纪 / 三本著作"
+    },
+    paragraphs: [
+      ["人物与核心主张","拉斯金是英国美术理论家、教育家，工艺美术运动的理论提倡者，也是最早提出现代设计思想的人物之一。他强调设计为大众服务，反对精英主义；主张师承自然、忠实于传统材料，“向自然学习”是其重要口号。"],
+      ["思想贡献与局限","拉斯金强调设计不同于美术、应有社会功能，主张回溯中世纪传统，提出忠于自然与真善美，并强调设计形式与功能的关系。他虽然发现了工业化问题，但解决方案停留在理论和传统层面，带有明显道德主义色彩。"]
+    ]
+  },
+  {
+    id: "dh-morris", num: "10", title: "威廉·莫里斯",
+    trigger: "莫里斯、现代设计之父、工艺美术运动、红屋、反机械化",
+    tags: ["设计史","第三章","人物必背"],
+    prompt: "四维串记：莫里斯的历史地位、设计思想、代表作品与影响局限是什么？",
+    keywords: ["威廉·莫里斯","现代设计之父","拉斐尔前派","哥特式","为大众服务","集体活动","手工艺","反对机械化","实用与美观","红屋"],
+    cues: ["现代设计之父","拉斐尔前派","设计为大众","集体活动","反机械化","实用美观结合","红屋"],
+    outline: [["地位","工艺美术运动主要代表、现代设计之父。"],["思想","民主设计、集体劳动、手工艺、实用与美观统一。"],["作品","红屋、壁纸、家具、书籍装帧。"],["局限","反机械批量生产，无法成为真正现代设计奠基人。"]],
+    note: "2026真题重点：思想 + 对现代设计影响 + 局限，三点都要写。",
+    exam: ["2026级617简答：威廉·莫里斯核心设计思想及对现代设计的影响"],
+    history: {
+      era: "19世纪下半叶英国工艺美术运动。",
+      people: "威廉·莫里斯，拉斐尔前派成员，工艺美术运动最主要代表人物。",
+      works: "与菲利普·韦伯共同设计红屋；壁纸、纺织品、家具和书籍装帧。",
+      contribution: "把拉斯金思想转化为设计实践，提出设计为大众、集体活动、手工艺与实用美观结合；推动现代设计职业化，但反对机械批量生产构成其历史局限。",
+      mnemonic: "大众 + 集体 + 手工 + 美观实用 + 反机械"
+    },
+    paragraphs: [
+      ["历史地位与思想","莫里斯是工艺美术运动最主要的代表人物、拉斐尔前派主要成员，被称为“现代设计之父”。他主张哥特式风格，反对过度装饰的维多利亚风格；强调设计为大众服务，认为设计工作必须是集体活动。"],
+      ["设计原则与局限","莫里斯强调手工艺、反对机械化和批量化生产，主张艺术家与技师合作，并追求实用性与美观性的结合。但他仍以手工艺、简单哥特式和自然主义装饰为实现路径，这一局限使他不可能成为真正现代设计的奠基人。"]
+    ]
+  },
+  {
+    id: "dh-red-house-prb", num: "11", title: "红屋与拉斐尔前派",
+    trigger: "红屋、菲利普·韦伯、莫里斯、拉斐尔前派、真实诚挚",
+    tags: ["设计史","第三章","作品高频"],
+    prompt: "四维串记：红屋的时代、设计者、建筑特征与拉斐尔前派的关系是什么？",
+    keywords: ["红屋","威廉·莫里斯","菲利普·韦伯","红砖","非对称布局","功能性","哥特风格","拉斐尔前派","真实的诚挚的"],
+    cues: ["莫里斯 + 韦伯","红砖即装饰","非对称","功能优先","哥特细节","真实诚挚"],
+    outline: [["时代","19世纪英国工艺美术运动。"],["人物","莫里斯与菲利普·韦伯。"],["创作","红砖、非对称、功能优先、哥特细节。"],["贡献","将功能、材料与整体设计统一，影响现代住宅设计。"]],
+    note: "2024名词解释红屋：写设计者、材料、布局、功能、意义；拉斐尔前派作为背景补充。",
+    exam: ["2024级617名词解释：红屋", "2024级617简答：法国新艺术运动代表人物及作品（关联自然与真实审美）"],
+    history: {
+      era: "19世纪英国工艺美术运动时期。",
+      people: "威廉·莫里斯与建筑师菲利普·韦伯；拉斐尔前派艺术群体。",
+      works: "红屋及其中家具、壁纸、地毯、灯具和餐具。",
+      contribution: "红屋以非对称布局、裸露红砖、功能优先和哥特细节，摆脱维多利亚繁复风格，把建筑、室内与家具统一设计，是工艺美术运动的代表作品。",
+      mnemonic: "红砖 + 非对称 + 功能 + 哥特 + 整体设计"
+    },
+    paragraphs: [
+      ["红屋特征","红屋由莫里斯与菲利普·韦伯合作设计，因外墙采用红砖得名。它采用非对称布局，表面没有多余粉饰，红砖既是建筑材料又是装饰，使结构完全裸露；设计强调功能性、实用性和舒适性。"],
+      ["设计意义","红屋部分采用哥特风格细节，摆脱维多利亚时期繁琐建筑特点，并从统一方案出发设计建筑和室内家具，体现“美与技术结合”的理念。拉斐尔前派反对保守主义，推崇中世纪哥特风格和真实、诚挚的艺术，为莫里斯和工艺美术运动提供了艺术土壤。"]
+    ]
+  },
+  {
+    id: "dh-voysey", num: "12", title: "查尔斯·沃赛",
+    trigger: "查尔斯·沃赛、果园住宅、橡木家具、清新简朴",
+    tags: ["设计史","第三章","人物"],
+    prompt: "四维串记：沃赛的身份、设计风格、代表作品与贡献是什么？",
+    keywords: ["查尔斯·沃赛","家具设计师","简单朴实","批量生产","清晰简朴","橡木","金属构件","为大众服务","果园住宅"],
+    cues: ["英国家具设计师","简单朴实","可批量生产","橡木 + 金属构件","果园住宅"],
+    outline: [["身份","英国工艺美术运动家具设计师。"],["风格","简单、朴实、清新、简练，较少中世纪重复。"],["作品","果园住宅、橡木椅。"],["贡献","更接近为大众服务，兼顾简朴与批量生产。"]],
+    note: "与莫里斯对比：沃赛装饰更少、更简朴，也更接近批量生产。",
+    exam: ["人物比较题：莫里斯与沃赛"],
+    history: {
+      era: "19世纪英国工艺美术运动。",
+      people: "查尔斯·沃赛，英国著名家具设计师。",
+      works: "果园住宅、橡木椅等。",
+      contribution: "家具设计简单朴实、清晰简朴，常用橡木和少量金属构件，较少重复中世纪风格，更易批量生产，也更接近“为大众服务”的工艺美术精神。",
+      mnemonic: "简朴 + 橡木 + 金属 + 可批量 + 果园住宅"
+    },
+    paragraphs: [
+      ["人物与风格","沃赛是英国工艺美术运动著名家具设计师。他最初从事建筑设计，后长期从事室内和家具设计。与莫里斯不同，他不盲目崇尚古风，家具简单、朴实、清新、简练，较少出现中世纪风格的重复。"],
+      ["作品与贡献","沃赛的家具大量采用橡木，偶尔使用黄铜、青铜或红铜构件，整体朴实无华、简练大方，也较容易批量生产。其设计更接近工艺美术运动“为大众服务”的精神，代表作有果园住宅和橡木椅。"]
+    ]
+  },
+  {
+    id: "dh-wright", num: "13", title: "弗兰克·赖特与有机建筑",
+    trigger: "赖特、草原小屋、有机建筑、沙利文、流水别墅",
+    tags: ["设计史","第三章","人物高频"],
+    prompt: "四维串记：赖特的身份、草原小屋特征、代表作品与有机建筑贡献是什么？",
+    keywords: ["弗兰克·赖特","美国现代建筑","沙利文","草原小屋","低矮","水平线","天然材料","有机建筑","流水别墅","古根海姆博物馆"],
+    cues: ["美国本土建筑开创者","沙利文","草原小屋","水平线","天然材料","有机建筑六原则"],
+    outline: [["身份","美国现代建筑与设计重要奠基人。"],["风格","草原小屋：低矮、宽阔、水平、自然材料。"],["作品","流水别墅、古根海姆博物馆、东京帝国饭店。"],["贡献","提出有机建筑六原则，影响现代建筑。"]],
+    note: "赖特是“四大现代建筑大师”之一，但设计路径不同于欧洲功能主义，强调环境与有机整体。",
+    exam: ["设计史人物高频题；与格罗皮乌斯、柯布西耶、密斯并称四大现代建筑大师"],
+    history: {
+      era: "19世纪末至20世纪美国现代建筑。",
+      people: "弗兰克·赖特，师承沙利文，美国本土建筑开创者。",
+      works: "流水别墅、古根海姆博物馆、东京帝国饭店；著作《有机建筑》。",
+      contribution: "形成草原小屋风格，强调水平线、天然材料与环境协调；提出有机建筑六原则，重视建筑、环境、材料和精神的整体统一。",
+      mnemonic: "草原 + 水平 + 天然 + 环境 + 有机整体"
+    },
+    paragraphs: [
+      ["身份与风格","赖特是美国现代建筑和设计的重要奠基人、美国本土建筑开创者，师承沙利文。其“草原小屋”风格具有低矮、宽阔的倾斜屋顶、开放室内和强调水平线的特点，主要使用天然材料，与环境协调，墙面平直、基本无装饰。"],
+      ["有机建筑与贡献","赖特提出有机建筑六原则：简练是艺术性检验标准；建筑风格应多样；建筑与环境协调；色彩与环境一致；表达材料本质；保持精神统一和完整。他重视传统再解释、环境因素、工业化材料和新技术，为现代建筑提供重要借鉴。"]
+    ]
+  },
+  {
+    id: "dh-art-nouveau", num: "14", title: "新艺术运动",
+    trigger: "新艺术运动、曲线、有机形态、东方风格、世纪之交",
+    tags: ["设计史","第三章","运动高频"],
+    prompt: "四维串记：新艺术运动的时间范围、地域差异、形式特征与历史位置是什么？",
+    keywords: ["19世纪末20世纪初","欧洲","艺术性","实用美术","曲线","有机风格","东方风格","浮世绘","铸铁和玻璃","承上启下"],
+    cues: ["19世纪末20世纪初","法国比利时偏艺术","德国奥地利偏实用","曲线有机","东方浮世绘","承上启下"],
+    outline: [["时间","19世纪末20世纪初，延续近30年。"],["地域","法国、比利时、西班牙偏艺术；德国、奥地利偏实用。"],["特征","手工、曲线、有机、东方影响、新材料。"],["位置","工艺美术运动的延续，预示现代主义到来。"]],
+    note: "新艺术不是单一风格而是运动；必须会与工艺美术运动比较。",
+    exam: ["2024级617简答：法国新艺术运动代表人物及代表作品"],
+    history: {
+      era: "19世纪末20世纪初，延续近30年，至第一次世界大战期间结束。",
+      people: "法国、比利时、西班牙、德国、奥地利、苏格兰等地的设计师群体。",
+      works: "建筑、家具、产品、首饰、服装、平面设计、书籍插图和绘画雕塑。",
+      contribution: "继承工艺美术运动对自然和手工艺的重视，又放弃传统装饰，转向曲线、有机形态和东方风格；探索铸铁、玻璃等新材料的美学价值，是连接工艺美术运动与现代主义的承上启下运动。",
+      mnemonic: "反传统装饰 + 曲线有机 + 东方影响 + 新材料 + 承上启下"
+    },
+    paragraphs: [
+      ["运动范围与特征","新艺术运动是19世纪末20世纪初在欧洲兴起的广泛设计运动。法国、比利时、西班牙倾向艺术性和装饰形式美感；德国、奥地利、斯堪的纳维亚倾向实用美术、理性结构和功能美。它强调手工艺但不完全反对工业化，放弃传统装饰，突出曲线和有机风格，并受日本浮世绘等东方风格影响。"],
+      ["历史位置","新艺术运动探索新材料和新技术的美学可能，把铸铁和玻璃纳入设计语言，是世纪之交承上启下的运动。它实质上是工艺美术运动在欧洲大陆的延续与传播，预示旧手工艺时代结束和现代主义时代到来。"]
+    ]
+  },
+  {
+    id: "dh-french-nouveau", num: "15", title: "法国新艺术运动与平面设计",
+    trigger: "谢列特、劳特累克、比亚兹莱、穆卡、红磨坊、吉斯蒙达",
+    tags: ["设计史","第三章","人物作品"],
+    prompt: "四维串记：法国新艺术运动的时间、代表设计师、代表作品与平面设计贡献是什么？",
+    keywords: ["谢列特","劳特累克","比亚兹莱","穆卡","红磨坊","吉斯蒙达","彩色石印","谢列特女","穆卡风格"],
+    cues: ["谢列特—谢列特女","劳特累克—红磨坊","比亚兹莱—莎乐美","穆卡—吉斯蒙达","彩色石印","海报平面"],
+    outline: [["时代","19世纪末20世纪初法国。"],["人物","谢列特、劳特累克、比亚兹莱、穆卡。"],["作品","《红磨坊》《莎乐美》《吉斯蒙达》等。"],["贡献","把新艺术风格带入海报和平面设计。"]],
+    note: "人物—国别—风格—作品必须配对，是真题常见考法。",
+    exam: ["2024级617简答：法国新艺术运动代表人物及代表作品"],
+    history: {
+      era: "19世纪末20世纪初的法国新艺术运动。",
+      people: "谢列特、劳特累克、比亚兹莱、穆卡。",
+      works: "谢列特《森林中的鹿》；劳特累克《红磨坊》海报；比亚兹莱《莎乐美》《月光下的女人》；穆卡《吉斯蒙达》海报、JOB香烟盒。",
+      contribution: "把新艺术风格带入海报、插图和商业平面设计，形成流动线条、平涂色彩、装饰性字体和鲜明女性形象，推动现代视觉传达设计发展。",
+      mnemonic: "谢列特女 / 红磨坊 / 莎乐美 / 穆卡风格"
+    },
+    paragraphs: [
+      ["法国平面设计群体","谢列特是法国新艺术平面设计开创人，讲究流畅线条、柔和色彩和充满动感的构图，创造“谢列特女”形象；劳特累克善用侧影、粗线条和平涂色彩，代表作《红磨坊》海报；比亚兹莱受日本绘画影响，以水墨、黑白和留白形成纤细清晰风格，代表作《莎乐美》《月光下的女人》。"],
+      ["穆卡","穆卡是法国新艺术平面设计代表人物，因舞台剧《吉斯蒙达》海报一举成名。其风格被称为“穆卡风格”，常用彩色粉笔、美丽少女主题和曲线有机形态，装饰性极强，被认为是20世纪初法国“美好时代”的视觉写照。"]
+    ]
+  },
+  {
+    id: "dh-paris-groups", num: "16", title: "新艺术之家、现代之家与六人集团",
+    trigger: "新艺术之家、现代之家、六人集团、萨穆尔·宾、吉马德",
+    tags: ["设计史","第三章","组织团体"],
+    prompt: "四维串记：巴黎三个新艺术设计组织的创办者、主张、代表与贡献是什么？",
+    keywords: ["新艺术之家","萨穆尔·宾","现代之家","六人集团","回归自然","植物纹样","吉马德","巴黎地铁入口"],
+    cues: ["新艺术之家—宾","现代之家—格拉斐","六人集团—吉马德","自然主义","植物曲线","巴黎地铁"],
+    outline: [["新艺术之家","1895年萨穆尔·宾创办，法国新艺术运动发祥地。"],["现代之家","1898年格拉斐创办，自然主义与东方风格。"],["六人集团","1898年成立，强调回归自然和植物曲线。"],["代表","吉马德设计巴黎地铁入口。"]],
+    note: "三家组织容易混：新艺术之家=宾；现代之家=格拉斐；六人集团=吉马德最杰出。",
+    exam: ["法国新艺术运动组织与人物匹配题"],
+    history: {
+      era: "19世纪末法国巴黎新艺术运动。",
+      people: "萨穆尔·宾、朱利斯·迈耶·格拉斐、吉马德及六人集团。",
+      works: "新艺术之家设计事务所、现代之家展示中心、巴黎地铁入口。",
+      contribution: "通过事务所、展览和设计团体推广新艺术风格，把自然主义、植物纹样和东方艺术引入家具、室内和公共设施，使巴黎成为新艺术运动的重要中心。",
+      mnemonic: "宾—新艺术之家 / 格拉斐—现代之家 / 吉马德—六人集团"
+    },
+    paragraphs: [
+      ["新艺术之家与现代之家","1895年出版商人萨穆尔·宾在巴黎开办“新艺术之家”设计事务所，法国因此被视为新艺术运动发祥地。其设计强调回到自然、植物纹样和有机形态。1898年格拉斐开设“现代之家”，主要从事新艺术家具设计与制作，风格具有自然主义和东方风格，虽只存在4年，但推动力较大。"],
+      ["六人集团与吉马德","六人集团成立于1898年，是巴黎新艺术运动的重要设计组织，强调自然主义、回归自然、植物纹和曲线。最杰出代表是吉马德，他为巴黎市政府设计了一百多个地铁入口，以植物枝干、藤蔓和海贝形态充分发挥自然主义特点，被称为“地铁风格”。"]
+    ]
+  },
+  {
+    id: "dh-velde", num: "17", title: "亨利·凡·德·威尔德",
+    trigger: "威尔德、比利时新艺术、功能第一、魏玛工艺美术学校、科隆论战",
+    tags: ["设计史","第三章","人物必背"],
+    prompt: "四维串记：威尔德的身份、设计主张、代表作品与历史贡献是什么？",
+    keywords: ["比利时新艺术","设计理论家","功能第一","艺术与技术结合","材料天然本性","魏玛工艺美术学校","科隆论战","花园椅","钢琴凳"],
+    cues: ["比利时核心人物","功能第一","支持机械","设计与艺术结合","魏玛学校","科隆论战"],
+    outline: [["身份","比利时新艺术核心人物、设计理论家。"],["主张","功能第一、艺术与技术结合、保持材料本性。"],["作品","花园椅、钢琴凳、根特大学图书馆。"],["贡献","连接新艺术与现代主义，影响德国现代设计。"]],
+    note: "2024简答重点：身份、功能原则、魏玛教育、科隆论战与局限。",
+    exam: ["2024级617简答：威尔德的设计贡献"],
+    history: {
+      era: "19世纪末20世纪初，比利时与德国现代设计转型期。",
+      people: "亨利·凡·德·威尔德，比利时新艺术核心人物、设计理论家和教育家。",
+      works: "花园椅、钢琴凳、比利时根特大学图书馆；魏玛工艺美术学校。",
+      contribution: "支持新技术，主张艺术与技术结合和“功能第一”；强调材料天然本性、结构合理、材料准确、程序明晰；参与创立魏玛工艺美术学校和德意志工作同盟，成为现代设计先驱。",
+      mnemonic: "功能第一 + 艺术技术结合 + 魏玛 + 科隆论战"
+    },
+    paragraphs: [
+      ["身份与主张","威尔德是比利时新艺术运动核心人物、19世纪末20世纪初杰出的设计师与理论家。他肯定机械，支持新技术，主张艺术与技术结合，明确提出“功能第一”，反对纯装饰主义，并强调保持材料天然本性、设计结构合理、材料运用准确、工作程序明晰。"],
+      ["贡献与局限","威尔德在比利时从事新艺术家具和室内设计，在德国创立魏玛工艺美术学校，并参与现代设计运动，是德意志工作同盟创始人之一。他的局限是不赞成标准化，这成为后来与穆特修斯“科隆论战”的焦点。"]
+    ]
+  },
+  {
+    id: "dh-horta", num: "18", title: "维克多·霍塔与二十人小组",
+    trigger: "霍塔、塔塞旅馆、比利时线条、二十人小组、自由美学社",
+    tags: ["设计史","第三章","人物团体"],
+    prompt: "四维串记：霍塔的身份、风格特征、代表作品与团体贡献是什么？",
+    keywords: ["维克多·霍塔","自然曲线","现代材料","形式与功能统一","比利时线条","鞭线","塔塞旅馆","二十人小组","自由美学社"],
+    cues: ["自然曲线 + 现代材料","比利时线条/鞭线","塔塞旅馆","二十人小组","自由美学社"],
+    outline: [["人物","比利时新艺术建筑代表霍塔。"],["风格","自然曲线与铸铁结合，形式功能统一。"],["作品","塔塞旅馆。"],["团体","二十人小组改组为自由美学社，推动现代设计。"]],
+    note: "霍塔与威尔德都是比利时新艺术核心，但霍塔偏建筑空间与曲线，威尔德偏理论与功能主义。",
+    exam: ["比利时新艺术运动人物与作品题"],
+    history: {
+      era: "19世纪末比利时新艺术运动。",
+      people: "维克多·霍塔；二十人小组与自由美学社。",
+      works: "塔塞旅馆；布鲁塞尔新艺术建筑与室内。",
+      contribution: "以自然曲线结合现代材料，创造“比利时线条/鞭线”，实现形式与功能统一；通过二十人小组和自由美学社传播现代艺术与设计思想。",
+      mnemonic: "霍塔—曲线—铸铁—塔塞旅馆 / 二十人—自由美学社"
+    },
+    paragraphs: [
+      ["霍塔的设计","霍塔是比利时新艺术建筑杰出代表，摒弃新古典主义风格，开创自然曲线与现代材料结合的新建筑风范。他注重建筑时代性，并在形态和室内装饰上实现形式与功能统一，擅用葡萄枝蔓般缠绕扭转的“比利时线条”或“鞭线”。代表作品塔塞旅馆利用铸铁可锻铸特性，形成流畅曲线、协调色彩和开阔通透空间。"],
+      ["二十人小组","二十人小组是19世纪末受新艺术思想影响组成的比利时前卫小组，通过展览使公众接触现代艺术思想。设计师威尔德成为领袖，组织逐步转向实用美术并改名为“自由美学社”，主张自然纹样、艺术与技术结合，推动比利时现代设计理论发展。"]
+    ]
+  },
+  {
+    id: "dh-gaudi", num: "19", title: "安东尼·高迪",
+    trigger: "高迪、西班牙新艺术、巴塞罗那、曲线、有机风格",
+    tags: ["设计史","第三章","人物必背"],
+    prompt: "四维串记：高迪的身份、三个阶段、代表作品与设计史贡献是什么？",
+    keywords: ["安东尼·高迪","西班牙","巴塞罗那","反功能主义","浪漫主义","多元混合","阿拉伯摩尔风格","新哥特式","有机风格","巴塞罗那住宅"],
+    cues: ["西班牙建筑家","曲线才是自然","三阶段：摩尔—新哥特—有机","巴塞罗那住宅转折","精神力量"],
+    outline: [["身份","西班牙新艺术与塑性建筑代表。"],["三阶段","阿拉伯摩尔、新哥特、有机风格。"],["作品","圣特雷萨斯修道院、卡勒基修道院、巴塞罗那住宅。"],["贡献","以曲线和有机形态创造独特建筑语言。"]],
+    note: "2025真题重点：反功能主义、曲线、三阶段和巴塞罗那住宅转折。",
+    exam: ["2025级617简答：安东尼·高迪的设计特点"],
+    history: {
+      era: "19世纪末20世纪初西班牙新艺术运动。",
+      people: "安东尼·高迪，西班牙建筑师、塑性建筑流派代表人物。",
+      works: "圣特雷萨斯修道院、卡勒基修道院、巴塞罗那住宅等。",
+      contribution: "以反功能主义立场追求建筑精神力量和纯粹形式，拒绝直线、强调曲线与自然；经历阿拉伯摩尔、新哥特与有机风格三阶段，形成高度个人化、象征性的建筑语言。",
+      mnemonic: "西班牙 + 巴塞罗那 + 曲线 + 三阶段 + 有机象征"
+    },
+    paragraphs: [
+      ["身份与风格","高迪是西班牙著名建筑师、新艺术运动和塑性建筑流派杰出代表，被称为巴塞罗那最前卫、最疯狂的建筑艺术家。他反功能主义，追求建筑精神力量和纯粹形式，是充满幻想的浪漫主义建筑家；拒绝直线，认为直线是人为的，曲线才是自然的。"],
+      ["三个阶段与影响","高迪经历阿拉伯摩尔风格、新哥特式与新艺术混合风格、有机风格三个阶段。巴塞罗那住宅是风格转折点，使其设计更加人性化，不再单纯模仿时尚。他对曲线的精妙运用创造了最奇妙、最富观感的建筑，对现代设计产生深远影响。"]
+    ]
+  },
+  {
+    id: "dh-mackintosh", num: "20", title: "格拉斯哥四人组与麦金托什",
+    trigger: "格拉斯哥四人组、麦金托什、高背椅、纵横直线、苏格兰新艺术",
+    tags: ["设计史","第三章","人物团体"],
+    prompt: "四维串记：格拉斯哥四人组的成员、形式语言、代表作品与历史贡献是什么？",
+    keywords: ["格拉斯哥四人组","麦金托什","纵横直线","长直线","几何造型","黑白中性色","高背椅","格拉斯哥艺术学院","机械化","批量化"],
+    cues: ["麦金托什 + 麦克内尔 + 麦当娜姐妹","纵横直线","黑白中性","高背椅","格拉斯哥艺术学院","机械化批量化"],
+    outline: [["团体","麦金托什、麦克内尔、麦当娜姐妹。"],["风格","纵横直线、几何形态、黑白中性色、平衡装饰。"],["作品","高背椅、格拉斯哥艺术学院。"],["贡献","为机械化、批量化现代主义奠定形式基础。"]],
+    note: "麦金托什是联系新艺术与现代主义的关键过渡人物。",
+    exam: ["设计史人物与团体高频题"],
+    history: {
+      era: "19世纪90年代至20世纪初苏格兰新艺术运动。",
+      people: "麦金托什、麦克内尔、麦当娜姐妹组成格拉斯哥四人组。",
+      works: "麦金托什高背椅、格拉斯哥艺术学院、室内与家具设计。",
+      contribution: "以纵横直线、长直线、几何造型、黑白中性色和装饰平衡形成苏格兰新艺术风格；肯定机械和批量生产，为现代主义形式奠定基础。",
+      mnemonic: "四人组 + 纵横直线 + 黑白 + 高背椅 + 批量生产"
+    },
+    paragraphs: [
+      ["团体与风格","格拉斯哥四人组由麦金托什、麦克内尔和麦当娜姐妹组成，是苏格兰新艺术运动的重要团体。他们以纵横直线为基本造型元素，尤其强调长直线，结合简单几何形和有机形态，讲究黑白中性色、平衡和装饰性表现。"],
+      ["麦金托什与贡献","麦金托什是英国重要产品与建筑设计师、新艺术运动代表人物，也是联系新艺术运动与现代主义运动的关键过渡人物。他肯定机器和工业，使用柔软曲线与坚硬高雅竖线交替的形式，代表作品有高背椅和格拉斯哥艺术学院，为机械化、批量化现代主义奠定形式基础。"]
+    ]
+  },
+  {
+    id: "dh-vienna", num: "21", title: "维也纳分离派与奥托·瓦格纳",
+    trigger: "维也纳分离派、瓦格纳、功能第一、现代建筑、斯托克列宫",
+    tags: ["设计史","第三章","人物运动"],
+    prompt: "四维串记：维也纳分离派的主张、代表人物、代表作品与历史贡献是什么？",
+    keywords: ["维也纳分离派","为时代的艺术为艺术的自由","简洁明快","简单直线","功能主义","有机形态","奥托·瓦格纳","功能第一","现代建筑"],
+    cues: ["分离派口号","简洁明快","直线与几何","瓦格纳","功能第一装饰第二","斯托克列宫"],
+    outline: [["团体","维也纳分离派，主张与正统艺术分离。"],["风格","简洁明快、简单直线、几何与有机形态。"],["人物","瓦格纳、霍夫曼等。"],["贡献","推动新艺术向功能主义和现代建筑过渡。"]],
+    note: "瓦格纳的“功能第一、装饰第二”和《现代建筑》是关键得分点。",
+    exam: ["2024级617名词解释：维也纳分离派"],
+    history: {
+      era: "19世纪末20世纪初奥地利维也纳。",
+      people: "维也纳分离派；奥托·瓦格纳、霍夫曼等。",
+      works: "斯托克列宫、迈奥里卡住宅、维也纳地铁站、孔雀椅。",
+      contribution: "以“为时代的艺术，为艺术的自由”为口号，追求简洁明快、直线和几何形式，把功能主义与有机形态结合；瓦格纳提出功能第一、装饰第二，推动新艺术向现代建筑过渡。",
+      mnemonic: "分离派 + 简洁直线 + 瓦格纳 + 功能第一 + 斯托克列宫"
+    },
+    paragraphs: [
+      ["维也纳分离派","奥地利新艺术运动由维也纳分离派发起，成员包括先锋艺术家、建筑师和设计师。他们主张与正统设计和艺术分离，口号是“为时代的艺术，为艺术的自由”。风格造型简洁明快，注重简单直线、几何外形与自然形态吻合，是功能主义与有机形态的结合，但本质上仍未完全摆脱新艺术风格。"],
+      ["瓦格纳","瓦格纳是维也纳分离派领军人物、现代建筑先驱，被称为“分离派运动之父”。1895年创办《现代建筑》，主张建筑设计为现代生活服务，以促进交流、提供方便为目的。他提出“功能第一、装饰第二”，采用直线、简单几何和新材料，代表作有迈奥里卡住宅、维也纳地铁站和孔雀椅。"]
+    ]
+  },
+  {
+    id: "dh-behrens", num: "22", title: "德国青年风格与彼得·贝伦斯",
+    trigger: "德国青年风格、贝伦斯、AEG、企业形象、现代建筑",
+    tags: ["设计史","第三章","人物运动"],
+    prompt: "四维串记：德国青年风格的主张、贝伦斯的代表作品、设计思想与历史贡献是什么？",
+    keywords: ["青年风格","青年杂志","几何造型","直线","视觉秩序","彼得·贝伦斯","AEG","企业形象标志","透平机工厂","现代设计之父"],
+    cues: ["青年风格","几何直线","贝伦斯","AEG 企业形象","透平机工厂","培养现代主义大师"],
+    outline: [["运动","德国青年风格，从自然主义转向几何直线。"],["人物","彼得·贝伦斯，德国现代设计之父。"],["作品","AEG 标志、透平机工厂、AEG 电水壶。"],["贡献","开创 CI 设计，培养柯布西耶、格罗皮乌斯、密斯。"]],
+    note: "贝伦斯是连接新艺术、德国现代设计与包豪斯的重要桥梁。",
+    exam: ["设计史人物高频题；企业形象设计与现代建筑题"],
+    history: {
+      era: "19世纪末20世纪初德国青年风格与早期现代主义。",
+      people: "德国青年风格艺术家；彼得·贝伦斯。",
+      works: "AEG 企业形象标志、AEG 透平机工厂、AEG 电水壶。",
+      contribution: "青年风格从自然主义曲线转向几何造型、直线和视觉秩序；贝伦斯以功能出发、抛弃繁琐装饰，开创企业形象策划，设计现代建筑典范，并培养柯布西耶、格罗皮乌斯、密斯等现代主义大师。",
+      mnemonic: "青年风格 + AEG + CI + 透平机工厂 + 三大师"
+    },
+    paragraphs: [
+      ["德国青年风格","德国新艺术运动称“青年风格”，以《青年》杂志为中心，希望通过手工艺传统恢复挽救颓败的当代设计。它最初具有自然主义色彩，后逐步摆脱曲线装饰，转向简单几何造型和直线，追求简洁规整的视觉秩序。代表作有奥托·艾克曼《五只天鹅》、贝伦斯透平机工厂和 AEG 电水壶。"],
+      ["彼得·贝伦斯","贝伦斯是德国现代设计奠基人、德国青年风格代表人物、德国现代设计之父。他为 AEG 设计世界上第一个企业形象标志和透平机工厂，后者被誉为第一座真正的“现代建筑”。他的设计从功能出发，抛弃繁琐装饰，采用新技术新材料和标准化批量生产，开创 CI 设计，并培养柯布西耶、格罗皮乌斯、密斯等现代主义大师。"]
+    ]
+  }
+];
+
+DATA.push({
+  id: "designhistory",
+  short: "设计史",
+  title: "世界现代设计史 · 第三章前标注重点",
+  accent: "history",
+  cards: DESIGN_HISTORY_CARDS
+});
+
+
 const POLITICAL_DECK_IDS = ["mayuan", "sishu", "mzsg", "newthought", "policy"];
 const CUSTOM_DECK_ID = "custom";
 const STORAGE_KEY = "kaoyan-zhengzhi-memo-v1";
@@ -1912,7 +2456,7 @@ function rebuildCatalog() {
   CARD_MAP = new Map(ALL_CARDS.map(card => [card.id, card]));
 }
 let view = {  deckFilter: "all", statusFilter: "all", search: "", currentCardId: null, mode: "full", clozeLevel: "standard", translationVisible: false,
-  maskRevealed: false, revealedBlanks: new Set(), dictationResult: null, dictationStarted: false,
+  maskRevealed: false, revealedBlanks: new Set(), historyRevealed: new Set(), dictationResult: null, dictationStarted: false,
   dictationTimerStartedAt: null, dictationTimerAccumulated: 0, dictationTimerRunning: false, dictationTimerInterval: null,
   timerRunning: true, timerStartedAt: null,
   timerBaseSeconds: 0, timerInterval: null
@@ -2228,7 +2772,113 @@ function clearDictation() {
   renderStudyContent(card);
   startDictationTimer();
   requestAnimationFrame(() => { const input = document.getElementById("dictationInput"); if (input) input.focus(); });
-}function renderDashboard() {
+}function supportsFourDimensionMode(card) {
+  return Boolean(card && (card.history || card.deckId === "ux"));
+}
+function getFourDimensionConfig(card) {
+  if (!card) return null;
+  if (card.history) {
+    return {
+      kicker: `四维串记 · ${card.tags?.[1] || "设计史"}`,
+      intro: "先根据标题回忆四个维度，再逐个揭晓。不要只背定义，要把“时代—人物—作品—贡献”串成一条线。",
+      dimensions: [
+        ["era", "01 时代 / 运动", card.history.era],
+        ["people", "02 人物 / 标签", card.history.people],
+        ["works", "03 核心创作", card.history.works],
+        ["contribution", "04 贡献 / 影响", card.history.contribution]
+      ],
+      mnemonic: card.history.mnemonic,
+      exam: card.exam || ["设计史人物、作品与风格匹配题"]
+    };
+  }
+  if (card.deckId === "ux") {
+    return {
+      kicker: `四维串记 · ${(card.tags || []).find(tag => tag !== "★★★必背") || "用户研究"}`,
+      intro: "先根据方法名称回忆定义、核心内容、关键词和答题落点，再逐个揭晓。重点训练“是什么—怎么做—何时用—怎么答”。",
+      dimensions: [
+        ["context", "01 定义 / 定位", card.paragraphs?.[0]?.[1] || card.trigger],
+        ["method", "02 核心方法 / 内容", card.paragraphs?.[1]?.[1] || card.paragraphs?.[0]?.[1] || ""],
+        ["keywords", "03 关键词 / 结构", card.keywords.join(" · ")],
+        ["answer", "04 答题落点", `${card.note}${card.cues?.length ? ` 记忆线：${card.cues.join(" → ")}` : ""}`]
+      ],
+      mnemonic: card.cues?.join(" → ") || card.note,
+      exam: ["699设计理论基础：定义、方法比较、适用场景与综合分析题"]
+    };
+  }
+  return null;
+}
+function renderHistoryMode(card) {
+  const config = getFourDimensionConfig(card);
+  if (!config) return "";
+  const allRevealed = config.dimensions.every(([key]) => view.historyRevealed.has(key));
+  return `<div class="history-mode">
+    <div class="history-intro"><span>${escapeHtml(config.kicker)}</span><h3>${escapeHtml(card.title)}</h3><p>${escapeHtml(config.intro)}</p></div>
+    <div class="history-grid">${config.dimensions.map(([key, label, value]) => {
+      const revealed = view.historyRevealed.has(key);
+      return `<button class="history-dim${revealed ? " revealed" : ""}" data-history-key="${key}" aria-expanded="${revealed}"><span class="history-dim-label">${label}</span><span class="history-dim-content">${revealed ? escapeHtml(value) : "点击回忆并揭晓"}</span></button>`;
+    }).join("")}</div>
+    <div class="history-mnemonic"><strong>串记：</strong>${allRevealed ? escapeHtml(config.mnemonic) : "四个维度全部揭晓后显示速记串联。"}</div>
+    <div class="history-exam"><div class="history-exam-label">真题 / 考法连接</div><div class="history-exam-chips">${config.exam.map(item => `<span class="history-exam-chip">${escapeHtml(item)}</span>`).join("")}</div></div>
+    <div class="history-actions"><button class="btn btn-small" id="historyRevealAll">全部揭晓</button></div>
+  </div>`;
+}
+function revealAllHistory() {
+  const card = CARD_MAP.get(view.currentCardId);
+  const config = getFourDimensionConfig(card);
+  if (!config) return;
+  config.dimensions.forEach(([key]) => view.historyRevealed.add(key));
+  renderStudyContent(card);
+}
+function historyTimelineHtml() {
+  const nodes = [
+    ["17—18世纪", "巴洛克 / 洛可可", "dh-baroque-rococo"],
+    ["1760s—1840s", "工业革命", "dh-industrial-revolution"],
+    ["18世纪60年代起", "新古典 / 维多利亚", "dh-neoclassic-victorian"],
+    ["1851", "水晶宫博览会", "dh-crystal-palace"],
+    ["1860s起", "工艺美术运动", "dh-arts-crafts"],
+    ["1880s—1914", "新艺术运动", "dh-art-nouveau"],
+    ["19世纪末—20世纪初", "现代主义前夜", "dh-behrens"]
+  ];
+  return `<div class="history-overview-block"><div class="overview-kicker">TIME LINE</div><h3>设计史时间线</h3><div class="timeline-track">${nodes.map(([time, title, id], index) => `<button class="timeline-node" data-history-jump="${id}"><span class="timeline-dot">${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(time)}</strong><span>${escapeHtml(title)}</span></button>`).join("")}</div></div>`;
+}
+function historyMindMapHtml() {
+  const branches = [
+    ["设计概念与伦理", [["拉姆斯", "dh-rams"], ["巴巴纳克", "dh-papanek"]]],
+    ["工业革命与装饰风格", [["韦奇伍德", "dh-wedgwood"], ["巴洛克 / 洛可可", "dh-baroque-rococo"], ["水晶宫", "dh-crystal-palace"]]],
+    ["工艺美术运动", [["拉斯金", "dh-ruskin"], ["莫里斯", "dh-morris"], ["红屋", "dh-red-house-prb"], ["沃赛", "dh-voysey"]]],
+    ["新艺术运动", [["法国平面", "dh-french-nouveau"], ["巴黎团体", "dh-paris-groups"], ["威尔德", "dh-velde"], ["霍塔", "dh-horta"], ["高迪", "dh-gaudi"], ["麦金托什", "dh-mackintosh"]]],
+    ["走向现代主义", [["赖特", "dh-wright"], ["维也纳分离派", "dh-vienna"], ["德国青年风格 / 贝伦斯", "dh-behrens"]]]
+  ];
+  return `<div class="history-overview-block"><div class="overview-kicker">MIND MAP</div><h3>人物—运动—作品关系图</h3><div class="mindmap-core">现代设计史 · 前三章</div><div class="mindmap-branches">${branches.map(([title, items]) => `<div class="mindmap-branch"><h4>${escapeHtml(title)}</h4><div class="mindmap-nodes">${items.map(([label, id]) => `<button data-history-jump="${id}">${escapeHtml(label)}</button>`).join("")}</div></div>`).join("")}</div></div>`;
+}
+function userResearchWorkflowHtml() {
+  const nodes = [
+    ["01", "定义研究问题", "ux-ucd"],
+    ["02", "选择研究方法", "ux-qual-quant"],
+    ["03", "访谈与观察", "ux-interview"],
+    ["04", "组织研究数据", "ux-analysis"],
+    ["05", "构建用户模型", "ux-persona"],
+    ["06", "表达体验洞察", "ux-visual"],
+    ["07", "测试与迭代", "ux-usability-eval"]
+  ];
+  return `<div class="history-overview-block"><div class="overview-kicker">RESEARCH FLOW</div><h3>用户研究流程</h3><div class="timeline-track">${nodes.map(([num, title, id]) => `<button class="timeline-node" data-history-jump="${id}"><span class="timeline-dot">${num}</span><span>${escapeHtml(title)}</span></button>`).join("")}</div></div>`;
+}
+function userResearchMindMapHtml() {
+  const branches = [
+    ["基础理论与体验", [["UCD", "ux-ucd"], ["交互原则", "ux-principles"], ["ISO 9241", "ux-iso"], ["UX 定义", "ux-definition"], ["设计思考", "ux-dt"], ["蜂窝模型", "ux-honeycomb"], ["桑德斯地图", "ux-sanders"]]],
+    ["研究方法", [["观察法", "ux-observation"], ["访谈法", "ux-interview"], ["出声思维", "ux-tap"], ["人种志", "ux-ethno"], ["AEIOU", "ux-aeiou"]]],
+    ["用户与需求", [["冰山模型", "ux-iceberg"], ["人物角色", "ux-persona"], ["市场调研", "ux-market"], ["定性与定量", "ux-qual-quant"]]],
+    ["评价与分析", [["可用性", "ux-usability"], ["可用性评估", "ux-usability-eval"], ["定量分析", "ux-analysis"], ["体验图与定位图", "ux-visual"]]],
+    ["热点与应用", [["故事板与进化图", "ux-story-evolution"], ["同理心设计", "ux-empathy"], ["感性工学", "ux-kansei"], ["叙事医学", "ux-narrative"], ["HPSS", "ux-hpss"]]]
+  ];
+  return `<div class="history-overview-block"><div class="overview-kicker">KNOWLEDGE MAP</div><h3>用户研究知识地图</h3><div class="mindmap-core">用户研究与体验设计</div><div class="mindmap-branches">${branches.map(([title, items]) => `<div class="mindmap-branch"><h4>${escapeHtml(title)}</h4><div class="mindmap-nodes">${items.map(([label, id]) => `<button data-history-jump="${id}">${escapeHtml(label)}</button>`).join("")}</div></div>`).join("")}</div></div>`;
+}
+function renderHistoryOverview() {
+  if (view.deckFilter === "designhistory") return `<section class="history-overview">${historyTimelineHtml()}${historyMindMapHtml()}</section>`;
+  if (view.deckFilter === "ux") return `<section class="history-overview">${userResearchWorkflowHtml()}${userResearchMindMapHtml()}</section>`;
+  return "";
+}
+function renderDashboard() {
   const today = ensureToday();
   const counts = { new: 0, fuzzy: 0, mastered: 0 };
   ALL_CARDS.forEach(card => { counts[getStatus(card.id)] += 1; });
@@ -2271,7 +2921,7 @@ function clearDictation() {
   if (view.deckFilter === "all" || (!POLITICAL_DECK_IDS.includes(view.deckFilter) && view.deckFilter !== "politics")) {
     allSections += otherDecks.map(renderDeckSection).join("");
   }
-  sections.innerHTML = allSections;
+  sections.innerHTML = renderHistoryOverview() + allSections;
 }
 function openStudy(id) {
   const card = CARD_MAP.get(id);
@@ -2279,7 +2929,7 @@ function openStudy(id) {
   stopSpeech();
   if (view.mode === "dictation" && view.currentCardId) exitDictationSession();
   if (view.currentCardId && view.currentCardId !== id) flushTimer(false);
-  view.currentCardId = id; view.mode = "full"; view.maskRevealed = false; view.revealedBlanks = new Set(); view.dictationResult = null; view.dictationStarted = false; view.translationVisible = false; delete state.drafts[id]; resetDictationTimer();
+  view.currentCardId = id; view.mode = supportsFourDimensionMode(card) ? "history" : "full"; view.maskRevealed = false; view.revealedBlanks = new Set(); view.historyRevealed = new Set(); view.dictationResult = null; view.dictationStarted = false; view.translationVisible = false; delete state.drafts[id]; resetDictationTimer();
   view.timerRunning = true; state.lastCard = id;
   ensureToday().reviewed = [...new Set([...ensureToday().reviewed,id])];
   saveState();
@@ -2306,6 +2956,7 @@ function renderStudy() {
   document.getElementById("questionBox").className = `question-box ${card.deckId !== "mayuan" ? card.deckId : ""}`;
   document.querySelectorAll(".mode-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.mode === view.mode));
   document.querySelectorAll(".status-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.status === status));
+  document.getElementById("historyModeBtn").classList.toggle("hidden", !supportsFourDimensionMode(card));
   const levelBar = document.getElementById("clozeLevelBar");
   levelBar.classList.toggle("hidden", view.mode !== "cloze");
   levelBar.classList.toggle("sishu", card.deckId === "sishu");
@@ -2356,6 +3007,10 @@ function toggleTranslation() {
 function renderStudyContent(card) {
   const content = document.getElementById("studyContent");
   syncClozeControls();
+  if (view.mode === "history") {
+    content.innerHTML = renderHistoryMode(card);
+    return;
+  }
   if (view.mode === "dictation") {
     content.innerHTML = renderDictation(card);
     return;
@@ -2429,9 +3084,9 @@ function startDictationSession() {
   startDictationTimer();
 }
 function changeMode(mode) {
-  if (!["full","cloze","dictation","mask","outline"].includes(mode)) return;
+  if (!["full","cloze","dictation","mask","outline","history"].includes(mode)) return;
   if (view.mode === "dictation" && mode !== "dictation") exitDictationSession();
-  view.mode = mode; view.maskRevealed = false;
+  view.mode = mode; view.maskRevealed = false; if (mode === "history") view.historyRevealed = new Set();
   if (mode !== "cloze") view.revealedBlanks = new Set();
   renderStudy();
 }
@@ -2606,6 +3261,16 @@ function resetProgress() {
   saveState(); renderDashboard(); if (view.currentCardId) renderStudy(); toast("背诵进度已清空");
 }
 document.addEventListener("click", event => {
+  const historyJump = event.target.closest("[data-history-jump]");
+  if (historyJump) { openStudy(historyJump.dataset.historyJump); return; }
+  const historyDim = event.target.closest("[data-history-key]");
+  if (historyDim) {
+    const key = historyDim.dataset.historyKey;
+    if (view.historyRevealed.has(key)) view.historyRevealed.delete(key); else view.historyRevealed.add(key);
+    renderStudyContent(CARD_MAP.get(view.currentCardId));
+    return;
+  }
+  if (event.target.closest("#historyRevealAll")) { revealAllHistory(); return; }
   const deleteBtn = event.target.closest("[data-delete-card]");
   if (deleteBtn) { deleteCustomCard(deleteBtn.dataset.deleteCard); return; }
   const openBtn = event.target.closest("[data-open-card]");
@@ -2806,14 +3471,15 @@ function syncCatalogMeta() {
   const politicsCount = ["mayuan", "sishu", "mzsg", "newthought", "policy"].reduce((sum, id) => sum + (counts[id] || 0), 0);
   const uxCount = counts.ux || 0;
   const englishCount = counts.english || 0;
-  document.getElementById("brandSub").textContent = `政治 ${politicsCount} 篇 · 用户研究 ${uxCount} 篇 · 英语作文 ${englishCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
+  const historyCount = counts.designhistory || 0;
+  document.getElementById("brandSub").textContent = `政治 ${politicsCount} 篇 · 用户研究 ${uxCount} 篇 · 英语作文 ${englishCount} 篇 · 设计史 ${historyCount} 篇 · 共 ${ALL_CARDS.length} 篇`;
   document.getElementById("heroLead").textContent = `把政治分析题、用户研究高频与英语作文模板拆成“触发词 → 答题骨架 → 完整表述”。先看提示复述，再揭晓对照，最后给自己评级。`;
   document.getElementById("sideTotal").textContent = `${ALL_CARDS.length} 篇`;
   document.querySelector(".hero").dataset.count = String(ALL_CARDS.length);
   document.querySelector('[data-deck-filter="all"] .nav-count').textContent = String(ALL_CARDS.length);
   const politicsBadge = document.querySelector('[data-deck-filter="politics"] .nav-count');
   if (politicsBadge) politicsBadge.textContent = String((counts.mayuan || 0) + (counts.sishu || 0) + (counts.mzsg || 0) + (counts.newthought || 0) + (counts.policy || 0));
-  ["mayuan", "sishu", "mzsg", "newthought", "policy", "ux", "english", "custom"].forEach(id => {
+  ["mayuan", "sishu", "mzsg", "newthought", "policy", "ux", "english", "designhistory", "custom"].forEach(id => {
     const badge = document.querySelector(`[data-deck-filter="${id}"] .nav-count`);
     if (badge) badge.textContent = String(counts[id] || 0);
   });
