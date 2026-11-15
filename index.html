@@ -2772,7 +2772,35 @@ function clearDictation() {
   renderStudyContent(card);
   startDictationTimer();
   requestAnimationFrame(() => { const input = document.getElementById("dictationInput"); if (input) input.focus(); });
-}function supportsFourDimensionMode(card) {
+}const UX_COMPACT = {
+  "ux-ucd": { definition: "以用户为中心、让用户参与全过程，并依据用户评价持续迭代的设计哲学与方法。", core: "用户深度参与；合理分配人与技术功能；迭代设计；多学科协同。", answer: "设计决策从真实用户需求出发，优化产品适配用户。" },
+  "ux-principles": { definition: "诺曼七原则与施耐德曼黄金八法则，是交互可用性的基础准则。", core: "诺曼：降记忆、简任务、强可视、自然匹配、限制因素、容错、标准化。黄金八法：一致、快捷、反馈、撤销、控制权、降低记忆。", answer: "减少认知负担，提高操作效率和容错能力。" },
+  "ux-iso": { definition: "ISO 9241-210 是规定以人为中心设计活动与用户体验定义的国际标准。", core: "四活动：识别使用环境；梳理用户需求；产出方案；用户评估迭代。", answer: "四项活动不是一次性流程，而是循环迭代。" },
+  "ux-dt": { definition: "以人为核心、融合多学科解决创新问题的方法论。", core: "平衡人的需求、技术可行性和商业可持续性；D-school 六步：理解、观察、定义、概念、原型、测试。", answer: "流程非线性，通过反复迭代降低创新风险。" },
+  "ux-definition": { definition: "用户使用或预期使用产品、系统、服务时产生的全部感知与主观反应。", core: "主观性、动态性、情境性；覆盖使用前、中、后；受系统、用户和环境共同影响。", answer: "UX 关注整体感受，不只关注界面是否可用。" },
+  "ux-honeycomb": { definition: "莫维尔蜂窝模型以价值性为中心，拆解用户体验要素。", core: "有用、可用、期待、易寻、可获得、可靠；七维相互支撑。", answer: "单维突出会失衡，应从整体评价用户价值。" },
+  "ux-sanders": { definition: "桑德斯设计研究地图用研究心态和研究主导方划分研究类型。", core: "横轴专家/参与式；纵轴研究/设计主导；交叉形成四象限。", answer: "专家心态重解释，参与式心态重用户共同创造。" },
+  "ux-iceberg": { definition: "用户信息分为表层显性行为和深层隐性动因两层。", core: "表层：行为、表情、动作；深层：偏好、态度、动机、价值观。", answer: "不能只看行为，需用访谈、出声思维、眼动等交叉验证。" },
+  "ux-market": { definition: "市场调研研究购买行为与消费态度，用户研究关注真实使用过程。", core: "市场调研偏量化、大样本、购买决策；用户研究重场景、行为和可用性。", answer: "两者研究对象和证据不同，应互补而非替代。" },
+  "ux-qual-quant": { definition: "定性回答为什么，定量回答多少和分布。", core: "定性：小样本、真实场景、动机；定量：大样本、统计、验证假设。", answer: "先定性发现问题，再定量验证规模，形成混合研究。" },
+  "ux-observation": { definition: "研究者在真实场景直接观察并记录用户行为。", core: "局内沉浸、实时记录、隐性细节；可参与/非参与、结构/非结构、自然/实验观察。", answer: "价值在发现用户说不出的真实行为，需与访谈互证。" },
+  "ux-interview": { definition: "通过口头交谈收集用户经历、感受、需求和动机。", core: "开放型、半开放型、封闭型；倾听不打断，善用总结、认可、追问。", answer: "访谈看“怎么说”，但要防口述偏差，配合观察验证。" },
+  "ux-tap": { definition: "用户边操作边说出内心想法，研究者同步记录。", core: "同步法边做边说；回顾法看录像复述；记录语言、动作、情绪。", answer: "用于发现操作时的认知障碍，推动界面迭代。" },
+  "ux-ethno": { definition: "进入用户原生环境长期观察，理解其文化和真实生活逻辑。", core: "田野—编码—备忘录—分析；快速人种志用游击访谈、日记、定点录像。", answer: "重点发现口述与真实行为的落差和隐性需求。" },
+  "ux-aeiou": { definition: "AEIOU 是整理田野观察素材的五维分析框架。", core: "活动、环境、交互、物体、用户。", answer: "统一团队分析标准，常与 POEMS 搭配使用。" },
+  "ux-persona": { definition: "基于研究数据构建的虚拟典型用户，不是凭空想象。", core: "整合目标、行为、需求和痛点；库珀七步：变量、映射、聚类、目标、核验、叙事、定型。", answer: "Persona 用来统一用户认知，支撑需求、设计和测试。" },
+  "ux-usability": { definition: "可用性衡量用户完成目标时的效果、效率和满意程度。", core: "尼尔森六维、ISO 三指标、5Es：有效、易学、容错、效率、吸引。", answer: "可用性评估围绕完成任务和用户体验质量展开。" },
+  "ux-usability-eval": { definition: "让真实用户操作原型或成品，发现并量化可用性问题。", core: "形成性：开发中找问题，约 5 人；总结性：成品后测水平，约 10—15 人。", answer: "形成性重迭代，总结性重验收和对比。" },
+  "ux-analysis": { definition: "常用定量分析工具用于分类、降维和空间可视化。", core: "聚类分组；因素分析找潜在因子；主成分分析降维；MDS 呈现感知距离。", answer: "聚类分样本、因素找因子、主成分降维、MDS 画空间图。" },
+  "ux-visual": { definition: "用体验图、定位图和情境图把研究数据转成设计洞察。", core: "体验图看流程触点；定位图看感知与偏好位置；情境图看真实生活语境。", answer: "三类图分别解决流程、竞争位置和场景理解问题。" },
+  "ux-story-evolution": { definition: "故事板用分镜讲使用过程，产品进化图梳理品类长期演变。", core: "故事板：场景、行为、操作、反馈；进化图：形态演变 + 社会技术经济文化驱动。", answer: "故事板看一次使用，进化图看长期趋势。" },
+  "ux-empathy": { definition: "移情设计是把自己代入用户视角，理解其需求和情绪。", core: "通过跟踪、访谈、情绪打分、体验地图捕捉真实痛点。", answer: "重点不是同情，而是基于研究证据理解用户。" },
+  "ux-kansei": { definition: "感性工学把用户主观情感量化并映射到设计维度。", core: "二维模型：去医疗化—专业感；功能集成—功能专一。", answer: "医疗产品趋势：情感去医疗化，功能专一简化。" },
+  "ux-narrative": { definition: "将叙事和交互故事融入医疗产品与服务。", core: "把诊疗行为转化为童趣故事，结合实体道具和线上动画。", answer: "用第一人称参与消解未知恐惧，改善医患沟通。" },
+  "ux-hpss": { definition: "融合用户研究、体验设计、叙事医学和同理心设计的医疗服务设计体系。", core: "以患者为中心；覆盖产品、界面和完整服务流程。", answer: "路径：问题挖掘、概念规划、原型落地、测试迭代。" }
+};
+
+function supportsFourDimensionMode(card) {
   return Boolean(card && (card.history || card.deckId === "ux"));
 }
 function getFourDimensionConfig(card) {
@@ -2792,16 +2820,17 @@ function getFourDimensionConfig(card) {
     };
   }
   if (card.deckId === "ux") {
+    const compact = UX_COMPACT[card.id];
     return {
       kicker: `四维串记 · ${(card.tags || []).find(tag => tag !== "★★★必背") || "用户研究"}`,
-      intro: "先根据方法名称回忆定义、核心内容、关键词和答题落点，再逐个揭晓。重点训练“是什么—怎么做—何时用—怎么答”。",
+      intro: "精简必背版：只抓定义、核心点、关键词和答题落点。完整原文保留在“全文”模式中备查。",
       dimensions: [
-        ["context", "01 定义 / 定位", card.paragraphs?.[0]?.[1] || card.trigger],
-        ["method", "02 核心方法 / 内容", card.paragraphs?.[1]?.[1] || card.paragraphs?.[0]?.[1] || ""],
-        ["keywords", "03 关键词 / 结构", card.keywords.join(" · ")],
-        ["answer", "04 答题落点", `${card.note}${card.cues?.length ? ` 记忆线：${card.cues.join(" → ")}` : ""}`]
+        ["context", "01 定义 / 定位", compact?.definition || card.paragraphs?.[0]?.[1] || card.trigger],
+        ["method", "02 核心答案", compact?.core || card.paragraphs?.[1]?.[1] || card.paragraphs?.[0]?.[1] || ""],
+        ["keywords", "03 关键词 / 结构", card.keywords.slice(0, 6).join(" · ")],
+        ["answer", "04 答题落点", compact?.answer || card.note]
       ],
-      mnemonic: card.cues?.join(" → ") || card.note,
+      mnemonic: card.cues?.slice(0, 4).join(" → ") || compact?.answer || card.note,
       exam: ["699设计理论基础：定义、方法比较、适用场景与综合分析题"]
     };
   }
