@@ -330,9 +330,8 @@
   .history-exam-chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .history-exam-chip { padding: 5px 8px; border-radius: 5px; background: var(--amber-soft); color: #7f6035; font-size: 9px; line-height: 1.45; }
   .history-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 7px; }
-  .history-annotation-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-right: auto; }
-  .history-annotation-hint { color: #908980; font-size: 9px; line-height: 1.5; }
-  .history-underline { padding: 0 1px; background: transparent; color: inherit; text-decoration: underline; text-decoration-color: #b24b40; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .history-emphasis { color: var(--red); font-weight: 700; }
+  .history-emphasis-note { margin-top: 9px; color: #908980; font-size: 9px; }
   .history-overview { display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin-bottom: 24px; }
   .history-overview-block { min-width: 0; padding: 18px; border: 1px solid rgba(199,187,168,.7); border-radius: 15px; background: rgba(255,253,248,.68); }
   .overview-kicker { color: var(--history); font-size: 8px; font-weight: 700; letter-spacing: .16em; }
@@ -2805,88 +2804,21 @@ function clearDictation() {
   "ux-hpss": { definition: "融合用户研究、体验设计、叙事医学和同理心设计的医疗服务设计体系。", core: "以患者为中心；覆盖产品、界面和完整服务流程。", answer: "路径：问题挖掘、概念规划、原型落地、测试迭代。" }
 };
 
-function normalizeAnnotationRanges(ranges) {
-  const sorted = (ranges || [])
-    .filter(range => Number.isFinite(range.start) && Number.isFinite(range.end) && range.end > range.start)
-    .map(range => ({ start: range.start, end: range.end }))
-    .sort((a, b) => a.start - b.start);
-  const merged = [];
-  sorted.forEach(range => {
-    const last = merged[merged.length - 1];
-    if (last && range.start <= last.end + 1) last.end = Math.max(last.end, range.end);
-    else merged.push({ ...range });
-  });
-  return merged;
-}
-function getHistoryAnnotationRanges(cardId, key) {
-  return normalizeAnnotationRanges(state.historyAnnotations?.[cardId]?.[key] || []);
-}
-function renderAnnotatedHistoryText(cardId, key, text) {
-  const ranges = getHistoryAnnotationRanges(cardId, key);
-  if (!ranges.length) return escapeHtml(text);
-  let html = "";
-  let cursor = 0;
-  ranges.forEach(range => {
-    const start = Math.max(cursor, Math.min(text.length, range.start));
-    const end = Math.max(start, Math.min(text.length, range.end));
-    if (start > cursor) html += escapeHtml(text.slice(cursor, start));
-    if (end > start) html += `<mark class="history-underline">${escapeHtml(text.slice(start, end))}</mark>`;
-    cursor = end;
-  });
-  if (cursor < text.length) html += escapeHtml(text.slice(cursor));
-  return html;
-}
-function captureHistorySelection() {
-  if (view.mode !== "history" || !view.currentCardId) return;
-  const selection = window.getSelection();
-  if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return;
-  const range = selection.getRangeAt(0);
-  const startNode = range.startContainer.nodeType === Node.ELEMENT_NODE ? range.startContainer : range.startContainer.parentElement;
-  const endNode = range.endContainer.nodeType === Node.ELEMENT_NODE ? range.endContainer : range.endContainer.parentElement;
-  const startContent = startNode?.closest?.(".history-dim-content");
-  const endContent = endNode?.closest?.(".history-dim-content");
-  if (!startContent || startContent !== endContent || !startContent.dataset.historyContent) return;
-  const prefix = document.createRange();
-  prefix.selectNodeContents(startContent);
-  prefix.setEnd(range.startContainer, range.startOffset);
-  const start = prefix.toString().length;
-  const selectedText = range.toString();
-  if (!selectedText.trim()) return;
-  view.pendingAnnotation = {
-    cardId: view.currentCardId,
-    key: startContent.dataset.historyContent,
-    start,
-    end: start + selectedText.length
-  };
-}
-function annotateSelectedText() {
-  const pending = view.pendingAnnotation;
-  const card = CARD_MAP.get(view.currentCardId);
-  if (!card || !pending || pending.cardId !== card.id) { toast("请先在已揭晓内容中选中文字"); return; }
-  if (!state.historyAnnotations[card.id]) state.historyAnnotations[card.id] = {};
-  state.historyAnnotations[card.id][pending.key] = normalizeAnnotationRanges([...(state.historyAnnotations[card.id][pending.key] || []), pending]);
-  view.pendingAnnotation = null;
-  window.getSelection()?.removeAllRanges();
-  saveState();
-  renderStudyContent(card);
-  toast("已添加划线标注");
-}
-function clearHistoryAnnotations() {
-  const card = CARD_MAP.get(view.currentCardId);
-  if (!card) return;
-  delete state.historyAnnotations[card.id];
-  view.pendingAnnotation = null;
-  saveState();
-  renderStudyContent(card);
-  toast("已清除本卡划线");
+function highlightHistoryEmphasis(text, card) {
+  const sourceTerms = card.deckId === "designhistory" ? (card.keywords || []) : (card.keywords || []).slice(0, 8);
+  const terms = [...new Set([
+    ...sourceTerms,
+    ...(String(text).match(/\d{4}(?:年|年代)?/g) || [])
+  ])].filter(Boolean).sort((a, b) => b.length - a.length);
+  if (!terms.length) return escapeHtml(text);
+  const pattern = new RegExp(`(${terms.map(escapeRegExp).join("|")})`, "g");
+  const termSet = new Set(terms);
+  return String(text).split(pattern).map(part => termSet.has(part) ? `<span class="history-emphasis">${escapeHtml(part)}</span>` : escapeHtml(part)).join("");
 }
 function resetHistoryReveal() {
   view.historyRevealed = new Set();
-  view.pendingAnnotation = null;
-  window.getSelection()?.removeAllRanges();
   renderStudyContent(CARD_MAP.get(view.currentCardId));
-}
-function supportsFourDimensionMode(card) {
+}function supportsFourDimensionMode(card) {
   return Boolean(card && (card.history || card.deckId === "ux"));
 }
 function getFourDimensionConfig(card) {
@@ -2928,14 +2860,14 @@ function renderHistoryMode(card) {
   const allRevealed = config.dimensions.every(([key]) => view.historyRevealed.has(key));
   const annotationCount = Object.values(state.historyAnnotations?.[card.id] || {}).reduce((sum, ranges) => sum + normalizeAnnotationRanges(ranges).length, 0);
   return `<div class="history-mode">
-    <div class="history-intro"><span>${escapeHtml(config.kicker)}</span><h3>${escapeHtml(card.title)}</h3><p>${escapeHtml(config.intro)}</p></div>
+    <div class="history-intro"><span>${escapeHtml(config.kicker)}</span><h3>${escapeHtml(card.title)}</h3><p>${escapeHtml(config.intro)}</p><div class="history-emphasis-note"><span class="history-emphasis">红色文字</span>为预勾画重点</div></div>
     <div class="history-grid">${config.dimensions.map(([key, label, value]) => {
       const revealed = view.historyRevealed.has(key);
-      return `<article class="history-dim${revealed ? " revealed" : ""}" data-history-key="${key}" tabindex="0" role="button" aria-expanded="${revealed}"><span class="history-dim-label">${label}</span><span class="history-dim-content" data-history-content="${key}">${revealed ? renderAnnotatedHistoryText(card.id, key, value) : "点击回忆并揭晓"}</span></article>`;
+      return `<article class="history-dim${revealed ? " revealed" : ""}" data-history-key="${key}" tabindex="0" role="button" aria-expanded="${revealed}"><span class="history-dim-label">${label}</span><span class="history-dim-content" data-history-content="${key}">${revealed ? highlightHistoryEmphasis(value, card) : "点击回忆并揭晓"}</span></article>`;
     }).join("")}</div>
     <div class="history-mnemonic"><strong>串记：</strong>${allRevealed ? escapeHtml(config.mnemonic) : "四个维度全部揭晓后显示速记串联。"}</div>
     <div class="history-exam"><div class="history-exam-label">真题 / 考法连接</div><div class="history-exam-chips">${config.exam.map(item => `<span class="history-exam-chip">${escapeHtml(item)}</span>`).join("")}</div></div>
-    <div class="history-actions"><div class="history-annotation-tools"><span class="history-annotation-hint">已划线 ${annotationCount} 处 · 选中已揭晓文字后可标注</span><button class="btn btn-small" id="historyAnnotateBtn">划线选中内容</button><button class="btn btn-small" id="historyClearAnnotations">清除划线</button></div><button class="btn btn-small" id="historyResetReveal">重新遮盖</button><button class="btn btn-small" id="historyRevealAll">全部揭晓</button></div>
+    <div class="history-actions"><button class="btn btn-small" id="historyResetReveal">重新遮盖</button><button class="btn btn-small" id="historyRevealAll">全部揭晓</button></div>
   </div>`;
 }
 function revealAllHistory() {
@@ -3385,8 +3317,8 @@ document.addEventListener("click", event => {
     if (!view.historyRevealed.has(key)) { view.historyRevealed.add(key); renderStudyContent(CARD_MAP.get(view.currentCardId)); }
     return;
   }
-  if (event.target.closest("#historyAnnotateBtn")) { annotateSelectedText(); return; }
-  if (event.target.closest("#historyClearAnnotations")) { clearHistoryAnnotations(); return; }
+
+
   if (event.target.closest("#historyResetReveal")) { resetHistoryReveal(); return; }
   if (event.target.closest("#historyRevealAll")) { revealAllHistory(); return; }
   const deleteBtn = event.target.closest("[data-delete-card]");
@@ -3440,7 +3372,7 @@ document.getElementById("closeCustomModal").addEventListener("click", closeCusto
 document.getElementById("cancelCustomModal").addEventListener("click", closeCustomModal);
 document.getElementById("customForm").addEventListener("submit", saveCustomCard);
 document.getElementById("customModal").addEventListener("click", event => { if (event.target.id === "customModal") closeCustomModal(); });
-document.addEventListener("selectionchange", captureHistorySelection);
+
 document.addEventListener("input", event => {
   if (event.target && event.target.id === "dictationInput") {
     const card = CARD_MAP.get(view.currentCardId);
