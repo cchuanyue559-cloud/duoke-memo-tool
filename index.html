@@ -95,6 +95,8 @@
   .nav-subitem:hover { color: var(--red-deep); background: rgba(255,255,255,.45); }
   .nav-subitem.active { color: var(--red-deep); background: var(--red-soft); border-color: #e6c8c1; font-weight: 700; }
   .nav-subitem .nav-count { min-width: 21px; padding: 1px 6px; font-size: 9px; background: rgba(255,255,255,.55); }
+  .legacy-archive-btn { width: calc(100% - 14px); margin: 1px 0 6px 14px; padding: 6px 9px; border: 1px dashed var(--line-strong); border-radius: 7px; background: transparent; color: #858278; font-size: 9px; text-align: left; }
+  .legacy-archive-btn:hover { border-color: var(--amber); color: var(--amber); background: var(--amber-soft); }
   .nav-item.active[data-deck-filter="custom"] { color: var(--jade); }
   .nav-item.active[data-deck-filter="custom"] .nav-count { background: var(--jade-soft); color: var(--jade); }
   .nav-item.active[data-deck-filter="designhistory"] { color: var(--history); }
@@ -407,6 +409,18 @@
   .dictation-answer .paragraph { margin-bottom: 19px; }
   .modal-backdrop { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 18px; background: rgba(25,29,25,.48); backdrop-filter: blur(5px); }
   .custom-modal { width: min(640px,100%); max-height: calc(100vh - 36px); overflow-y: auto; padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: var(--card); box-shadow: 0 28px 80px rgba(20,25,21,.24); }
+  .legacy-modal { width: min(860px,100%); }
+  .legacy-body { display: grid; grid-template-columns: 235px minmax(0,1fr); gap: 16px; }
+  .legacy-list { max-height: 58vh; overflow-y: auto; padding-right: 5px; }
+  .legacy-group { margin-bottom: 13px; }
+  .legacy-group h3 { margin: 0 0 5px; color: var(--red); font-family: var(--serif); font-size: 13px; }
+  .legacy-item { width: 100%; padding: 7px 8px; border: 0; border-radius: 6px; background: #f8f5ee; color: #5f655f; font-size: 10px; text-align: left; }
+  .legacy-item:hover { background: var(--red-soft); color: var(--red-deep); }
+  .legacy-preview { min-width: 0; max-height: 58vh; overflow-y: auto; padding: 16px; border: 1px solid #e8dfd2; border-radius: 10px; background: #fffdf8; }
+  .legacy-preview h3 { margin: 0 0 5px; font-family: var(--serif); font-size: 20px; }
+  .legacy-preview-meta { margin-bottom: 14px; color: var(--muted); font-size: 9px; }
+  .legacy-preview p { margin: 0 0 12px; color: #4f554f; font-family: var(--serif); font-size: 14px; line-height: 1.9; }
+  .legacy-preview-actions { display: flex; justify-content: space-between; gap: 8px; margin-top: 14px; }
   .custom-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; margin-bottom: 18px; }
   .custom-modal-head h2 { margin: 0; font-family: var(--serif); font-size: 24px; }
   .custom-modal-head p { margin: 5px 0 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
@@ -473,6 +487,7 @@
     .sidebar { position: static; margin-bottom: 16px; padding: 13px; }
     .deck-nav { display: flex; overflow-x: auto; align-items: center; } .nav-item { width: auto; flex: 0 0 auto; min-width: 110px; }
     .subdeck-nav { display: flex; flex: 0 0 auto; gap: 5px; margin: 0; padding: 0; border: 0; }
+    .legacy-archive-btn { width: auto; flex: 0 0 auto; margin: 0; }
     .nav-subitem { width: auto; flex: 0 0 auto; min-width: 86px; }
     .side-rule,.side-plan,.side-actions,.reset-link,.keyboard-tip { display: none; }
     .hero { min-height: auto; grid-template-columns: 1fr; }
@@ -507,6 +522,9 @@
     .diff-columns { grid-template-columns: 1fr; }
     .history-grid { grid-template-columns: 1fr; }
     .history-overview { grid-template-columns: 1fr; }
+    .legacy-body { grid-template-columns: 1fr; }
+    .legacy-list { max-height: 32vh; }
+    .legacy-preview { max-height: 45vh; }
     .history-actions { justify-content: flex-start; }
     .history-annotation-tools { width: 100%; margin-right: 0; }
     .dictation-score-grid { grid-template-columns: 1fr; }
@@ -550,6 +568,7 @@
         <button class="nav-subitem" data-deck-filter="newthought">新思想 35题 <span class="nav-count">5</span></button>
         <button class="nav-subitem" data-deck-filter="policy">政经及形势政策 <span class="nav-count">5</span></button>
       </div>
+      <button class="legacy-archive-btn" id="oldTemplatesBtn">查看旧版政治模板存档</button>
       <button class="nav-item" data-deck-filter="ux">用户研究 <span class="nav-count">25</span></button>
       <button class="nav-item" data-deck-filter="english">英语作文 <span class="nav-count">20</span></button>
       <button class="nav-item" data-deck-filter="designhistory">设计史 <span class="nav-count">42</span></button>
@@ -707,6 +726,12 @@
       <div class="custom-field"><label for="customTags">标签</label><input id="customTags" placeholder="例如：马原, 易错"></div>
       <div class="custom-modal-actions"><button type="button" class="btn" id="cancelCustomModal">取消</button><button type="submit" class="btn btn-primary">保存并开始背诵</button></div>
     </form>
+  </div>
+</div>
+<div class="modal-backdrop hidden" id="legacyModal" role="dialog" aria-modal="true" aria-labelledby="legacyModalTitle">
+  <div class="custom-modal legacy-modal">
+    <div class="custom-modal-head"><div><h2 id="legacyModalTitle">旧版政治模板存档</h2><p>仅用于查看和对照，不参与挖空、默写与掌握进度。</p></div><button class="custom-close" id="closeLegacyModal" aria-label="关闭">×</button></div>
+    <div class="legacy-body"><div class="legacy-list" id="legacyList"></div><div class="legacy-preview hidden" id="legacyPreview"></div></div>
   </div>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -2976,6 +3001,16 @@ const POLITICS_ESSENCE_TEXT = {
     "中国秉持智能向善、开放包容的理念，尊重各国数字主权，积极参与数字领域国际规则制定，助力各国弥合数字鸿沟，推动构建公平公正、安全有序的全球数字治理格局。"
   ]
 };
+const LEGACY_POLITICAL_DECKS = DATA.filter(deck => ["mayuan", "sishu", "mzsg", "newthought", "policy"].includes(deck.id)).map(deck => ({
+  id: deck.id,
+  short: deck.short,
+  title: deck.title,
+  cards: deck.cards.map(card => ({
+    ...card,
+    paragraphs: card.paragraphs.map(paragraph => [...paragraph]),
+    words: card.words || card.paragraphs.reduce((sum, paragraph) => sum + paragraph[1].length, 0)
+  }))
+}));
 DATA.forEach(deck => deck.cards.forEach(card => {
   const texts = POLITICS_ESSENCE_TEXT[card.id];
   if (!texts) return;
@@ -3889,6 +3924,10 @@ function resetProgress() {
   saveState(); renderDashboard(); if (view.currentCardId) renderStudy(); toast("背诵进度已清空");
 }
 document.addEventListener("click", event => {
+  const legacyCardBtn = event.target.closest("[data-legacy-card]");
+  if (legacyCardBtn) { showLegacyCard(legacyCardBtn.dataset.legacyCard); return; }
+  if (event.target.closest("#legacyBackBtn")) { renderLegacyList(); return; }
+  if (event.target.closest("#legacyCopyBtn")) { copyLegacyTemplate(); return; }
   const historyJump = event.target.closest("[data-history-jump]");
   if (historyJump) { openStudy(historyJump.dataset.historyJump); return; }
   const historyDim = event.target.closest("[data-history-key]");
@@ -3948,6 +3987,9 @@ document.addEventListener("click", event => {
 });
 document.getElementById("searchInput").addEventListener("input", event => { view.search = event.target.value; renderDashboard(); });
 document.getElementById("addContentBtn").addEventListener("click", openCustomModal);
+document.getElementById("oldTemplatesBtn").addEventListener("click", openLegacyModal);
+document.getElementById("closeLegacyModal").addEventListener("click", closeLegacyModal);
+document.getElementById("legacyModal").addEventListener("click", event => { if (event.target.id === "legacyModal") closeLegacyModal(); });
 document.getElementById("closeCustomModal").addEventListener("click", closeCustomModal);
 document.getElementById("cancelCustomModal").addEventListener("click", closeCustomModal);
 document.getElementById("customForm").addEventListener("submit", saveCustomCard);
@@ -3989,6 +4031,7 @@ document.getElementById("translationBtn").addEventListener("click", toggleTransl
 document.getElementById("printBtn").addEventListener("click", () => window.print());
 document.getElementById("timerToggle").addEventListener("click", toggleTimer);
 document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !document.getElementById("legacyModal").classList.contains("hidden")) { closeLegacyModal(); return; }
   if (event.key === "Escape" && !document.getElementById("customModal").classList.contains("hidden")) { closeCustomModal(); return; }
   const tag = document.activeElement && document.activeElement.tagName;
   if (!view.currentCardId) return;
@@ -4041,6 +4084,56 @@ function splitCustomList(value, pattern = /[，,、;；\n]+/) {
 function inferCustomKeywords(text) {
   const clauses = String(text || "").split(/[，。；！？：,.;!?\n]+/).map(item => item.trim()).filter(item => item.length >= 2);
   return clauses.sort((a, b) => b.length - a.length).slice(0, 6);
+}
+function renderLegacyList() {
+  const list = document.getElementById("legacyList");
+  const preview = document.getElementById("legacyPreview");
+  preview.classList.add("hidden");
+  list.classList.remove("hidden");
+  list.innerHTML = LEGACY_POLITICAL_DECKS.map(deck => `<div class="legacy-group"><h3>${escapeHtml(deck.short)}</h3>${deck.cards.map(card => `<button class="legacy-item" data-legacy-card="${card.id}">${escapeHtml(card.title)}</button>`).join("")}</div>`).join("");
+}
+function openLegacyModal() {
+  const modal = document.getElementById("legacyModal");
+  if (!modal) return;
+  renderLegacyList();
+  modal.classList.remove("hidden");
+}
+function closeLegacyModal() {
+  const modal = document.getElementById("legacyModal");
+  if (modal) modal.classList.add("hidden");
+}
+function showLegacyCard(cardId) {
+  let found = null;
+  let foundDeck = null;
+  LEGACY_POLITICAL_DECKS.some(deck => {
+    const card = deck.cards.find(item => item.id === cardId);
+    if (card) { found = card; foundDeck = deck; return true; }
+    return false;
+  });
+  if (!found) return;
+  const list = document.getElementById("legacyList");
+  const preview = document.getElementById("legacyPreview");
+  list.classList.add("hidden");
+  preview.classList.remove("hidden");
+  preview.dataset.cardId = cardId;
+  preview.innerHTML = `<h3>${escapeHtml(found.title)}</h3><div class="legacy-preview-meta">${escapeHtml(foundDeck.short)} · 旧版字数 ${found.words} · 仅供对照</div>${found.paragraphs.map(paragraph => `<p>${escapeHtml(paragraph[1])}</p>`).join("")}<div class="legacy-preview-actions"><button class="btn btn-small" id="legacyBackBtn">返回列表</button><button class="btn btn-small" id="legacyCopyBtn">复制旧版</button></div>`;
+}
+async function copyLegacyTemplate() {
+  const preview = document.getElementById("legacyPreview");
+  const cardId = preview?.dataset.cardId;
+  let found = null;
+  LEGACY_POLITICAL_DECKS.some(deck => {
+    found = deck.cards.find(card => card.id === cardId) || null;
+    return Boolean(found);
+  });
+  if (!found) return;
+  const text = `${found.title}\n\n${found.paragraphs.map(paragraph => paragraph[1]).join("\n\n")}`;
+  try { await navigator.clipboard.writeText(text); }
+  catch (error) {
+    const area = document.createElement("textarea"); area.value = text; area.style.position = "fixed"; area.style.opacity = "0";
+    document.body.appendChild(area); area.select(); document.execCommand("copy"); area.remove();
+  }
+  toast("旧版模板已复制");
 }
 function openCustomModal() {
   const modal = document.getElementById("customModal");
