@@ -286,6 +286,8 @@
   .paragraph-label::before { content: ""; width: 16px; height: 1px; background: #b7aa98; }
   .paragraph p { margin: 0; font-family: var(--serif); font-size: clamp(16px,1.55vw,18px); line-height: 2.08; letter-spacing: .045em; text-align: justify; }
   .paragraph mark { color: inherit; background: linear-gradient(transparent 61%,rgba(216,179,119,.38) 61%); padding: 0 1px; }
+  .cue-target-flash { animation: cueTargetFlash 1.7s ease-out; border-radius: 9px; }
+  @keyframes cueTargetFlash { 0%, 100% { background-color: transparent; box-shadow: 0 0 0 0 rgba(166,63,51,0); } 18%, 62% { background-color: rgba(244,218,206,.72); box-shadow: 0 0 0 5px rgba(166,63,51,.09); } }
   .sentence-read-row { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-top: 8px; color: #918b80; font-size: 9px; }
   .sentence-read-row > span { margin-right: 2px; letter-spacing: .06em; }
   .sentence-read-btn { width: 25px; height: 25px; padding: 0; border: 1px solid #ded4c4; border-radius: 50%; background: #fffdf8; color: #6b716a; font-size: 9px; }
@@ -334,7 +336,7 @@
   .history-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 7px; }
   .history-emphasis { color: var(--red); font-weight: 700; }
   .history-emphasis-note { margin-top: 9px; color: #908980; font-size: 9px; }
-  .history-overview { display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin-bottom: 24px; }
+  .history-overview { display: grid; grid-template-columns: 1.2fr .8fr; align-items: start; gap: 14px; margin-bottom: 24px; }
   .history-overview-block { min-width: 0; padding: 18px; border: 1px solid rgba(199,187,168,.7); border-radius: 15px; background: rgba(255,253,248,.68); }
   .overview-kicker { color: var(--history); font-size: 8px; font-weight: 700; letter-spacing: .16em; }
   .history-overview-block h3 { margin: 4px 0 14px; font-family: var(--serif); font-size: 19px; }
@@ -346,12 +348,27 @@
   .timeline-node strong { font-size: 9px; color: var(--history); }
   .timeline-node > span:last-child { color: var(--muted); font-size: 10px; line-height: 1.45; }
   .timeline-node:hover > span:last-child { color: var(--red-deep); text-decoration: underline; text-underline-offset: 3px; }
-  .mindmap-core { width: max-content; max-width: 100%; margin: 0 auto 12px; padding: 8px 14px; border-radius: 999px; background: var(--history); color: #fff; font-family: var(--serif); font-size: 12px; text-align: center; }
-  .mindmap-branches { display: grid; gap: 9px; }
-  .mindmap-branch { padding: 9px 10px; border-left: 2px solid #c6d9d1; background: #f8fbf9; border-radius: 0 7px 7px 0; }
-  .mindmap-branch h4 { margin: 0 0 6px; color: var(--history); font-size: 10px; }
-  .mindmap-nodes { display: flex; flex-wrap: wrap; gap: 5px; }
-  .mindmap-nodes button { padding: 4px 7px; border: 1px solid #d5e1dc; border-radius: 5px; background: #fff; color: #60736b; font-size: 9px; }
+  .overview-hint { margin: 7px 0 0; color: #8f9892; font-size: 8px; line-height: 1.5; }
+  .mindmap-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+  .mindmap-controls { display: flex; flex-wrap: wrap; gap: 5px; }
+  .mindmap-control-btn { padding: 5px 7px; border: 1px solid #d5e1dc; border-radius: 6px; background: #fff; color: #60736b; font-size: 8px; }
+  .mindmap-control-btn:hover { border-color: var(--history); color: var(--history); background: var(--history-soft); }
+  .mindmap-core { width: min(100%,460px); margin: 0 auto 13px; padding: 10px 15px; border-radius: 12px; background: linear-gradient(135deg,var(--history),#557d71); color: #fff; text-align: center; box-shadow: 0 8px 18px rgba(63,103,93,.12); }
+  .mindmap-core strong { display: block; font-family: var(--serif); font-size: 13px; }
+  .mindmap-core span { display: block; margin-top: 3px; color: rgba(255,255,255,.76); font-size: 8px; }
+  .mindmap-branches { display: grid; gap: 7px; }
+  .mindmap-branch { overflow: hidden; border: 1px solid #dbe6e1; border-left: 3px solid #bcd3ca; background: #f8fbf9; border-radius: 8px; }
+  .mindmap-branch-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 9px 10px; border: 0; background: transparent; color: var(--ink); text-align: left; }
+  .mindmap-branch-toggle:hover { background: var(--history-soft); }
+  .mindmap-branch-title { min-width: 0; }
+  .mindmap-branch-title strong { display: block; color: var(--history); font-size: 10px; }
+  .mindmap-branch-title small { display: block; margin-top: 2px; color: #8b948e; font-size: 8px; line-height: 1.4; }
+  .mindmap-branch-meta { flex: 0 0 auto; display: flex; align-items: center; gap: 5px; color: #78877f; font-size: 8px; }
+  .mindmap-chevron { display: inline-grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: #fff; transition: transform .2s ease; }
+  .mindmap-branch.collapsed .mindmap-chevron { transform: rotate(-90deg); }
+  .mindmap-branch.collapsed .mindmap-nodes { display: none; }
+  .mindmap-nodes { display: flex; flex-wrap: wrap; gap: 5px; padding: 0 10px 10px; }
+  .mindmap-nodes button { padding: 5px 8px; border: 1px solid #d5e1dc; border-radius: 6px; background: #fff; color: #60736b; font-size: 9px; }
   .mindmap-nodes button:hover { border-color: var(--history); color: var(--history); background: var(--history-soft); }
   .level-hint { flex: 0 0 auto; max-width: 205px; color: #908980; font-size: 9px; line-height: 1.55; }
   .sentence-flow { font-family: var(--serif); font-size: clamp(16px,1.55vw,18px); line-height: 2.08; letter-spacing: .045em; text-align: justify; }
@@ -421,6 +438,19 @@
   .legacy-preview-meta { margin-bottom: 14px; color: var(--muted); font-size: 9px; }
   .legacy-preview p { margin: 0 0 12px; color: #4f554f; font-family: var(--serif); font-size: 14px; line-height: 1.9; }
   .legacy-preview-actions { display: flex; justify-content: space-between; gap: 8px; margin-top: 14px; }
+  .compare-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px; }
+  .compare-column { min-width: 0; padding: 15px; border: 1px solid #e8dfd2; border-radius: 10px; background: #fffdf8; }
+  .compare-column.current { border-top: 3px solid var(--jade); }
+  .compare-column.legacy { border-top: 3px solid var(--amber); }
+  .compare-column h3 { margin: 0 0 4px; font-family: var(--serif); font-size: 16px; }
+  .compare-meta { margin-bottom: 12px; color: var(--muted); font-size: 9px; }
+  .compare-column p { margin: 0 0 11px; color: #555c55; font-family: var(--serif); font-size: 13px; line-height: 1.85; }
+  .period-summary { margin: 0 0 14px; color: var(--muted); font-size: 11px; line-height: 1.75; }
+  .period-cards { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+  .period-card-link { padding: 11px 12px; border: 1px solid #e1d8ca; border-radius: 8px; background: #fffdf8; color: var(--ink); text-align: left; }
+  .period-card-link strong { display: block; font-family: var(--serif); font-size: 13px; }
+  .period-card-link span { display: block; margin-top: 4px; color: var(--muted); font-size: 9px; line-height: 1.45; }
+  .period-card-link:hover { border-color: var(--history); background: var(--history-soft); }
   .custom-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; margin-bottom: 18px; }
   .custom-modal-head h2 { margin: 0; font-family: var(--serif); font-size: 24px; }
   .custom-modal-head p { margin: 5px 0 0; color: var(--muted); font-size: 10px; line-height: 1.6; }
@@ -525,6 +555,11 @@
     .legacy-body { grid-template-columns: 1fr; }
     .legacy-list { max-height: 32vh; }
     .legacy-preview { max-height: 45vh; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .period-cards { grid-template-columns: 1fr; }
+    .mindmap-head { flex-direction: column; }
+    .mindmap-controls { width: 100%; }
+    .mindmap-control-btn { flex: 1 1 auto; }
     .history-actions { justify-content: flex-start; }
     .history-annotation-tools { width: 100%; margin-right: 0; }
     .dictation-score-grid { grid-template-columns: 1fr; }
@@ -658,6 +693,7 @@
                 <button class="tool-btn" id="speakBtn">朗读</button>
                 <button class="tool-btn" id="copyBtn">复制</button>
                 <button class="tool-btn hidden" id="translationBtn">查看译文</button>
+                <button class="tool-btn hidden" id="legacyCompareBtn">新旧对比</button>
                 <button class="tool-btn" id="printBtn">打印</button>
               </div>
             </div>
@@ -732,6 +768,18 @@
   <div class="custom-modal legacy-modal">
     <div class="custom-modal-head"><div><h2 id="legacyModalTitle">旧版政治模板存档</h2><p>仅用于查看和对照，不参与挖空、默写与掌握进度。</p></div><button class="custom-close" id="closeLegacyModal" aria-label="关闭">×</button></div>
     <div class="legacy-body"><div class="legacy-list" id="legacyList"></div><div class="legacy-preview hidden" id="legacyPreview"></div></div>
+  </div>
+</div>
+<div class="modal-backdrop hidden" id="compareModal" role="dialog" aria-modal="true" aria-labelledby="compareModalTitle">
+  <div class="custom-modal">
+    <div class="custom-modal-head"><div><h2 id="compareModalTitle">新旧模板对比</h2><p>左侧为当前精华版，右侧为旧版原文。</p></div><button class="custom-close" id="closeCompareModal" aria-label="关闭">×</button></div>
+    <div class="compare-grid" id="compareGrid"></div>
+  </div>
+</div>
+<div class="modal-backdrop hidden" id="periodModal" role="dialog" aria-modal="true" aria-labelledby="periodModalTitle">
+  <div class="custom-modal">
+    <div class="custom-modal-head"><div><h2 id="periodModalTitle">时间线关联知识点</h2><p id="periodSummary"></p></div><button class="custom-close" id="closePeriodModal" aria-label="关闭">×</button></div>
+    <div class="period-cards" id="periodCards"></div>
   </div>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
@@ -3011,6 +3059,7 @@ const LEGACY_POLITICAL_DECKS = DATA.filter(deck => ["mayuan", "sishu", "mzsg", "
     words: card.words || card.paragraphs.reduce((sum, paragraph) => sum + paragraph[1].length, 0)
   }))
 }));
+const LEGACY_CARD_MAP = new Map(LEGACY_POLITICAL_DECKS.flatMap(deck => deck.cards.map(card => [card.id, { ...card, deckShort: deck.short }])));
 DATA.forEach(deck => deck.cards.forEach(card => {
   const texts = POLITICS_ESSENCE_TEXT[card.id];
   if (!texts) return;
@@ -3069,7 +3118,7 @@ function rebuildCatalog() {
   CARD_MAP = new Map(ALL_CARDS.map(card => [card.id, card]));
 }
 let view = {  deckFilter: "all", statusFilter: "all", search: "", currentCardId: null, mode: "full", clozeLevel: "standard", translationVisible: false,
-  maskRevealed: false, revealedBlanks: new Set(), historyRevealed: new Set(), pendingAnnotation: null, dictationResult: null, dictationStarted: false,
+  maskRevealed: false, revealedBlanks: new Set(), historyRevealed: new Set(), mindMapCollapsed: new Set(), pendingAnnotation: null, dictationResult: null, dictationStarted: false,
   dictationTimerStartedAt: null, dictationTimerAccumulated: 0, dictationTimerRunning: false, dictationTimerInterval: null,
   timerRunning: true, timerStartedAt: null,
   timerBaseSeconds: 0, timerInterval: null
@@ -3486,33 +3535,64 @@ function revealAllHistory() {
   config.dimensions.forEach(([key]) => view.historyRevealed.add(key));
   renderStudyContent(card);
 }
+const HISTORY_PERIODS = [
+  { id: "baroque", time: "17—18世纪", title: "巴洛克 / 洛可可", summary: "宫廷与宗教装饰风格，强调曲线、光效与繁复装饰。", cards: ["dh-baroque-rococo"] },
+  { id: "industrial", time: "1760s—1840s", title: "工业革命", summary: "机器生产、标准化与批量化改变设计的生产方式。", cards: ["dh-industrial-revolution", "dh-wedgwood"] },
+  { id: "neoclassic", time: "18世纪60年代起", title: "新古典 / 维多利亚", summary: "理性复古与华丽历史样式并存。", cards: ["dh-neoclassic-victorian"] },
+  { id: "crystal", time: "1851", title: "水晶宫博览会", summary: "钢铁、玻璃与标准化预制构件标志现代工业产品设计开始。", cards: ["dh-crystal-palace"] },
+  { id: "arts-crafts", time: "1860s起", title: "工艺美术运动", summary: "以手工艺反对机械化，莫里斯与拉斯金构成核心。", cards: ["dh-arts-crafts", "dh-ruskin", "dh-morris", "dh-red-house-prb", "dh-voysey"] },
+  { id: "nouveau", time: "1880s—1914", title: "新艺术运动", summary: "自然曲线、有机形态和东方影响，法、比、西、苏格兰等分支并起。", cards: ["dh-art-nouveau", "dh-french-nouveau", "dh-paris-groups", "dh-velde", "dh-horta", "dh-gaudi", "dh-mackintosh"] },
+  { id: "modern-prelude", time: "19世纪末—20世纪初", title: "现代主义前夜", summary: "赖特、麦金托什、维也纳分离派和贝伦斯推动新形式。", cards: ["dh-wright", "dh-mackintosh", "dh-vienna", "dh-behrens"] },
+  { id: "modernism", time: "20世纪初—30年代", title: "现代主义与包豪斯", summary: "功能主义、机器美学、现代建筑大师、包豪斯、构成主义与风格派。", cards: ["dh-modernism", "dh-loos", "dh-gropius", "dh-mies", "dh-corbusier", "dh-machine-aalto", "dh-werkbund", "dh-bauhaus", "dh-bauhaus-education", "dh-bauhaus-people", "dh-constructivism", "dh-de-stijl"] },
+  { id: "deco", time: "20世纪20—30年代", title: "装饰艺术运动", summary: "现代几何形式与奢华装饰结合，并延伸到平面设计。", cards: ["dh-art-deco", "dh-art-deco-compare", "dh-art-deco-world", "dh-graphic-modernism"] },
+  { id: "us-industrial", time: "20世纪30—50年代", title: "美国工业设计", summary: "流线型、商业设计与有计划废止制塑造美国现代消费文化。", cards: ["dh-streamline", "dh-us-designers", "dh-loewy-maya", "dh-obsolescence-chicago"] }
+];
 function historyTimelineHtml() {
-  const nodes = [
-    ["17—18世纪", "巴洛克 / 洛可可", "dh-baroque-rococo"],
-    ["1760s—1840s", "工业革命", "dh-industrial-revolution"],
-    ["18世纪60年代起", "新古典 / 维多利亚", "dh-neoclassic-victorian"],
-    ["1851", "水晶宫博览会", "dh-crystal-palace"],
-    ["1860s起", "工艺美术运动", "dh-arts-crafts"],
-    ["1880s—1914", "新艺术运动", "dh-art-nouveau"],
-    ["19世纪末—20世纪初", "现代主义前夜", "dh-behrens"],
-    ["20世纪初—30年代", "现代主义与包豪斯", "dh-bauhaus"],
-    ["20世纪20—30年代", "装饰艺术运动", "dh-art-deco"],
-    ["20世纪30—50年代", "美国工业设计", "dh-streamline"]
-  ];
-  return `<div class="history-overview-block"><div class="overview-kicker">TIME LINE</div><h3>设计史时间线</h3><div class="timeline-track">${nodes.map(([time, title, id], index) => `<button class="timeline-node" data-history-jump="${id}"><span class="timeline-dot">${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(time)}</strong><span>${escapeHtml(title)}</span></button>`).join("")}</div></div>`;
+  return `<div class="history-overview-block"><div class="overview-kicker">TIME LINE</div><h3>设计史时间线</h3><div class="timeline-track">${HISTORY_PERIODS.map((period, index) => `<button class="timeline-node" data-history-period="${period.id}" title="查看 ${escapeHtml(period.title)} 相关知识点"><span class="timeline-dot">${String(index + 1).padStart(2, "0")}</span><strong>${escapeHtml(period.time)}</strong><span>${escapeHtml(period.title)}</span></button>`).join("")}</div><p class="overview-hint">点击任一节点，查看该时期关联知识卡。</p></div>`;
+}
+function openHistoryPeriod(periodId) {
+  const period = HISTORY_PERIODS.find(item => item.id === periodId);
+  if (!period) return;
+  document.getElementById("periodModalTitle").textContent = `${period.time} · ${period.title}`;
+  document.getElementById("periodSummary").textContent = period.summary;
+  document.getElementById("periodCards").innerHTML = period.cards.map(id => {
+    const card = CARD_MAP.get(id);
+    if (!card) return "";
+    return `<button class="period-card-link" data-history-jump="${id}"><strong>${escapeHtml(card.title)}</strong><span>${escapeHtml(card.trigger)}</span></button>`;
+  }).join("");
+  document.getElementById("periodModal").classList.remove("hidden");
+}
+function closePeriodModal() {
+  const modal = document.getElementById("periodModal");
+  if (modal) modal.classList.add("hidden");
+}
+function renderMindMapBlock(config) {
+  const collapsed = view.mindMapCollapsed instanceof Set ? view.mindMapCollapsed : new Set();
+  const total = config.branches.reduce((sum, branch) => sum + branch[3].length, 0);
+  const branchHtml = config.branches.map(([id, title, relation, items]) => {
+    const key = `${config.id}:${id}`;
+    const isCollapsed = collapsed.has(key);
+    return `<section class="mindmap-branch${isCollapsed ? " collapsed" : ""}" data-mindmap-branch="${escapeHtml(key)}"><button class="mindmap-branch-toggle" data-mindmap-toggle="${escapeHtml(key)}" aria-expanded="${String(!isCollapsed)}"><span class="mindmap-branch-title"><strong>${escapeHtml(title)}</strong><small>${escapeHtml(relation)}</small></span><span class="mindmap-branch-meta">${items.length} 个 <span class="mindmap-chevron">⌄</span></span></button><div class="mindmap-nodes">${items.map(([label, cardId]) => `<button data-history-jump="${cardId}" title="打开：${escapeHtml(label)}">${escapeHtml(label)}</button>`).join("")}</div></section>`;
+  }).join("");
+  return `<div class="history-overview-block mindmap-block" data-mindmap-id="${config.id}"><div class="mindmap-head"><div><div class="overview-kicker">${config.kicker}</div><h3>${escapeHtml(config.title)}</h3></div><div class="mindmap-controls"><button class="mindmap-control-btn" data-mindmap-action="expand" data-mindmap-target="${config.id}">全部展开</button><button class="mindmap-control-btn" data-mindmap-action="collapse" data-mindmap-target="${config.id}">全部收起</button></div></div><div class="mindmap-core"><strong>${escapeHtml(config.core)}</strong><span>${total} 个知识点 · 点击节点进入四维串记</span></div><div class="mindmap-branches">${branchHtml}</div><p class="overview-hint">先看分支关系，再点具体知识点回忆；同一分支可随时收起。</p></div>`;
 }
 function historyMindMapHtml() {
-  const branches = [
-    ["设计概念与伦理", [["拉姆斯", "dh-rams"], ["巴巴纳克", "dh-papanek"]]],
-    ["工业革命与装饰风格", [["韦奇伍德", "dh-wedgwood"], ["巴洛克 / 洛可可", "dh-baroque-rococo"], ["水晶宫", "dh-crystal-palace"]]],
-    ["工艺美术运动", [["拉斯金", "dh-ruskin"], ["莫里斯", "dh-morris"], ["红屋", "dh-red-house-prb"], ["沃赛", "dh-voysey"]]],
-    ["新艺术运动", [["法国平面", "dh-french-nouveau"], ["巴黎团体", "dh-paris-groups"], ["威尔德", "dh-velde"], ["霍塔", "dh-horta"], ["高迪", "dh-gaudi"], ["麦金托什", "dh-mackintosh"]]],
-    ["走向现代主义", [["赖特", "dh-wright"], ["维也纳分离派", "dh-vienna"], ["德国青年风格 / 贝伦斯", "dh-behrens"]]],
-    ["装饰艺术", [["运动概述", "dh-art-deco"], ["比较与评价", "dh-art-deco-compare"], ["各国分支", "dh-art-deco-world"], ["图画现代主义", "dh-graphic-modernism"]]],
-    ["现代主义与包豪斯", [["现代主义", "dh-modernism"], ["卢斯", "dh-loos"], ["格罗皮乌斯", "dh-gropius"], ["密斯", "dh-mies"], ["柯布西耶", "dh-corbusier"], ["包豪斯", "dh-bauhaus"], ["包豪斯教育", "dh-bauhaus-education"], ["构成主义", "dh-constructivism"], ["风格派", "dh-de-stijl"]]],
-    ["美国工业设计", [["流线型运动", "dh-streamline"], ["盖迪斯与提格", "dh-us-designers"], ["罗维与 MAYA", "dh-loewy-maya"], ["废止制与芝加哥学派", "dh-obsolescence-chicago"]]]
-  ];
-  return `<div class="history-overview-block"><div class="overview-kicker">MIND MAP</div><h3>人物—运动—作品关系图</h3><div class="mindmap-core">现代设计史 · 前三章</div><div class="mindmap-branches">${branches.map(([title, items]) => `<div class="mindmap-branch"><h4>${escapeHtml(title)}</h4><div class="mindmap-nodes">${items.map(([label, id]) => `<button data-history-jump="${id}">${escapeHtml(label)}</button>`).join("")}</div></div>`).join("")}</div></div>`;
+  return renderMindMapBlock({
+    id: "history",
+    kicker: "KNOWLEDGE MAP",
+    title: "人物—运动—作品关系图",
+    core: "现代设计史 · 第一章至第六章",
+    branches: [
+      ["concept", "设计概念与伦理", "从“好设计”到设计责任", [["拉姆斯", "dh-rams"], ["巴巴纳克", "dh-papanek"]]],
+      ["industry", "工业革命与装饰风格", "生产方式变化推动新样式", [["工业革命", "dh-industrial-revolution"], ["韦奇伍德", "dh-wedgwood"], ["巴洛克 / 洛可可", "dh-baroque-rococo"], ["新古典 / 维多利亚", "dh-neoclassic-victorian"], ["水晶宫", "dh-crystal-palace"]]],
+      ["craft", "工艺美术运动", "反机械化，强调手工艺与道德", [["工艺美术运动", "dh-arts-crafts"], ["拉斯金", "dh-ruskin"], ["莫里斯", "dh-morris"], ["红屋", "dh-red-house-prb"], ["沃赛", "dh-voysey"]]],
+      ["nouveau", "新艺术运动", "自然曲线与各国分支", [["新艺术运动", "dh-art-nouveau"], ["法国平面", "dh-french-nouveau"], ["巴黎团体", "dh-paris-groups"], ["威尔德", "dh-velde"], ["霍塔", "dh-horta"], ["高迪", "dh-gaudi"], ["麦金托什", "dh-mackintosh"]]],
+      ["modern-prelude", "走向现代主义", "新形式、标准化与机器美学前夜", [["赖特", "dh-wright"], ["维也纳分离派", "dh-vienna"], ["德国青年风格 / 贝伦斯", "dh-behrens"]]],
+      ["deco", "装饰艺术", "现代几何形式与奢华装饰结合", [["运动概述", "dh-art-deco"], ["比较与评价", "dh-art-deco-compare"], ["各国分支", "dh-art-deco-world"], ["图画现代主义", "dh-graphic-modernism"]]],
+      ["modernism", "现代主义与包豪斯", "功能主义、机器美学与设计教育", [["现代主义", "dh-modernism"], ["德国制造联盟", "dh-werkbund"], ["卢斯", "dh-loos"], ["格罗皮乌斯", "dh-gropius"], ["密斯", "dh-mies"], ["柯布西耶", "dh-corbusier"], ["机器美学 / 阿尔托", "dh-machine-aalto"], ["包豪斯", "dh-bauhaus"], ["包豪斯教育", "dh-bauhaus-education"], ["包豪斯人物", "dh-bauhaus-people"], ["构成主义", "dh-constructivism"], ["风格派", "dh-de-stijl"]]],
+      ["us", "美国工业设计", "商业设计与消费文化形成", [["流线型运动", "dh-streamline"], ["盖迪斯与提格", "dh-us-designers"], ["罗维与 MAYA", "dh-loewy-maya"], ["废止制与芝加哥学派", "dh-obsolescence-chicago"]]]
+    ]
+  });
 }
 function userResearchWorkflowHtml() {
   const nodes = [
@@ -3524,17 +3604,22 @@ function userResearchWorkflowHtml() {
     ["06", "表达体验洞察", "ux-visual"],
     ["07", "测试与迭代", "ux-usability-eval"]
   ];
-  return `<div class="history-overview-block"><div class="overview-kicker">RESEARCH FLOW</div><h3>用户研究流程</h3><div class="timeline-track">${nodes.map(([num, title, id]) => `<button class="timeline-node" data-history-jump="${id}"><span class="timeline-dot">${num}</span><span>${escapeHtml(title)}</span></button>`).join("")}</div></div>`;
+  return `<div class="history-overview-block"><div class="overview-kicker">RESEARCH FLOW</div><h3>用户研究流程</h3><div class="timeline-track">${nodes.map(([num, title, id]) => `<button class="timeline-node" data-history-jump="${id}"><span class="timeline-dot">${num}</span><span>${escapeHtml(title)}</span></button>`).join("")}</div><p class="overview-hint">点击流程节点，进入对应方法或产出。</p></div>`;
 }
 function userResearchMindMapHtml() {
-  const branches = [
-    ["基础理论与体验", [["UCD", "ux-ucd"], ["交互原则", "ux-principles"], ["ISO 9241", "ux-iso"], ["UX 定义", "ux-definition"], ["设计思考", "ux-dt"], ["蜂窝模型", "ux-honeycomb"], ["桑德斯地图", "ux-sanders"]]],
-    ["研究方法", [["观察法", "ux-observation"], ["访谈法", "ux-interview"], ["出声思维", "ux-tap"], ["人种志", "ux-ethno"], ["AEIOU", "ux-aeiou"]]],
-    ["用户与需求", [["冰山模型", "ux-iceberg"], ["人物角色", "ux-persona"], ["市场调研", "ux-market"], ["定性与定量", "ux-qual-quant"]]],
-    ["评价与分析", [["可用性", "ux-usability"], ["可用性评估", "ux-usability-eval"], ["定量分析", "ux-analysis"], ["体验图与定位图", "ux-visual"]]],
-    ["热点与应用", [["故事板与进化图", "ux-story-evolution"], ["同理心设计", "ux-empathy"], ["感性工学", "ux-kansei"], ["叙事医学", "ux-narrative"], ["HPSS", "ux-hpss"]]]
-  ];
-  return `<div class="history-overview-block"><div class="overview-kicker">KNOWLEDGE MAP</div><h3>用户研究知识地图</h3><div class="mindmap-core">用户研究与体验设计</div><div class="mindmap-branches">${branches.map(([title, items]) => `<div class="mindmap-branch"><h4>${escapeHtml(title)}</h4><div class="mindmap-nodes">${items.map(([label, id]) => `<button data-history-jump="${id}">${escapeHtml(label)}</button>`).join("")}</div></div>`).join("")}</div></div>`;
+  return renderMindMapBlock({
+    id: "ux",
+    kicker: "KNOWLEDGE MAP",
+    title: "用户研究知识地图",
+    core: "用户研究与体验设计",
+    branches: [
+      ["foundation", "基础理论与体验", "先明确用户体验与设计原则", [["UCD", "ux-ucd"], ["交互原则", "ux-principles"], ["ISO 9241", "ux-iso"], ["UX 定义", "ux-definition"], ["设计思考", "ux-dt"], ["蜂窝模型", "ux-honeycomb"], ["桑德斯地图", "ux-sanders"]]],
+      ["methods", "研究方法", "定性观察与访谈如何开展", [["观察法", "ux-observation"], ["访谈法", "ux-interview"], ["出声思维", "ux-tap"], ["人种志", "ux-ethno"], ["AEIOU", "ux-aeiou"]]],
+      ["needs", "用户与需求", "从用户数据提炼真实需求", [["冰山模型", "ux-iceberg"], ["人物角色", "ux-persona"], ["市场调研", "ux-market"], ["定性与定量", "ux-qual-quant"]]],
+      ["evaluation", "评价与分析", "用可用性指标检验方案", [["可用性", "ux-usability"], ["可用性评估", "ux-usability-eval"], ["定量分析", "ux-analysis"], ["体验图与定位图", "ux-visual"]]],
+      ["applications", "热点与应用", "把研究洞察转成设计表达", [["故事板与进化图", "ux-story-evolution"], ["同理心设计", "ux-empathy"], ["感性工学", "ux-kansei"], ["叙事医学", "ux-narrative"], ["HPSS", "ux-hpss"]]]
+    ]
+  });
 }
 function renderHistoryOverview() {
   if (view.deckFilter === "designhistory") return `<section class="history-overview">${historyTimelineHtml()}${historyMindMapHtml()}</section>`;
@@ -3620,6 +3705,7 @@ function renderStudy() {
   document.querySelectorAll(".mode-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.mode === view.mode));
   document.querySelectorAll(".status-btn").forEach(btn => btn.classList.toggle("active", btn.dataset.status === status));
   document.getElementById("historyModeBtn").classList.toggle("hidden", !supportsFourDimensionMode(card));
+  document.getElementById("legacyCompareBtn").classList.toggle("hidden", !LEGACY_CARD_MAP.has(card.id));
   const levelBar = document.getElementById("clozeLevelBar");
   levelBar.classList.toggle("hidden", view.mode !== "cloze");
   levelBar.classList.toggle("sishu", card.deckId === "sishu");
@@ -3679,7 +3765,7 @@ function renderStudyContent(card) {
     return;
   }
   if (view.mode === "outline") {
-    content.innerHTML = `<div class="outline-list">${card.outline.map((item,index) => `<div class="outline-item"><div class="outline-num">${String(index+1).padStart(2,"0")}</div><div><h4>${escapeHtml(item[0])}</h4><p>${escapeHtml(item[1])}</p></div></div>`).join("")}</div><div class="outline-tip"><strong>背诵提示：</strong>${escapeHtml(card.note)}</div>`;
+    content.innerHTML = `<div class="outline-list">${card.outline.map((item,index) => `<div class="outline-item" data-outline-index="${index}"><div class="outline-num">${String(index+1).padStart(2,"0")}</div><div><h4>${escapeHtml(item[0])}</h4><p>${escapeHtml(item[1])}</p></div></div>`).join("")}</div><div class="outline-tip"><strong>背诵提示：</strong>${escapeHtml(card.note)}</div>`;
     return;
   }
   if (view.mode === "mask" && !view.maskRevealed) {
@@ -3697,7 +3783,7 @@ function renderStudyContent(card) {
   content.innerHTML = card.paragraphs.map((paragraph, paragraphIndex) => {
     const body = view.mode === "cloze" ? clozeText(paragraph[1],getClozeKeywords(card),view.revealedBlanks,paragraphIndex) : highlightKeywords(paragraph[1],card.keywords);
     const readRow = view.mode === "full" ? renderSentenceReadRow(card, paragraph[1], paragraphIndex) : "";
-    return `<div class="paragraph"><div class="paragraph-label">${escapeHtml(paragraph[0])}</div><p>${body}</p>${readRow}</div>`;
+    return `<div class="paragraph" data-paragraph-index="${paragraphIndex}"><div class="paragraph-label">${escapeHtml(paragraph[0])}</div><p>${body}</p>${readRow}</div>`;
   }).join("");
 }
 function getCurrentClozeKeys(card) {
@@ -3918,6 +4004,88 @@ function toast(message) {
   const node = document.getElementById("toast"); node.textContent = message; node.classList.add("show");
   clearTimeout(toast.timer); toast.timer = setTimeout(() => node.classList.remove("show"),1900);
 }
+function normalizeCueText(value) {
+  return String(value || "").toLowerCase().replace(/[\s，。；、：:,.!?！？“”"'‘’（）()【】\[\]—\-+＋→\/]+/g, "");
+}
+function cueMatchScore(text, cue) {
+  const haystack = normalizeCueText(text);
+  const fullCue = normalizeCueText(cue);
+  if (!haystack || !fullCue) return 0;
+  if (haystack.includes(fullCue)) return 1000 + fullCue.length;
+  const terms = String(cue || "").split(/[\s，。；、：:,.!?！？“”"'‘’（）()【】\[\]—\-+＋→\/]+/).map(normalizeCueText).filter(term => term.length >= 2);
+  let score = [...new Set(terms)].reduce((sum, term) => haystack.includes(term) ? sum + term.length * 10 : sum, 0);
+  if (score > 0) return score;
+  for (const size of [4, 3, 2]) {
+    if (fullCue.length < size) continue;
+    const grams = new Set();
+    for (let index = 0; index <= fullCue.length - size; index += 1) grams.add(fullCue.slice(index, index + size));
+    score = [...grams].reduce((sum, gram) => haystack.includes(gram) ? sum + size * size : sum, 0);
+    if (score > 0) return score;
+  }
+  return 0;
+}
+function flashCueTarget(node, message) {
+  if (!node) { toast("没有找到对应的知识点"); return; }
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    node.scrollIntoView({ behavior: "smooth", block: "center" });
+    node.classList.remove("cue-target-flash");
+    void node.offsetWidth;
+    node.classList.add("cue-target-flash");
+    setTimeout(() => node.classList.remove("cue-target-flash"), 1800);
+  }));
+  toast(message);
+}
+function findDomByData(selector, key, value) {
+  return [...document.querySelectorAll(selector)].find(node => node.dataset[key] === value) || null;
+}
+function switchModeForCue(mode) {
+  if (view.mode === "dictation" && mode !== "dictation") exitDictationSession();
+  view.mode = mode;
+  view.maskRevealed = false;
+  if (mode !== "cloze") view.revealedBlanks = new Set();
+  renderStudy();
+}
+function jumpToCue(cue) {
+  const card = CARD_MAP.get(view.currentCardId);
+  if (!card) return;
+  const config = getFourDimensionConfig(card);
+  if (config) {
+    const ranked = config.dimensions.map(([key, label, value]) => ({ key, label, score: cueMatchScore(`${label} ${value}`, cue) })).sort((a, b) => b.score - a.score);
+    if (ranked[0]?.score > 0) {
+      if (view.mode === "dictation") exitDictationSession();
+      view.mode = "history";
+      view.maskRevealed = false;
+      view.historyRevealed.add(ranked[0].key);
+      renderStudy();
+      flashCueTarget(findDomByData("[data-history-key]", "historyKey", ranked[0].key), `已定位：${ranked[0].label}`);
+      return;
+    }
+  }
+  const paragraphRanked = card.paragraphs.map((paragraph, index) => ({ index, score: cueMatchScore(`${paragraph[0]} ${paragraph[1]}`, cue) })).sort((a, b) => b.score - a.score);
+  if (paragraphRanked[0]?.score > 0) {
+    const needsSafeMode = !["full", "cloze"].includes(view.mode) || (view.mode === "cloze" && ["advanced", "challenge"].includes(view.clozeLevel));
+    if (needsSafeMode) switchModeForCue("full");
+    const target = findDomByData("[data-paragraph-index]", "paragraphIndex", String(paragraphRanked[0].index));
+    flashCueTarget(target, "已定位到相关段落");
+    return;
+  }
+  const outlineRanked = (card.outline || []).map((item, index) => ({ index, score: cueMatchScore(item.join(" "), cue) })).sort((a, b) => b.score - a.score);
+  if (outlineRanked[0]?.score > 0) {
+    switchModeForCue("outline");
+    flashCueTarget(findDomByData("[data-outline-index]", "outlineIndex", String(outlineRanked[0].index)), "已定位到相关提纲");
+    return;
+  }
+  toast(`“${cue}”暂未找到对应段落`);
+}
+function setMindMapBranch(key, collapsed) {
+  if (!(view.mindMapCollapsed instanceof Set)) view.mindMapCollapsed = new Set();
+  if (collapsed) view.mindMapCollapsed.add(key); else view.mindMapCollapsed.delete(key);
+  const branch = findDomByData("[data-mindmap-branch]", "mindmapBranch", key);
+  if (!branch) return;
+  branch.classList.toggle("collapsed", collapsed);
+  const toggle = branch.querySelector("[data-mindmap-toggle]");
+  if (toggle) toggle.setAttribute("aria-expanded", String(!collapsed));
+}
 function resetProgress() {
   if (!window.confirm("确定清空全部背诵进度和今日专注时长吗？此操作不可撤销。")) return;
   ensureToday().reviewed = []; state.status = {}; state.favorites = {}; ensureToday().seconds = 0;
@@ -3928,12 +4096,26 @@ document.addEventListener("click", event => {
   if (legacyCardBtn) { showLegacyCard(legacyCardBtn.dataset.legacyCard); return; }
   if (event.target.closest("#legacyBackBtn")) { renderLegacyList(); return; }
   if (event.target.closest("#legacyCopyBtn")) { copyLegacyTemplate(); return; }
+  const historyPeriod = event.target.closest("[data-history-period]");
+  if (historyPeriod) { openHistoryPeriod(historyPeriod.dataset.historyPeriod); return; }
+  const mindMapToggle = event.target.closest("[data-mindmap-toggle]");
+  if (mindMapToggle) { const key = mindMapToggle.dataset.mindmapToggle; setMindMapBranch(key, !view.mindMapCollapsed.has(key)); return; }
+  const mindMapAction = event.target.closest("[data-mindmap-action]");
+  if (mindMapAction) {
+    const mapId = mindMapAction.dataset.mindmapTarget;
+    const collapse = mindMapAction.dataset.mindmapAction === "collapse";
+    document.querySelectorAll("[data-mindmap-branch]").forEach(branch => {
+      if (branch.dataset.mindmapBranch.startsWith(`${mapId}:`)) setMindMapBranch(branch.dataset.mindmapBranch, collapse);
+    });
+    return;
+  }
   const historyJump = event.target.closest("[data-history-jump]");
-  if (historyJump) { openStudy(historyJump.dataset.historyJump); return; }
+  if (historyJump) { closePeriodModal(); openStudy(historyJump.dataset.historyJump); return; }
   const historyDim = event.target.closest("[data-history-key]");
   if (historyDim) {
     const key = historyDim.dataset.historyKey;
-    if (!view.historyRevealed.has(key)) { view.historyRevealed.add(key); renderStudyContent(CARD_MAP.get(view.currentCardId)); }
+    if (view.historyRevealed.has(key)) view.historyRevealed.delete(key); else view.historyRevealed.add(key);
+    renderStudyContent(CARD_MAP.get(view.currentCardId));
     return;
   }
 
@@ -3983,12 +4165,17 @@ document.addEventListener("click", event => {
   if (event.target.closest("#dictationCheck")) { submitDictation(); return; }
   if (event.target.closest("#dictationClear")) { clearDictation(); return; }
   const cue = event.target.closest("[data-cue]");
-  if (cue) { if (view.mode !== "outline") changeMode("outline"); toast("提纲模式：" + cue.dataset.cue); }
+  if (cue) { jumpToCue(cue.dataset.cue); return; }
 });
 document.getElementById("searchInput").addEventListener("input", event => { view.search = event.target.value; renderDashboard(); });
 document.getElementById("addContentBtn").addEventListener("click", openCustomModal);
 document.getElementById("oldTemplatesBtn").addEventListener("click", openLegacyModal);
+document.getElementById("legacyCompareBtn").addEventListener("click", openCompareModal);
+document.getElementById("closeCompareModal").addEventListener("click", closeCompareModal);
+document.getElementById("compareModal").addEventListener("click", event => { if (event.target.id === "compareModal") closeCompareModal(); });
 document.getElementById("closeLegacyModal").addEventListener("click", closeLegacyModal);
+document.getElementById("closePeriodModal").addEventListener("click", closePeriodModal);
+document.getElementById("periodModal").addEventListener("click", event => { if (event.target.id === "periodModal") closePeriodModal(); });
 document.getElementById("legacyModal").addEventListener("click", event => { if (event.target.id === "legacyModal") closeLegacyModal(); });
 document.getElementById("closeCustomModal").addEventListener("click", closeCustomModal);
 document.getElementById("cancelCustomModal").addEventListener("click", closeCustomModal);
@@ -4031,6 +4218,8 @@ document.getElementById("translationBtn").addEventListener("click", toggleTransl
 document.getElementById("printBtn").addEventListener("click", () => window.print());
 document.getElementById("timerToggle").addEventListener("click", toggleTimer);
 document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && !document.getElementById("periodModal").classList.contains("hidden")) { closePeriodModal(); return; }
+  if (event.key === "Escape" && !document.getElementById("compareModal").classList.contains("hidden")) { closeCompareModal(); return; }
   if (event.key === "Escape" && !document.getElementById("legacyModal").classList.contains("hidden")) { closeLegacyModal(); return; }
   if (event.key === "Escape" && !document.getElementById("customModal").classList.contains("hidden")) { closeCustomModal(); return; }
   const tag = document.activeElement && document.activeElement.tagName;
@@ -4084,6 +4273,19 @@ function splitCustomList(value, pattern = /[，,、;；\n]+/) {
 function inferCustomKeywords(text) {
   const clauses = String(text || "").split(/[，。；！？：,.;!?\n]+/).map(item => item.trim()).filter(item => item.length >= 2);
   return clauses.sort((a, b) => b.length - a.length).slice(0, 6);
+}
+function openCompareModal() {
+  const card = CARD_MAP.get(view.currentCardId);
+  const legacy = LEGACY_CARD_MAP.get(view.currentCardId);
+  if (!card || !legacy) { toast("当前模板没有旧版存档"); return; }
+  document.getElementById("compareGrid").innerHTML = `
+    <section class="compare-column current"><h3>当前精华版</h3><div class="compare-meta">${escapeHtml(card.title)} · ${card.words} 字</div>${card.paragraphs.map(paragraph => `<p>${escapeHtml(paragraph[1])}</p>`).join("")}</section>
+    <section class="compare-column legacy"><h3>旧版模板</h3><div class="compare-meta">${escapeHtml(legacy.title)} · ${legacy.words} 字</div>${legacy.paragraphs.map(paragraph => `<p>${escapeHtml(paragraph[1])}</p>`).join("")}</section>`;
+  document.getElementById("compareModal").classList.remove("hidden");
+}
+function closeCompareModal() {
+  const modal = document.getElementById("compareModal");
+  if (modal) modal.classList.add("hidden");
 }
 function renderLegacyList() {
   const list = document.getElementById("legacyList");
