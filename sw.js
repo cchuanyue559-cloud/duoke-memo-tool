@@ -1,4 +1,4 @@
-const CACHE_NAME = "zhengzhi-memo-v24";
+const CACHE_NAME = "zhengzhi-memo-v25";
 const ASSETS = [
   "./",
   "./index.html",
@@ -32,3 +32,4 @@ self.addEventListener("fetch", event => {
       .catch(() => caches.match(event.request).then(hit => hit || (event.request.mode === "navigate" ? caches.match("./index.html") : undefined)))
   );
 });
+
